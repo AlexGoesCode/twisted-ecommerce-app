@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import colors from 'colors';
+import colors, { black } from 'colors';
 import * as dotenv from 'dotenv';
 
 const app = express();
@@ -14,3 +14,5 @@ const Port = process.env.PORT || 5022;
 app.listen(() => {
   console.log(`server running on port: ${Port}`.bgCyan);
 });
+
+black;

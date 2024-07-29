@@ -3,25 +3,32 @@ import cors from 'cors';
 import colors from 'colors';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import router from './routes/testRoute.js';
+// import { cloudinaryConfig } from './config/cloudinary.js';
 
 dotenv.config();
 
 const { black } = colors;
-const app = express();
 
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+//* Add the middleware functions by calling app.use()
+const addMiddlewares = (app) => {
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cors());
+  // cloudinaryConfig();
+};
 
-const Port = process.env.PORT || 5022;
-
-app.listen(() => {
-  console.log(`server running on port: ${Port}`.bgCyan);
-});
+//* Start the server by calling app.listen()
+const startServer = (app) => {
+  const port = process.env.PORT || 5022;
+  app.listen(port, () => {
+    console.log(`Server is running on port', ${port}`);
+  });
+};
 
 const DBConnection = async () => {
   try {
-    await mongoose.connect(process.env.Mongo_DB);
+    await mongoose.connect(process.env.MONGO_DB);
     console.log('connection with MongoDB established'.bgGreen);
   } catch (error) {
     console.log('problem with connecting to MongoDB'.bgRed, error);
@@ -35,7 +42,7 @@ const DBConnection = async () => {
   const app = express();
   await DBConnection();
   addMiddlewares(app);
-  loadRoutes(app);
+  app.use('/api', router);
   startServer(app);
 })();
 // a self-contained function that initializes an Express application, establishes a DB connection,

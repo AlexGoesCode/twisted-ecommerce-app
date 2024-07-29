@@ -43,7 +43,7 @@ const DBConnection = async () => {
 
 // bellow is a main function that runs the server aka IIFE:
 //* Immediatelly Invoked Function Expression
-
+// functions need to be in order after each other
 (async function controller() {
   const app = express();
   await DBConnection();

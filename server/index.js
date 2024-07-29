@@ -3,8 +3,9 @@ import cors from 'cors';
 import colors from 'colors';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import router from './routes/testRoute.js';
+import testRouter from './routes/testRoute.js';
 // import { cloudinaryConfig } from './config/cloudinary.js';
+import itemRouter from './routes/itemsRouter.js';
 
 dotenv.config();
 
@@ -26,6 +27,11 @@ const startServer = (app) => {
   });
 };
 
+const loadRoutes = (app) => {
+  app.use('/api', testRouter);
+  app.use('/api/items', itemRouter);
+};
+
 const DBConnection = async () => {
   try {
     await mongoose.connect(process.env.MONGO_DB);
@@ -41,8 +47,8 @@ const DBConnection = async () => {
 (async function controller() {
   const app = express();
   await DBConnection();
+  loadRoutes(app);
   addMiddlewares(app);
-  app.use('/api', router);
   startServer(app);
 })();
 // a self-contained function that initializes an Express application, establishes a DB connection,

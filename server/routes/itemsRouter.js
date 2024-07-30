@@ -1,6 +1,6 @@
 import express from 'express';
 import itemModel from '../models/itemModel.js';
-import { multerUpload } from '../';
+import { multerUpload } from '../middleware/multer.js';
 
 //* Import all the functions from the recipesController
 import { allItems, itemsByCountry } from '../controller/itemsController.js';

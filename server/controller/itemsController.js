@@ -17,4 +17,13 @@ const allItems = async (req, res) => {
   }
 };
 
-export { allItems };
+const itemsByCountry = async (req, res) => {
+  console.log('req :>> '.yellow, req);
+};
+
+//* Function that tries to like a recipe. -> 200, 400 or 500
+const likeItem = async (req, res) => {
+    const 
+}
+
+export { allItems, itemsByCountry };

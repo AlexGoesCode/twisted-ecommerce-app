@@ -22,8 +22,8 @@ const itemsByCountry = async (req, res) => {
 };
 
 //* Function that tries to like a recipe. -> 200, 400 or 500
-const likeItem = async (req, res) => {
-    const 
-}
+// const likeItem = async (req, res) => {
+//     const
+// }
 
 export { allItems, itemsByCountry };

@@ -5,18 +5,19 @@ import DesktopImage from './assets/images/bobbleheads.png';
 import Footer from './components/Footer';
 
 function App() {
-  const [] = useState(0);
+  const [state, setState] = useState(0);
 
   return (
     // <Router>
     // <AuthProvider>
-    <div
-      className='relative h-screen bg-cover bg-center flex flex-col min-h-screen saturate-100'
-      style={{ backgroundImage: `url(${DesktopImage})` }}
-    >
-      <div className='rela'></div>
+    <div className='flex flex-col min-h-screen'>
       <Header />
-      <div className='flex-grow'>{/* <Routes /> */}</div>
+      <div
+        className='sti flex-grow bg-cover bg-center'
+        style={{ backgroundImage: `url(${DesktopImage})` }}
+      >
+        <div className='flex-grow'>{/* <Routes /> */}</div>
+      </div>
       <Footer />
     </div>
     // </AuthProvider>

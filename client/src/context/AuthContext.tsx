@@ -33,6 +33,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserType | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  // const [avatarUrl, setAvatarUrl] = useState('');
 
   const login = async (email: string, password: string) => {
     console.log(`Logging in with username: ${email} and password: ${password}`);
@@ -61,22 +64,93 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const result = (await response.json()) as LoginAndSignUpResponse;
         console.log('result :>> ', result);
         navigate('/product');
+        if (!result.token) {
+          alert(' you need to login first');
+          return;
+        }
+        if (result.token) {
+          localStorage.setItem('token', result.token);
+          localStorage.setItem('user', JSON.stringify(result.user));
+          setUser(result.user);
+          // setAvatarUrl(result.user.avatar);
+          setIsAuthenticated(true);
+          setIsLoading(false);
+        }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log('error :>> ', error);
+      setIsLoading(false);
+    }
+
+    setError(null);
   };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    console.log('Logging out...');
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  const getUserProfile = async () => {
+    const myHeaders = new Headers();
+    myHeaders.append(
+      'Authorisation',
+      `Bearer ${localStorage.getItem('token')}`
+    );
+
+    const requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+    };
+    try {
+      const response = await fetch(
+        'http://localhost:5022/api/user/profile',
+        requestOptions
+      );
+      if (!response.ok && response.status === 401) {
+        localStorage.removeItem('token');
+        setIsLoading(false);
+        setIsAuthenticated(false);
+
+        navigate('/login');
+        return;
+      }
+      const result = (await response.json()) as GetProfileOkResponse;
+      console.log('result profile', result);
+      setUser(result.user);
+      setIsLoading(false);
+    } catch (error) {
+      console.log('error getting profile :>> ', error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      getUserProfile();
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+      alert('you need to login first');
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         login,
-        // logout,
-        // setError,
-        // error,
+        logout,
+        setError,
+        error,
         // avatarUrl,
         user,
-        // getUserProfile,
-        // isLoading,
+        getUserProfile,
+        isLoading,
       }}
     >
       {children}

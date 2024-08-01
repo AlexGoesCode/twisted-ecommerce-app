@@ -35,6 +35,8 @@ const Routes = () => {
         }
       />
 
+      <Route path='/aboutus' element={<AboutUs />} />
+
       <Route
         path='/myaccount'
         element={
@@ -44,6 +46,7 @@ const Routes = () => {
         }
       />
 
+      <Route path='/aboutus' element={<AboutUs />} />
       <Route path='*' element={<NotFound />} />
     </RouterRoutes>
   );

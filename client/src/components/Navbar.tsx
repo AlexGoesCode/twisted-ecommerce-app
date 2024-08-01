@@ -15,8 +15,8 @@ import { Link, NavLink } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'BobbleHeads', href: '/recipes', current: false },
-  { name: 'About Us', href: '/create-recipe', current: false },
+  { name: 'Products', href: '/products', current: false },
+  { name: 'About Us', href: '/aboutus', current: false },
   { name: 'My Account', href: '/saved-recipes', current: false },
 ];
 
@@ -69,7 +69,7 @@ const Navbar = () => {
   };
 
   return (
-    <Disclosure as='nav' className='bg-gray-700 bg-opacity-85'>
+    <Disclosure as='nav' className='bg-gray-100 bg-opacity-85'>
       {({ open }) => (
         <>
           <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -106,7 +106,7 @@ const Navbar = () => {
                           classNames(
                             isActive
                               ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              : 'text-gray-700 hover:bg-gray-700 hover:text-white',
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )
                         }
@@ -164,7 +164,7 @@ const Navbar = () => {
                                   'block w-full text-left px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                Sign out
+                                Sign-out
                               </button>
                             )}
                           </MenuItem>
@@ -214,7 +214,20 @@ const Navbar = () => {
                                   'block w-full text-left px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                Sign up
+                                Register
+                              </Link>
+                            )}
+                          </MenuItem>
+                          <MenuItem>
+                            {({ active }) => (
+                              <Link
+                                to='/myaccount'
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                )}
+                              >
+                                My account
                               </Link>
                             )}
                           </MenuItem>

@@ -2,7 +2,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        rodeoDust: '#CCB69D', // Rodeo Dust (grey-beige)
+        mirage: '#1C2434', // Mirage (dark grey)
+        mexicanRed: '#A12529', // Mexican Red
+        tuscany: '#CE633B', // Tuscany (orange-beige)
+      },
+    },
   },
   plugins: [],
 };

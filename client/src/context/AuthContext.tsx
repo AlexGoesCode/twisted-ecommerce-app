@@ -60,29 +60,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       if (!response.ok) throw new Error('Failed to login');
 
-      if (response.ok) {
-        const result = (await response.json()) as LoginAndSignUpResponse;
-        console.log('result :>> ', result);
-        navigate('/product');
-        if (!result.token) {
-          alert(' you need to login first');
-          return;
-        }
-        if (result.token) {
-          localStorage.setItem('token', result.token);
-          localStorage.setItem('user', JSON.stringify(result.user));
-          setUser(result.user);
-          // setAvatarUrl(result.user.avatar);
-          setIsAuthenticated(true);
-          setIsLoading(false);
-        }
+      const result = (await response.json()) as LoginAndSignUpResponse;
+      console.log('result :>> ', result);
+
+      if (!result.token) {
+        alert('You need to login first');
+        return;
       }
+
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
+      setUser(result.user);
+      setIsAuthenticated(true);
+      navigate('/product');
     } catch (error) {
       console.log('error :>> ', error);
+      setError('Failed to login');
+    } finally {
       setIsLoading(false);
     }
-
-    setError(null);
   };
 
   const logout = () => {
@@ -96,7 +92,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getUserProfile = async () => {
     const myHeaders = new Headers();
     myHeaders.append(
-      'Authorisation',
+      'Authorization',
       `Bearer ${localStorage.getItem('token')}`
     );
 
@@ -111,18 +107,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       if (!response.ok && response.status === 401) {
         localStorage.removeItem('token');
-        setIsLoading(false);
         setIsAuthenticated(false);
-
         navigate('/login');
         return;
       }
       const result = (await response.json()) as GetProfileOkResponse;
       console.log('result profile', result);
       setUser(result.user);
-      setIsLoading(false);
     } catch (error) {
       console.log('error getting profile :>> ', error);
+    } finally {
       setIsLoading(false);
     }
   };

@@ -17,7 +17,7 @@ const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Products', href: '/products', current: false },
   { name: 'About Us', href: '/aboutus', current: false },
-  { name: 'My Account', href: '/saved-recipes', current: false },
+  { name: 'My Account', href: '/myaccount', current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -31,7 +31,6 @@ const Navbar = () => {
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log('asdasddd');
     const file = event.target.files?.[0];
     console.log('file :>> ', file);
     if (file) {
@@ -208,7 +207,7 @@ const Navbar = () => {
                           <MenuItem>
                             {({ active }) => (
                               <Link
-                                to='/signup'
+                                to='/register'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block w-full text-left px-4 py-2 text-sm text-gray-700'

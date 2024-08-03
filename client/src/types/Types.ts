@@ -2,7 +2,7 @@ export type Item = {
   _id: string;
   name: string; // always available, no need to make it optional
   country: string;
-  description: string[];
+  body: 'I love it';
   likes: string[];
   picture: string;
 };
@@ -21,7 +21,7 @@ export type SingleRecipeOkResponse = {
   data: Item;
 };
 
-export type LoginAndSignUpResponse = {
+export type LoginAndRegisterResponse = {
   message: string;
   user: UserType;
   token?: string;

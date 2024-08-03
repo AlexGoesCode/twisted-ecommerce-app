@@ -4,6 +4,11 @@ import bcrypt from 'bcrypt'; // hash password
 import passwordEncryption from '../';
 import { imageUpload } from '../utils/imageUpload.js';
 
+// Helper function to handle errors
+const handleError = (res, message, status = 500) => {
+  return res.status(status).json({ message });
+};
+
 export const registerUser = async (req, res) => {
   console.log('req.body :>> ', req.body);
   console.log('req.file :>> ', req.file);
@@ -12,42 +17,40 @@ export const registerUser = async (req, res) => {
     const user = await User.findOne({ email: req.body.email }); // check if user exists, by email
     console.log('user :>> ', user);
     if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+      return handleError(res, 'User already exists', 400);
     }
-    if (!user) {
-      const hashedPassword = await passwordEncryption(req.body.password); // if user does not exist, hash the password
-      if (hashedPassword) {
-        return res
-          .status(500)
-          .json({ message: 'Server error hashing password' });
-      }
 
-      if (hashedPassword) {
-        // upload file to cloudinary by calling the imageUpload function
-        const avatar = await imageUpload(req.file, 'user-avatars');
-        console.log('avatar :>> ', avatar);
-
-        const newUser = new User({
-          // create a new user with following properties
-          email: req.body.email,
-          password: hashedPassword,
-          name: req.body.name,
-          avatar: avatar,
-        });
-        const savedUser = await newUser.save();
-        // if you want to leave the user logged in after registration,
-        // generate the token with the user id, and include the token in the response.
-        // In the client, save the token in local storage.
-        res.status(201).json({
-          message: 'user registered successfully',
-          user: savedUser,
-        });
-        return;
-      }
+    const hashedPassword = await passwordEncryption(req.body.password); // if user does not exist, hash the password
+    if (!hashedPassword) {
+      return handleError(res, 'Server error hashing password');
     }
+
+    // upload file to cloudinary by calling the imageUpload function
+    const avatar = await imageUpload(req.file, 'user-avatars');
+    console.log('avatar :>> ', avatar);
+
+    const newUser = new User({
+      // create a new user with following properties
+      email: req.body.email,
+      password: hashedPassword,
+      name: req.body.name,
+      avatar: avatar,
+    });
+    const savedUser = await newUser.save();
+
+    // generate the token with the user id, and include the token in the response.
+    const token = jwt.sign({ sub: savedUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
+
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: savedUser,
+      token,
+    });
   } catch (error) {
     console.log('Registration error :>> ', error);
-    res.status(500).json({ message: 'Server error' });
+    handleError(res, 'Server error');
   }
 };
 
@@ -58,38 +61,34 @@ export const loginUser = async (req, res) => {
     // Find user by email and populate the likedRecipes array
     const user = await User.findOne({ email }).populate('likedRecipes');
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return handleError(res, 'User not found', 404);
     }
+
     // Compare the password from the request with the hashed password from the database
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return res.status(404).json({ message: 'Password is incorrect' });
+      return handleError(res, 'Password is incorrect', 404);
     }
-    if (isPasswordCorrect) {
-      const options = {
-        expiresIn: '1h',
-      };
-      const payload = {
-        sub: user.id,
-      };
-      // Generate a token with the user id
-      const token = jwt.sign(payload, process.env.JWT_SECRET, options);
-      console.log('token :>> ', token);
-      res.status(200).json({
-        message: 'Login successful',
-        user: {
-          id: user._id,
-          email: user.email,
-          username: user.name,
-          avatar: user.avatar,
-          likedRecipes: user.likedRecipes,
-        },
-        token,
-      });
-    }
+
+    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
+    console.log('token :>> ', token);
+
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.name,
+        avatar: user.avatar,
+        likedRecipes: user.likedRecipes,
+      },
+      token,
+    });
   } catch (error) {
     console.log('Login error :>> ', error);
-    res.status(500).json({ message: 'Server error' });
+    handleError(res, 'Server error');
   }
 };
 
@@ -100,58 +99,52 @@ export const testAuth = async (req, res) => {
 };
 
 export const uploadAvatar = async (req, res) => {
-  // log the file received in request
   console.log('req.file :>> ', req.file);
   try {
-    // Check if the user is authenticated and has a valid user ID
     if (!req.user || !req.user._id) {
-      return res
-        .status(401)
-        .json({ message: 'Unauthorized: No user ID found' });
+      return handleError(res, 'Unauthorized: No user ID found', 401);
     }
 
     const userId = req.user._id; // extract user ID from the request
-    // upload avatar image and get it's path or URL
+
     const avatar = await imageUpload(req.file, 'user-avatars');
     console.log('avatar :>> ', avatar);
-    // Check if the avatar upload was successful
+
     if (!avatar) {
-      console.log('No avatar uploaded');
-      return res.status(500).json({ message: 'Failed to upload avatar' });
+      return handleError(res, 'Failed to upload avatar');
     }
-    // Update the user's avatar in the database
-    console.log('Avatar uploaded successfully');
+
     const user = await User.findByIdAndUpdate(
       userId,
-      { avatar: avatar },
+      { avatar },
       { new: true }
     );
     console.log('user :>> ', user);
-    // Respond with a success message and the new avatar URL or path
-    return res.status(200).json({
+
+    res.status(200).json({
       message: 'Avatar uploaded successfully',
       avatar: user.avatar,
     });
   } catch (error) {
-    // Handle any errors that occur during the process
     console.log('Error uploading avatar :>> ', error);
-    res.status(500).json({ message: 'Failed to upload avatar' });
+    handleError(res, 'Failed to upload avatar');
   }
 };
 
 export const getUserProfile = async (req, res) => {
   console.log('req.user controller :>> ', req.user);
   if (!req.user) {
-    return res.status(401).json({ message: 'No token, authorisation denied' });
+    return handleError(res, 'No token, authorization denied', 401);
   }
-  if (req.user) {
-    res.status(200).json({
-      message: 'User profile retrieved successfuly',
-      user: {
-        id: req.user._id,
-        email: req.user.avatar,
-        likedRecipes: req.user.likedRecipes,
-      },
-    });
-  }
+
+  res.status(200).json({
+    message: 'User profile retrieved successfully',
+    user: {
+      id: req.user._id,
+      email: req.user.email,
+      username: req.user.name,
+      avatar: req.user.avatar,
+      likedRecipes: req.user.likedRecipes,
+    },
+  });
 };

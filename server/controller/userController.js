@@ -5,7 +5,7 @@ import passwordEncryption from '../';
 import { imageUpload } from '../utils/imageUpload.js';
 
 export const registerUser = async (req, res) => {
-  console.log('req.body!!! :>> ', req.body);
+  console.log('req.body :>> ', req.body);
   console.log('req.file :>> ', req.file);
 
   try {
@@ -100,36 +100,41 @@ export const testAuth = async (req, res) => {
 };
 
 export const uploadAvatar = async (req, res) => {
+  // log the file received in request
   console.log('req.file :>> ', req.file);
   try {
-    const userId = req.user._id;
-    try {
-      const avatar = await imageUpload(req.file, 'user-avatars');
-      console.log('avatar :>> ', avatar);
-
-      if (!avatar) {
-        console.log('no avatar uploaded');
-        return res.status(500).json({ message: 'Failed to upload avatar' });
-      }
-      if (avatar) {
-        console.log('avatar uploaded successfuly');
-        const user = await User.findByIdAndUpdate(
-          userId,
-          { avatar: avatar },
-          { new: true }
-        );
-        console.log('user :>> ', user);
-        return res.status(200).json({
-          message: 'Avatar uploaded successfuly',
-          avatar: user.avatar,
-        });
-      }
-    } catch (error) {
-      console.log('error upload avatar :>> ', error);
-      res.status(500).json({ message: 'Failed to upload avatar' });
+    // Check if the user is authenticated and has a valid user ID
+    if (!req.user || !req.user._id) {
+      return res
+        .status(401)
+        .json({ message: 'Unauthorized: No user ID found' });
     }
+
+    const userId = req.user._id; // extract user ID from the request
+    // upload avatar image and get it's path or URL
+    const avatar = await imageUpload(req.file, 'user-avatars');
+    console.log('avatar :>> ', avatar);
+    // Check if the avatar upload was successful
+    if (!avatar) {
+      console.log('No avatar uploaded');
+      return res.status(500).json({ message: 'Failed to upload avatar' });
+    }
+    // Update the user's avatar in the database
+    console.log('Avatar uploaded successfully');
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { avatar: avatar },
+      { new: true }
+    );
+    console.log('user :>> ', user);
+    // Respond with a success message and the new avatar URL or path
+    return res.status(200).json({
+      message: 'Avatar uploaded successfully',
+      avatar: user.avatar,
+    });
   } catch (error) {
-    console.log('Avatar upload error :>> ', error);
+    // Handle any errors that occur during the process
+    console.log('Error uploading avatar :>> ', error);
     res.status(500).json({ message: 'Failed to upload avatar' });
   }
 };

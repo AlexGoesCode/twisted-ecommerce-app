@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -11,11 +11,19 @@ const itemSchema = new Schema({
   },
   body: {
     type: String,
-    comments: [{ body: String, date: Date }],
-    likes: Number,
+    required: true,
   },
+  image: {
+    type: String,
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
 });
 
-const itemModel = mongoose.model('item', itemSchema);
+const itemModel = mongoose.model('Item', itemSchema);
 
 export default itemModel;

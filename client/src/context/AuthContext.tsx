@@ -7,7 +7,7 @@ import {
 } from 'react';
 import {
   GetProfileOkResponse,
-  LoginAndSignUpResponse,
+  LoginAndRegisterResponse,
   UserType,
 } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       if (!response.ok) throw new Error('Failed to login');
 
-      const result = (await response.json()) as LoginAndSignUpResponse;
+      const result = (await response.json()) as LoginAndRegisterResponse;
       console.log('result :>> ', result);
 
       if (!result.token) {

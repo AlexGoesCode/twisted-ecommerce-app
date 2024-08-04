@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'; // generates token
 import User from '../models/userModel.js';
 import bcrypt from 'bcrypt'; // hash password
-import passwordEncryption from '../';
+import passwordEncryption from '../utils/passwordServices.js';
 import { imageUpload } from '../utils/imageUpload.js';
 
 // Helper function to handle errors

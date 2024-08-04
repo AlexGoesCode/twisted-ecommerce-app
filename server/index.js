@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import testRouter from './routes/testRoute.js';
 // import { cloudinaryConfig } from './config/cloudinary.js';
 import itemRouter from './routes/itemsRouter.js';
+import usersRouter from './routes/usersRouter.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ const startServer = (app) => {
 const loadRoutes = (app) => {
   app.use('/api', testRouter);
   app.use('/api/items', itemRouter);
+  app.use('/api/users', usersRouter);
 };
 
 const DBConnection = async () => {

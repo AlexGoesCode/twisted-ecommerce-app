@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/userModel';
+import userModel from '../models/userModel.js';
 
 const authMiddleware = async (req, res, next) => {
   // Middleware function that checks if the user is authenticated
@@ -16,9 +16,9 @@ const authMiddleware = async (req, res, next) => {
 
     // Find the user by id using the decoded.sub (which is the user id)
     // and populate the likedRecipes field with the Recipe model
-    const user = await User.findById({ _id: decoded.sub }).populate(
-      'likedRecipes'
-    );
+    const user = await userModel
+      .findById({ _id: decoded.sub })
+      .populate('likedRecipes');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' }); // Return 404 if user is not found

@@ -15,7 +15,7 @@ export type UserType = {
   avatar: string;
 };
 
-export type SingleRecipeOkResponse = {
+export type SingleItemOkResponse = {
   error: boolean;
   message: string;
   data: Item;

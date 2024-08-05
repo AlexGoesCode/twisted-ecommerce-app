@@ -87,14 +87,14 @@ const Register = () => {
       buttonText='Register'
       onButtonClick={handleRegister}
     >
-      <div className='bg-mirage bg-opacity-75 p-6 rounded-2xl shadow-md'>
-        <h2 className='text-white text-xl font-semibold mb-4'>
+      <div className='bg-gray-100 bg-opacity-95 p-6 rounded-2xl shadow-md'>
+        <h2 className='text-mirage text-center text-xl font-semibold mb-4'>
           Register a new account
         </h2>
         <div className='border border-tuscany p-4 rounded-md'>
           <label
             htmlFor='username'
-            className='block text-sm font-medium leading-6 text-gray-100'
+            className='block text-sm font-medium leading-6 text-mirage'
           >
             User Name
           </label>
@@ -112,7 +112,7 @@ const Register = () => {
           </div>
           <label
             htmlFor='email'
-            className='block text-sm font-medium leading-6 text-gray-100 mt-4'
+            className='block text-sm font-medium leading-6 text-mirage mt-4'
           >
             Email address
           </label>
@@ -130,7 +130,7 @@ const Register = () => {
           </div>
           <label
             htmlFor='password'
-            className='block text-sm font-medium leading-6 text-gray-100 mt-4'
+            className='block text-sm font-medium leading-6 text-mirage mt-4'
           >
             Password
           </label>
@@ -151,14 +151,14 @@ const Register = () => {
               id='file'
               name='file'
               type='file'
-              className='block w-full rounded-md border-0 py-1.5 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-900 focus:ring-2 focus:ring-inset focus:ring-tuscany sm:text-sm sm:leading-6'
+              className='block w-full rounded-md border-0 py-1.5 text-mirage shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-900 focus:ring-2 focus:ring-inset focus:ring-tuscany sm:text-sm sm:leading-6'
               onChange={handleFileChange}
             />
             {avatarName && <p>{avatarName} uploaded</p>}
           </div>
           <label
             htmlFor='confirm-password'
-            className='block text-sm font-medium leading-6 text-gray-100 mt-4'
+            className='block text-sm font-medium leading-6 text-mirage mt-4'
           >
             Confirm Password
           </label>

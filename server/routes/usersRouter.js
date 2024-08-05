@@ -17,8 +17,7 @@ router.post('/login', loginUser);
 router.post(
   '/upload-avatar',
   authMiddleware,
-  multerUpload,
-  uploadAvatar.single('avatar'),
+  multerUpload.single('avatar'),
   uploadAvatar
 );
 // router.get('/likes', authMiddleware, getUserLikes); //* activate for likes functionality

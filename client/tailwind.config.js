@@ -9,7 +9,10 @@ export default {
         mexicanRed: '#A12529', // Mexican Red
         tuscany: '#CE633B', // Tuscany (orange-beige)
       },
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 };

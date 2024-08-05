@@ -1,10 +1,13 @@
 export type Item = {
   _id: string;
   name: string; // always available, no need to make it optional
+  price: string;
   country: string;
   body: 'I love it';
   likes: string[];
-  picture: string;
+  itemImage: string;
+  itemImageAlt: string;
+  href?: string;
 };
 
 export type UserType = {

@@ -3,6 +3,7 @@ import 'dotenv/config'; // loads the .env file
 
 export const cloudinaryConfig = () => {
   // Configuration
+  console.log(process.env.CLOUD_API_KEY);
   cloudinary.config({
     //
     cloud_name: process.env.CLOUD_NAME,

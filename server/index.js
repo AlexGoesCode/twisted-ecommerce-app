@@ -7,6 +7,7 @@ import testRouter from './routes/testRoute.js';
 // import { cloudinaryConfig } from './config/cloudinary.js';
 import itemRouter from './routes/itemsRouter.js';
 import usersRouter from './routes/usersRouter.js';
+import cloudinaryConfig from './config/cloudinary.js';
 
 dotenv.config();
 
@@ -14,10 +15,10 @@ const { black } = colors;
 
 //* Add the middleware functions by calling app.use()
 const addMiddlewares = (app) => {
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(cors());
-  // cloudinaryConfig();
+  cloudinaryConfig();
 };
 
 //* Start the server by calling app.listen()
@@ -48,9 +49,9 @@ const DBConnection = async () => {
 // functions need to be in order after each other
 (async function controller() {
   const app = express();
+  addMiddlewares(app);
   await DBConnection();
   loadRoutes(app);
-  addMiddlewares(app);
   startServer(app);
 })();
 // a self-contained function that initializes an Express application, establishes a DB connection,

@@ -24,6 +24,7 @@ const itemsByCountry = async (req, res) => {
 const getItemById = async (req, res) => {
   try {
     const itemId = req.params.itemId; // req.params.itemId: ID we fetch from URL
+    console.log('itemID :>> ', itemId);
     const item = await itemModel.findById(itemId);
 
     if (!item) {

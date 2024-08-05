@@ -26,8 +26,11 @@ export const registerUser = async (req, res) => {
     }
 
     // upload file to cloudinary by calling the imageUpload function
-    const avatar = await imageUpload(req.file, 'user-avatars');
-    console.log('avatar :>> ', avatar);
+    let avatar = undefined;
+    if (req.file) {
+      avatar = await imageUpload(req.file, 'user-avatars');
+      console.log('avatar :>> ', avatar);
+    }
 
     const newUser = new User({
       // create a new user with following properties
@@ -50,7 +53,7 @@ export const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.log('Registration error :>> ', error);
-    handleError(res, 'Server error');
+    return handleError(res, 'Server error');
   }
 };
 

@@ -5,9 +5,9 @@ export type Item = {
   country: string;
   body: 'I love it';
   likes: string[];
-  itemImage: string;
-  itemImageAlt: string;
-  href?: string;
+  image: string;
+  imageAlt: string;
+  link: string;
 };
 
 export type UserType = {

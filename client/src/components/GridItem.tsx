@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Item } from '../types/Types';
-import { useAuth } from '../context/AuthContext';
-// import LikeButton from './LikeButton';
+// import { useAuth } from '../context/AuthContext';
+import LikeButton from './LikeButton';
 
 interface GridItemProps {
   item: Item;
@@ -10,15 +10,15 @@ interface GridItemProps {
 }
 
 const GridItem = ({ item, isLiked, fetchData }: GridItemProps) => {
-  const { user } = useAuth();
+  //   const { user } = useAuth();
 
   return (
     <div className='relative bg-gray-900 bg-opacity-50 max-w-60 p-4 border rounded-2xl shadow-md cursor-pointer'>
       {item.image && (
-        <Link to={`/recipes/${item._id}`}>
+        <Link to={`/items/${item._id}`}>
           <img
             src={item.image}
-            alt={item.name}
+            alt={item.imageAlt}
             className='w-full h-48 object-cover rounded-xl'
           />
         </Link>
@@ -30,7 +30,7 @@ const GridItem = ({ item, isLiked, fetchData }: GridItemProps) => {
 
       <div className='absolute bottom-2 right-2 '>
         <LikeButton
-          recipeId={item._id}
+          itemId={item._id}
           // userId={'your-user-id'} // Replace with dynamic user ID if available
           isLiked={isLiked}
           // Pass down the handleLike function

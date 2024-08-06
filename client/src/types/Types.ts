@@ -4,7 +4,7 @@ export type Item = {
   price: string;
   country: string;
   body: 'I love it';
-  likes: string[];
+  likes?: string[];
   image: string;
   imageAlt: string;
   link: string;

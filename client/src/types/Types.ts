@@ -1,7 +1,8 @@
 export type Item = {
   _id: string;
-  name: string; // always available, no need to make it optional
-  price: string;
+  name: string;
+  price: number;
+  inStock: number;
   country: string;
   body: 'I love it';
   likes?: string[];

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface SearchBarProps {
   handleSearch: () => void;
@@ -15,6 +15,11 @@ function SearchBar({
   const [searchOption, setSearchOption] = useState<'name' | 'country' | 'id'>(
     'name'
   ); // Uses a specific union type for searchOption
+
+  useEffect(() => {
+    // Trigger the search when the component mounts
+    handleSearch();
+  }, []);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();

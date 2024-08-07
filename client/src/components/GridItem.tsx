@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Item } from '../types/Types';
-// import { useAuth } from '../context/AuthContext';
 import LikeButton from './LikeButton';
 
 interface GridItemProps {
@@ -10,34 +9,33 @@ interface GridItemProps {
 }
 
 const GridItem = ({ item, isLiked, fetchData }: GridItemProps) => {
-  //   const { user } = useAuth();
-
+  console.log('item', item);
   return (
-    <div className='relative bg-gray-900 bg-opacity-50 max-w-60 p-4 border rounded-2xl shadow-md cursor-pointer'>
-      {item.image && (
-        <Link to={`/items/${item._id}`}>
-          <img
-            src={item.image}
-            alt={item.imageAlt}
-            className='w-full h-48 object-cover rounded-xl'
+    <Link to={`/items/${item._id}`} className='block'>
+      <div className='relative bg-gray-900 bg-opacity-50 max-w-60 p-4 border rounded-2xl shadow-md cursor-pointer'>
+        {item.image && (
+          <Link to={`/items/${item._id}`}>
+            <img
+              src={item.image[0].url}
+              alt={item.imageAlt}
+              className='w-full h-48 object-cover rounded-xl'
+            />
+          </Link>
+        )}
+        <h3 className='text-lg font-bold mt-2 text-gray-100'>{item.name}</h3>
+        <p className='text-gray-100'>{item.country}</p>
+        <p className='text-gray-100'>{item.likes?.length} Likes</p>
+        <p className='text-gray-100'>{item.price.toFixed(2)} €</p>
+        {/* Display price with € sign */}
+        <div className='absolute bottom-2 right-2 '>
+          <LikeButton
+            itemId={item._id}
+            isLiked={isLiked}
+            fetchData={fetchData}
           />
-        </Link>
-      )}
-      <h3 className='text-lg font-bold mt-2 text-gray-100'>{item.name}</h3>
-      <p className='text-gray-100'>{item.country}</p>
-
-      <p className='text-gray-100'>{item.likes?.length} Likes</p>
-
-      <div className='absolute bottom-2 right-2 '>
-        <LikeButton
-          itemId={item._id}
-          // userId={'your-user-id'} // Replace with dynamic user ID if available
-          isLiked={isLiked}
-          // Pass down the handleLike function
-          fetchData={fetchData}
-        />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

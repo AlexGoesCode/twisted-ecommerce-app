@@ -8,6 +8,7 @@ import Logout from '../pages/Logout';
 import Register from '../pages/Register';
 import SingleProduct from '../pages/SingleProduct';
 import NotFound from '../pages/NotFound';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 const Routes = () => {
   return (
@@ -18,7 +19,7 @@ const Routes = () => {
       <Route path='/register' element={<Register />} />
 
       <Route
-        path='/products'
+        path='/items'
         element={
           // <ProtectedRoute>
           <Products />
@@ -27,7 +28,7 @@ const Routes = () => {
       />
 
       <Route
-        path='/products/:productid'
+        path='/items/:itemid'
         element={
           //   <ProtectedRoute>
           <SingleProduct />
@@ -40,9 +41,9 @@ const Routes = () => {
       <Route
         path='/myaccount'
         element={
-          //   <ProtectedRoute>
-          <MyAccount />
-          //   </ProtectedRoute>
+          <ProtectedRoute>
+            <MyAccount />
+          </ProtectedRoute>
         }
       />
 

@@ -4,19 +4,13 @@ import GridItem from './GridItem';
 
 interface GridListProps {
   items: Item[];
-  totalPages: number;
-  currentPage: number;
-  handlePageChange: (page: number) => void;
+  // totalPages: number;
+  // currentPage: number;
+  // handlePageChange: (page: number) => void;
   fetchData: () => Promise<void>;
 }
 
-export default function GridList({
-  items,
-  // totalPages,
-  // currentPage,
-  // handlePageChange,
-  fetchData,
-}: GridListProps) {
+export default function GridList({ items, fetchData }: GridListProps) {
   const { user } = useAuth();
 
   console.log('Rendering GridList with items:', items); // Debug log

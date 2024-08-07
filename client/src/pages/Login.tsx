@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, setError } = useAuth();
+  const { error, setError, login } = useAuth();
   const navigate = useNavigate();
 
   //* Login user function
@@ -24,34 +24,7 @@ const Login = () => {
       return;
     }
     console.log(`Logging in with email: ${email} and password: ${password}`);
-
-    const formData = new URLSearchParams(); // URLSearchParams: find in postman
-    formData.append('email', email);
-    formData.append('password', password);
-
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      body: formData,
-      redirect: 'follow',
-    };
-
-    try {
-      const response = await fetch(
-        'http://localhost:5022/api/users/login',
-        requestOptions
-      );
-      if (!response.ok) {
-        const errorResult = await response.json();
-        setError(errorResult.message || 'An error has occured.');
-        return;
-      }
-      const result = await response.json();
-      console.log('result :>> ', result);
-      navigate('/dashboard'); // Redirect to a dashboard or homepage after login
-    } catch (error) {
-      console.error(error);
-      setError('An error has occured during login.');
-    }
+    login(email, password);
   };
 
   return (

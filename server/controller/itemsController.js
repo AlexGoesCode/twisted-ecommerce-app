@@ -6,7 +6,7 @@ const allItems = async (req, res) => {
     console.log('allItems :>> ', allItems);
 
     res.status(200).json({
-      number: allItems.lenght,
+      number: allItems.length,
       allItems,
     });
   } catch (error) {

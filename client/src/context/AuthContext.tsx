@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // const [avatarUrl, setAvatarUrl] = useState('');
 
   const login = async (email: string, password: string) => {
-    console.log(`Logging in with username: ${email} and password: ${password}`);
+    // console.log(`Logging in with username: ${email} and password: ${password}`);
 
     //* Headers make sure the content type is set to form data
     const myHeaders = new Headers();
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     try {
       const response = await fetch(
-        'http://localhost:5022/api/user/login',
+        'http://localhost:5022/api/users/login',
         requestOptions
       );
       if (!response.ok) throw new Error('Failed to login');
@@ -69,12 +69,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       localStorage.setItem('token', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
+      // localStorage.setItem('user', JSON.stringify(result.user)); //we get our user either from the DB or from local state variable
+      setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
-      navigate('/product');
+      navigate('/');
     } catch (error) {
       console.log('error :>> ', error);
+      setIsLoading(false);
       setError('Failed to login');
     } finally {
       setIsLoading(false);
@@ -102,20 +104,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
     try {
       const response = await fetch(
-        'http://localhost:5022/api/user/profile',
+        'http://localhost:5022/api/users/profile',
         requestOptions
       );
       if (!response.ok && response.status === 401) {
         localStorage.removeItem('token');
+        setIsLoading(false);
         setIsAuthenticated(false);
         navigate('/login');
         return;
       }
       const result = (await response.json()) as GetProfileOkResponse;
       console.log('result profile', result);
+      setIsLoading(false);
       setUser(result.user);
     } catch (error) {
       console.log('error getting profile :>> ', error);
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }

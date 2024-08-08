@@ -12,7 +12,7 @@ const GridItem = ({ item, isLiked, fetchData }: GridItemProps) => {
   console.log('item', item);
   return (
     <Link to={`/items/${item._id}`} className='block'>
-      <div className='relative bg-gray-900 bg-opacity-50 max-w-60 p-4 border rounded-2xl shadow-md cursor-pointer'>
+      <div className='relative bg-gray-600 opacity-100 max-w-60 min-h-96 p-4 border rounded-2xl shadow-md cursor-pointer'>
         {item.image && (
           <Link to={`/items/${item._id}`}>
             <img

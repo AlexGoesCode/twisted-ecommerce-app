@@ -54,20 +54,21 @@ export default function GridList({ items, fetchData }: GridListProps) {
 
   //* newer version
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-gray-100 opacity-100'>
       <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
-        <h2 className='text-2xl font-bold tracking-tight text-mirage'>
+        <h2 className='text-3xl text-center font-bold tracking-tight text-mirage'>
           Our BobbleHeads selection:
         </h2>
 
-        <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-          {items.map((item) => (
-            <GridItem
-              key={item._id}
-              item={item}
-              isLiked={user?.likedItems?.includes(item) || false}
-              fetchData={fetchData}
-            />
+        <div className='mt-6 flex flex-wrap justify-center gap-x-6 gap-y-10 xl:gap-x-8'>
+          {items.slice(0, 5).map((item) => (
+            <div key={item._id} className='flex-shrink-0 w-1/5 p-2'>
+              <GridItem
+                item={item}
+                isLiked={user?.likedItems?.includes(item) || false}
+                fetchData={fetchData}
+              />
+            </div>
           ))}
         </div>
       </div>

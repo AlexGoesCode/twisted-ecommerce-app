@@ -9,6 +9,7 @@ import Register from '../pages/Register';
 import SingleProduct from '../pages/SingleProduct';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
+import Basket from '../pages/Basket';
 
 const Routes = () => {
   return (
@@ -17,7 +18,6 @@ const Routes = () => {
       <Route path='/login' element={<Login />} />
       <Route path='/logout' element={<Logout />} />
       <Route path='/register' element={<Register />} />
-
       <Route
         path='/items'
         element={
@@ -26,7 +26,6 @@ const Routes = () => {
           // </ProtectedRoute>
         }
       />
-
       <Route
         path='/items/:itemid'
         element={
@@ -35,9 +34,7 @@ const Routes = () => {
           //   </ProtectedRoute>
         }
       />
-
       <Route path='/aboutus' element={<AboutUs />} />
-
       <Route
         path='/myaccount'
         element={
@@ -46,7 +43,8 @@ const Routes = () => {
           </ProtectedRoute>
         }
       />
-
+      h
+      <Route path='/basket' element={<Basket />} />
       <Route path='*' element={<NotFound />} />
     </RouterRoutes>
   );

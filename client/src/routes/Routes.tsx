@@ -21,17 +21,17 @@ const Routes = () => {
       <Route
         path='/items'
         element={
-          // <ProtectedRoute>
-          <Products />
-          // </ProtectedRoute>
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
         }
       />
       <Route
         path='/items/:itemid'
         element={
-          //   <ProtectedRoute>
-          <SingleProduct />
-          //   </ProtectedRoute>
+          <ProtectedRoute>
+            <SingleProduct />
+          </ProtectedRoute>
         }
       />
       <Route path='/aboutus' element={<AboutUs />} />

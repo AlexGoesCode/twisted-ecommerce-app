@@ -2,7 +2,7 @@ export type Item = {
   _id: string;
   name: string;
   price: number;
-  inStock: number;
+  // inStock: number;
   country: string;
   body: 'I love it';
   likes?: string[];
@@ -20,7 +20,8 @@ export type ImageType = {
 export type UserType = {
   email: string;
   username: string;
-  likedItems: Item[];
+  // likedItems: Item[];
+  shoppingCart: Item[];
   id: string;
   avatar: string;
 };

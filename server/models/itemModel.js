@@ -7,7 +7,7 @@ const itemSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     price: { type: Number, required: true },
-    inStock: { type: Number, required: true },
+    // inStock: { type: Number, required: true },
     country: { type: String, required: true },
     body: { type: String, required: true, default: 'I love it' },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],

@@ -1,4 +1,5 @@
 import itemModel from '../models/itemModel.js';
+import userModel from '../models/userModel.js';
 
 const allItems = async (req, res) => {
   try {
@@ -49,9 +50,34 @@ const getItemById = async (req, res) => {
   }
 };
 
-//* Function that tries to like an item. -> 200, 400 or 500
-// const likeItem = async (req, res) => {
-//     const
-// }
+const addProductToCart = async (req, res) => {
+  try {
+    // Extract user from request
+    const user = req.user;
+    // Extract product ID from request body
+    const { productId } = req.body;
 
-export { allItems, itemsByCountry, getItemById };
+    if (!productId) {
+      return res.status(400).json({ message: 'Product ID is required' });
+    }
+    // Find user in the database
+    const userRecord = await userModel.findByIdAndUpdate(user._id);
+
+    if (!userRecord) {
+      return res.status(404).json({ message: 'User not found ' });
+    }
+    // add product ID to user's shop.cart
+    userRecord.shoppingCart.push(productId);
+
+    // save updated document
+    await userRecord.save();
+
+    // send success response
+    res.status(200).json({ message: 'Product added to cart successfully ' });
+  } catch (error) {
+    console.error('Error adding product to cart:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+export { allItems, itemsByCountry, getItemById, addProductToCart };

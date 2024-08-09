@@ -62,7 +62,7 @@ export const loginUser = async (req, res) => {
 
   try {
     // Find user by email and populate the likedItems array
-    const user = await User.findOne({ email }).populate('likedItems');
+    const user = await User.findOne({ email }).populate('shoppingCart');
     if (!user) {
       return handleError(res, 'User not found', 404);
     }
@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
         email: user.email,
         username: user.name,
         avatar: user.avatar,
-        likedItems: user.likedItems,
+        shoppingCart: user.shoppingCart,
       },
       token,
     });
@@ -147,7 +147,7 @@ export const getUserProfile = async (req, res) => {
       email: req.user.email,
       username: req.user.name,
       avatar: req.user.avatar,
-      likedItems: req.user.likedItems,
+      shoppingCart: req.user.shoppingCart,
     },
   });
 };

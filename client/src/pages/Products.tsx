@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import GridList from '../components/GridList';
 import { Item } from '../types/Types';
-// import { fetchUserLikes } from '../api/user';
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Item, SingleItemOkResponse } from '../types/Types';
+// import { BasketContext } from '../context/BasketContext';
 
 function SingleProduct() {
   const [item, setItem] = useState<Item | null>(null);
@@ -96,7 +97,7 @@ function SingleProduct() {
           </h1>
           <div className='flex justify-between mb-16 text-xl '>
             <p className='mt-6 m-5'>Price: {item.price}</p>
-            <p className='mt-6'>In stock: {item.inStock}</p>
+            {/* <p className='mt-6'>In stock: {item.inStock}</p> */}
             <p className='mt-6'>Country: {item.country}</p>
           </div>
           <div className='flex justify-between mb-16'>

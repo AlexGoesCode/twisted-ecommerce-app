@@ -13,12 +13,9 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token
-
-    // Find the user by id using the decoded.sub (which is the user id)
-    // and populate the likedItems field with the Items model
     const user = await userModel
       .findById({ _id: decoded.sub })
-      .populate('likedItems');
+      .populate('shoppingCart');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' }); // Return 404 if user is not found

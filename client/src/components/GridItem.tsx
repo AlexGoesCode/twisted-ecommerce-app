@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Item } from '../types/Types';
 // import LikeButton from './LikeButton';
+import { useAuth } from '../context/AuthContext';
 
 interface GridItemProps {
   item: Item;
@@ -8,8 +9,9 @@ interface GridItemProps {
   fetchData: () => Promise<void>;
 }
 
-const GridItem = ({ item, /*isLiked*/ fetchData }: GridItemProps) => {
+const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
   console.log('item', item);
+  const { getUserProfile } = useAuth();
 
   const addToBasket = async (item: Item) => {
     const token = localStorage.getItem('token');
@@ -42,6 +44,7 @@ const GridItem = ({ item, /*isLiked*/ fetchData }: GridItemProps) => {
       console.log('Item added to basket', result);
 
       // fetchData();
+      getUserProfile();
     } catch (error) {
       console.error('Error adding item to basket:', error);
     }

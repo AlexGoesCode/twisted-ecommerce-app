@@ -47,10 +47,6 @@ const GridItem = ({ item, /*isLiked*/ fetchData }: GridItemProps) => {
     }
   };
 
-  //this function expects the id of the product clicked on
-  //this function should put the token (from the user stored in local storage) in the header
-  //do a fetch, and check result.
-
   return (
     // <Link to={`/items/${item._id}`} className='block'>
     <div className='relative bg-gray-600 opacity-100 max-w-60 min-h-96 p-4 border rounded-2xl shadow-md cursor-pointer'>

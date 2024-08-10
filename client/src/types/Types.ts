@@ -9,6 +9,7 @@ export type Item = {
   image: ImageType[];
   imageAlt: string;
   link: string;
+  quantity: number;
 };
 
 export type ImageType = {

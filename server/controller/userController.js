@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
 
     // generate the token with the user id, and include the token in the response.
     const token = jwt.sign({ sub: savedUser._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '5h',
     });
 
     res.status(201).json({
@@ -74,7 +74,7 @@ export const loginUser = async (req, res) => {
     }
 
     const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '5h',
     });
     console.log('token :>> ', token);
 

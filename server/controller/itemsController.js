@@ -50,7 +50,25 @@ const getItemById = async (req, res) => {
   }
 };
 
-const addProductToCart = async (req, res) => {
+const getCart = async (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({
+      message: 'Shopping cart fetched successfully',
+      shoppingCart: user.shoppingCart,
+    });
+  } catch (error) {
+    console.log('Error fetching shopping cart:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+const addItemsToCart = async (req, res) => {
   console.log('add to cart runnning');
   try {
     // Extract user from request
@@ -193,7 +211,8 @@ const removeItemsFromCart = async (req, res) => {
 export {
   allItems,
   itemsByCountry,
+  getCart,
   getItemById,
-  addProductToCart,
+  addItemsToCart,
   removeItemsFromCart,
 };

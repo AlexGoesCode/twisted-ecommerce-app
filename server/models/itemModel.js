@@ -7,12 +7,12 @@ const itemSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     price: { type: Number, required: true },
-    // inStock: { type: Number, required: true },
     country: { type: String, required: true },
     body: { type: String, required: true, default: 'I love it' },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     image: [{ url: String, alt: String }], // Array of image objects
-    link: { type: String, required: false },
+    // link: { type: String, required: false },
+    // inStock: { type: Number, required: true },
   },
   { timestamps: true }
 );

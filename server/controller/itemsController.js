@@ -75,6 +75,7 @@ const addProductToCart = async (req, res) => {
       return item.product.toString() === productId;
     });
     console.log('existingItem :>> ', existingItem);
+
     if (existingItem) {
       console.log('existing item ln 86');
       const newQuantity = existingItem.quantity + 1;
@@ -133,4 +134,66 @@ const addProductToCart = async (req, res) => {
   }
 };
 
-export { allItems, itemsByCountry, getItemById, addProductToCart };
+const removeItemsFromCart = async (req, res) => {
+  if (existingItem.quantity > 1) {
+    const newQuantity = existingItem.quantity - 1;
+
+    // If item exists, increase the quantity
+    try {
+      const user2 = await userModel.findOneAndUpdate(
+        { _id: user._id, 'shoppingCart.product': productId },
+
+        {
+          $set: {
+            'shoppingCart.$.product': productId,
+            'shoppingCart.$.quantity': newQuantity,
+          },
+        },
+
+        { new: true }
+      );
+      return res.status(200).json({
+        message: 'Product added to cart successfully, and quantity updated ',
+
+        user2,
+      });
+    } catch (error) {
+      console.log(
+        'error, adding product when product already exist in cart :>> ',
+        error
+      );
+    }
+  }
+
+  if (existingItem.quantity === 1) {
+    try {
+      const user2 = await userModel.findOneAndUpdate(
+        { _id: user._id, 'shoppingCart.product': productId },
+
+        {
+          $pull: { shoppingCart: { product: productId } },
+        },
+
+        { new: true }
+      );
+      return res.status(200).json({
+        message: 'Product added to cart successfully, and quantity updated ',
+
+        user2,
+      });
+    } catch (error) {
+      console.log(
+        'error, adding product when product already exist in cart :>> ',
+        error
+      );
+    }
+  }
+};
+
+export {
+  allItems,
+  itemsByCountry,
+  getItemById,
+  addProductToCart,
+  removeItemsFromCart,
+};

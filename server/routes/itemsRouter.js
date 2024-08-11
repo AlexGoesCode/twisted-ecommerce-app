@@ -5,7 +5,9 @@ import { multerUpload } from '../middleware/multer.js';
 
 //* Import all the functions from the itemsController
 import {
-  addProductToCart,
+  getCart,
+  addItemsToCart,
+  removeItemsFromCart,
   allItems,
   getItemById,
   itemsByCountry,
@@ -16,8 +18,10 @@ const itemsRouter = express.Router();
 //* Define the routes for the items API
 itemsRouter.get('/all', allItems); // ('/all', controller);
 itemsRouter.get('/france', itemsByCountry);
-itemsRouter.patch('/addProductToCart', authMiddleware, addProductToCart);
 itemsRouter.get('/:itemId', getItemById);
+itemsRouter.get('/cart', authMiddleware, getCart);
+itemsRouter.patch('/addItemsToCart', authMiddleware, addItemsToCart);
+itemsRouter.patch('/removeItemsFromCart', authMiddleware, removeItemsFromCart);
 
 // itemsRouter.put('/:itemid/rating', authMiddleware, rating);
 export default itemsRouter;

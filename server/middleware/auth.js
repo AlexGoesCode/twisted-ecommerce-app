@@ -21,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
       return res.status(404).json({ message: 'User not found' }); // Return 404 if user is not found
     }
 
-    console.log('user in authMiddleware :>> ', user); // Log the user for debugging purposes
+    // console.log('user in authMiddleware :>> ', user); // Log the user for debugging purposes
     req.user = user; // Add the user to the request object
     next(); // Call the next middleware
   } catch (err) {

@@ -16,8 +16,8 @@ const itemsRouter = express.Router();
 //* Define the routes for the items API
 itemsRouter.get('/all', allItems); // ('/all', controller);
 itemsRouter.get('/france', itemsByCountry);
-itemsRouter.get('/:itemId', getItemById);
 itemsRouter.patch('/addProductToCart', authMiddleware, addProductToCart);
+itemsRouter.get('/:itemId', getItemById);
 
 // itemsRouter.put('/:itemid/rating', authMiddleware, rating);
 export default itemsRouter;

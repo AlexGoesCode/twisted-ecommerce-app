@@ -11,7 +11,7 @@ export const useShoppingCart = (token: string) => {
         },
       });
       const data = await response.json();
-      setCartItems(data.user.shoppingCart);
+      setCartItems(data.shoppingCart);
     } catch (error) {
       console.log('Error fetching cart:', error);
     }
@@ -30,7 +30,7 @@ export const useShoppingCart = (token: string) => {
 
       if (response.ok) {
         const data = await response.json();
-        setCartItems(data.user.shoppingCart);
+        setCartItems(data.user2.shoppingCart);
       }
     } catch (error) {
       console.log('Error adding item to cart:', error);
@@ -50,7 +50,7 @@ export const useShoppingCart = (token: string) => {
 
       if (response.ok) {
         const data = await response.json();
-        setCartItems(data.user.shoppingCart);
+        setCartItems(data.user2.shoppingCart);
       }
     } catch (error) {
       console.log('Error removing item from cart', error);

@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
+const shoppingCartItemSchema = new Schema(
+  {
+    quantity: { type: Number },
+    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' },
+  },
+  { _id: false }
+);
+
 const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
@@ -8,7 +16,7 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     // likedItems: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }], //* array of item IDs liked by user
     avatar: { type: String, required: false },
-    shoppingCart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+    shoppingCart: { type: [shoppingCartItemSchema], default: [] },
   },
   { timestamps: true }
 );

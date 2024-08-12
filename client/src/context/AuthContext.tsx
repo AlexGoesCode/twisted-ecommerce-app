@@ -69,7 +69,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       localStorage.setItem('token', result.token);
-      // localStorage.setItem('user', JSON.stringify(result.user)); //we get our user either from the DB or from local state variable
       setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
@@ -118,9 +117,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log('result profile', result);
       setIsLoading(false);
       setUser(result.user);
+      setIsAuthenticated(true);
     } catch (error) {
       console.log('error getting profile :>> ', error);
       setIsLoading(false);
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -131,9 +132,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     if (token) {
       getUserProfile();
-      setIsAuthenticated(true);
     } else {
-      setIsAuthenticated(false);
       alert('you need to login first');
     }
   }, []);

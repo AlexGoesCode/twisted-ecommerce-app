@@ -8,8 +8,13 @@ export type Item = {
   likes?: string[];
   image: ImageType[];
   imageAlt: string;
-  link: string;
+  // link?: string;
   quantity: number;
+};
+
+export type ShoppingCartItem = {
+  quantity: number;
+  product: Item;
 };
 
 export type ImageType = {
@@ -22,7 +27,7 @@ export type UserType = {
   email: string;
   username: string;
   // likedItems: Item[];
-  shoppingCart: Item[];
+  shoppingCart: [ShoppingCartItem];
   id: string;
   avatar: string;
 };

@@ -87,7 +87,7 @@ function SingleProduct() {
         </div>
         <div className='relative px-8 py-4 font-outfit text-wenge-brown md:w-1/2'>
           <button
-            className='absolute top-4 right-6 w-20 bg-orange-400 p-2 rounded-full'
+            className='absolute top-4 right-6 w-20 bg-orange-300 p-3 rounded-full'
             onClick={handleBack}
           >
             Back

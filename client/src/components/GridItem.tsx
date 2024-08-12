@@ -25,7 +25,7 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
     urlencoded.append('productId', item._id);
     try {
       const response = await fetch(
-        'http://localhost:5022/api/items/addProductToCart',
+        'http://localhost:5022/api/items/addItemsToCart',
         {
           method: 'PATCH',
           headers: {
@@ -66,11 +66,13 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
       <p className='text-gray-100'>{item.country}</p>
       <p className='text-gray-100'>{item.likes?.length} Likes</p>
       <p className='text-gray-100'>{item.price.toFixed(2)} €</p>
-      <button onClick={() => addToBasket(item)}>Add to Cart</button>
-      {/* Display price with € sign */}
-      <div className='absolute bottom-2 right-2 '>
-        {/* <LikeButton itemId={item._id} isLiked={isLiked} fetchData={fetchData} /> */}
+      <div className='absolute bottom-3 right-3 w-13 bg-orange-300 p-3 rounded-full '>
+        <button onClick={() => addToBasket(item)}>Add to Cart</button>
       </div>
+      {/* Display price with € sign */}
+      {/* <div className='absolute bottom-2 right-2 '> */}
+      {/* <LikeButton itemId={item._id} isLiked={isLiked} fetchData={fetchData} /> */}
+      {/* </div> */}
     </div>
     // </Link>
   );

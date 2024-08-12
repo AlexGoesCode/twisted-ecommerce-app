@@ -1,5 +1,6 @@
 import itemModel from '../models/itemModel.js';
 import userModel from '../models/userModel.js';
+import orderModel from '../models/orderModel.js';
 
 const allItems = async (req, res) => {
   try {
@@ -51,6 +52,7 @@ const getItemById = async (req, res) => {
 };
 
 const getCart = async (req, res) => {
+  console.log('req.user :>> ', req.user);
   try {
     const user = req.user;
 
@@ -70,6 +72,7 @@ const getCart = async (req, res) => {
 
 const addItemsToCart = async (req, res) => {
   console.log('add to cart runnning');
+  console.log('req.user :>> ', req.user);
   try {
     // Extract user from request
     const user = req.user;
@@ -90,7 +93,8 @@ const addItemsToCart = async (req, res) => {
     // Check if the product is already in the cart
 
     const existingItem = user.shoppingCart.find((item) => {
-      return item.product.toString() === productId;
+      console.log('item :>> ', item.product._id.toString() === productId);
+      return item.product._id.toString() === productId;
     });
     console.log('existingItem :>> ', existingItem);
 
@@ -100,7 +104,7 @@ const addItemsToCart = async (req, res) => {
 
       // If item exists, increase the quantity
       try {
-        const user2 = await userModel.findOneAndUpdate(
+        const userIncreasingCart = await userModel.findOneAndUpdate(
           { _id: user._id, 'shoppingCart.product': productId },
 
           {
@@ -112,10 +116,11 @@ const addItemsToCart = async (req, res) => {
 
           { new: true }
         );
+        console.log('userIncreasingCart :>> ', userIncreasingCart);
         return res.status(200).json({
           message: 'Product added to cart successfully, and quantity updated ',
 
-          user2,
+          userIncreasingCart,
         });
       } catch (error) {
         console.log(
@@ -128,7 +133,7 @@ const addItemsToCart = async (req, res) => {
     if (!existingItem) {
       // If item does not exist, we update the quantity property in Items collection and push the id of the product to the shoppingCart array
       try {
-        const user3 = await userModel.updateOne(
+        const userItemNotInCart = await userModel.updateOne(
           { _id: user._id },
           { $addToSet: { shoppingCart: { quantity: 1, product: productId } } },
           { new: true }
@@ -137,7 +142,7 @@ const addItemsToCart = async (req, res) => {
         return res.status(200).json({
           message: 'Product added to cart successfully, and quantity updated ',
 
-          user3,
+          userItemNotInCart,
         });
       } catch (error) {
         console.log(
@@ -153,12 +158,18 @@ const addItemsToCart = async (req, res) => {
 };
 
 const removeItemsFromCart = async (req, res) => {
+  const user = req.user;
+  const productId = req.body.productId;
+
+  const existingItem = user.shoppingCart.find((item) => {
+    return item.product._id.toString() === productId;
+  });
   if (existingItem.quantity > 1) {
     const newQuantity = existingItem.quantity - 1;
 
-    // If item exists, increase the quantity
+    // If item exists, decrease the quantity
     try {
-      const user2 = await userModel.findOneAndUpdate(
+      const userIncreasingCart = await userModel.findOneAndUpdate(
         { _id: user._id, 'shoppingCart.product': productId },
 
         {
@@ -173,7 +184,7 @@ const removeItemsFromCart = async (req, res) => {
       return res.status(200).json({
         message: 'Product added to cart successfully, and quantity updated ',
 
-        user2,
+        userIncreasingCart,
       });
     } catch (error) {
       console.log(
@@ -185,7 +196,7 @@ const removeItemsFromCart = async (req, res) => {
 
   if (existingItem.quantity === 1) {
     try {
-      const user2 = await userModel.findOneAndUpdate(
+      const userIncreasingCart = await userModel.findOneAndUpdate(
         { _id: user._id, 'shoppingCart.product': productId },
 
         {
@@ -195,9 +206,9 @@ const removeItemsFromCart = async (req, res) => {
         { new: true }
       );
       return res.status(200).json({
-        message: 'Product added to cart successfully, and quantity updated ',
+        message: 'Product removed to cart successfully, and quantity updated ',
 
-        user2,
+        userIncreasingCart,
       });
     } catch (error) {
       console.log(
@@ -208,11 +219,55 @@ const removeItemsFromCart = async (req, res) => {
   }
 };
 
+const deleteItemsFromCart = async (req, res) => {
+  const user = req.user;
+  const productId = req.body.productId;
+
+  try {
+    const existingItem = user.shoppingCart.find((item) => {
+      return item.product._id.toString() === productId;
+    });
+
+    if (!existingItem) {
+      return res.status(404).json({
+        message: 'Product not found in cart',
+      });
+    }
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      { _id: user._id },
+      { $pull: { shoppingCart: { product: productId } } },
+      { new: true }
+    );
+    return res.status(200).json({
+      message: 'Product removed from cart successfully',
+      updatedUser,
+    });
+  } catch (error) {
+    console.log('Error removing product from cart:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+const checkout = async (req, res) => {
+  const user = req.user;
+  const { shippingAddress, paymentMethod } = req.body;
+
+  try {
+    // validate cart items
+    // Create an order
+    // Clear the user's cart after placing the order
+    // Optionally, send a confirmation email here
+  } catch (error) {}
+};
+
 export {
+  checkout,
   allItems,
   itemsByCountry,
   getCart,
   getItemById,
   addItemsToCart,
   removeItemsFromCart,
+  deleteItemsFromCart,
 };

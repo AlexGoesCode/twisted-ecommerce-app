@@ -1,22 +1,22 @@
-import { createContext, useContext } from 'react';
-import { useShoppingCart as useShoppingCartHook } from '../hooks/useShoppingCart';
+// import { createContext, useContext } from 'react';
+// import { useShoppingCart as useShoppingCartHook } from '../hooks/useShoppingCart';
 
-const ShoppingCartContext = createContext(null);
+// const ShoppingCartContext = createContext(null);
 
-export const ShoppingCartProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const shoppingCart = useShoppingCartHook('argument');
+// export const ShoppingCartProvider = ({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) => {
+//   const shoppingCart = useShoppingCartHook('argument');
 
-  return (
-    <ShoppingCartContext.Provider value={shoppingCart}>
-      {children}
-    </ShoppingCartContext.Provider>
-  );
-};
+//   return (
+//     <ShoppingCartContext.Provider value={shoppingCart}>
+//       {children}
+//     </ShoppingCartContext.Provider>
+//   );
+// };
 
-export const useShoppingCart = () => {
-  return useContext(ShoppingCartContext);
-};
+// export const useShoppingCart = () => {
+//   return useContext(ShoppingCartContext);
+// };

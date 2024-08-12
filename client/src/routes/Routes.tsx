@@ -10,6 +10,7 @@ import SingleProduct from '../pages/SingleProduct';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Basket from '../pages/Basket';
+import Checkout from '../pages/Checkout';
 
 const Routes = () => {
   return (
@@ -43,9 +44,11 @@ const Routes = () => {
           </ProtectedRoute>
         }
       />
-      h
+
       <Route path='/basket' element={<Basket />} />
       <Route path='*' element={<NotFound />} />
+
+      <Route path='/checkout' element={<Checkout />} />
     </RouterRoutes>
   );
 };

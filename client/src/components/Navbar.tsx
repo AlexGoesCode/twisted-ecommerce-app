@@ -126,6 +126,7 @@ const Navbar = () => {
                   className='relative rounded-full bg-gray-200 p-3 text-mirage hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                 >
                   <span className='sr-only'>View basket</span>
+                  <p>{user?.shoppingCart ? user?.shoppingCart.length : 0}</p>
                   <ShoppingCartIcon className='h-6 w-6' aria-hidden='true' />
                 </NavLink>
                 <button

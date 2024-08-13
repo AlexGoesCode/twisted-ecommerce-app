@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import {
   Disclosure,
   Menu,
@@ -31,7 +32,8 @@ function classNames(...classes: string[]) {
 const Navbar = () => {
   const { isAuthenticated, logout, user, getUserProfile } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
+  const navigate = useNavigate();
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -69,6 +71,20 @@ const Navbar = () => {
         console.error('Error uploading avatar:', error);
       }
     }
+  };
+
+  const handleCartIconClick = () => {
+    if (user?.shoppingCart && user.shoppingCart.length === 0) {
+      setShowEmptyCartModal(true);
+    } else {
+      setShowEmptyCartModal(false);
+      // Navigate to the shopping cart page or perform other actions
+    }
+  };
+
+  const closeModal = () => {
+    setShowEmptyCartModal(false);
+    navigate('/items');
   };
 
   return (
@@ -124,10 +140,17 @@ const Navbar = () => {
                 <NavLink
                   to='/basket'
                   className='relative rounded-full bg-gray-200 p-3 text-mirage hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
+                  onClick={handleCartIconClick}
                 >
                   <span className='sr-only'>View basket</span>
-                  <p>{user?.shoppingCart ? user?.shoppingCart.length : 0}</p>
-                  <ShoppingCartIcon className='h-6 w-6' aria-hidden='true' />
+                  <div className='relative'>
+                    <ShoppingCartIcon className='h-6 w-6' aria-hidden='true' />
+                    {user?.shoppingCart && user.shoppingCart.length > 0 && (
+                      <span className='absolute -bottom-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white'>
+                        {user.shoppingCart.length}
+                      </span>
+                    )}
+                  </div>
                 </NavLink>
                 <button
                   type='button'
@@ -269,6 +292,21 @@ const Navbar = () => {
               ))}
             </div>
           </DisclosurePanel>
+          {showEmptyCartModal && (
+            <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+              <div className='bg-white p-6 rounded-lg shadow-lg'>
+                <h2 className='text-lg font-semibold'>
+                  Your shopping cart is empty.
+                </h2>
+                <button
+                  onClick={closeModal}
+                  className='mt-4 px-4 py-2 bg-blue-500 text-white rounded-md'
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
         </>
       )}
     </Disclosure>

@@ -24,7 +24,7 @@ const Checkout = () => {
     // Implement the order placement logic here
     alert('Order placed successfully');
     // After placing the order, navigate to a success or order summary page
-    navigate('/order-success');
+    navigate('/');
   };
 
   const totalPrice = cartItems.reduce(

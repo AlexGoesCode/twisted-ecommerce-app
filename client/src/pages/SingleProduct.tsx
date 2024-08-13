@@ -73,7 +73,7 @@ function SingleProduct() {
   }
 
   return (
-    <main className='mt-8 flex justify-center items-center bg-eggshell'>
+    <main className='mt-8 flex justify-center items-center bg-eggshell p-10'>
       <article className='bg-white rounded-3xl max-w-5xl h-auto flex flex-col md:flex-row'>
         <div className='md:w-1/2 flex justify-center items-center p-4'>
           <div className='w-full'>

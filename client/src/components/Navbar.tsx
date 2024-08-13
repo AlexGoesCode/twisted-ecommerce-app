@@ -34,6 +34,7 @@ const Navbar = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
   const navigate = useNavigate();
+
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -108,14 +109,14 @@ const Navbar = () => {
                 <div className='flex flex-shrink-0 items-center'></div>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
-                    <input
+                    {/* <input
                       type='file'
                       name='avatar-file'
                       id='avatar-file'
                       ref={fileInputRef}
                       className='hidden'
                       onChange={handleAvatarChange}
-                    />
+                    /> */}
                     {navigation.map((item) => (
                       <NavLink
                         key={item.name}

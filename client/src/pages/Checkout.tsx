@@ -1,7 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
 import { useShoppingCart } from '../hooks/useShoppingCart';
-import { Item } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
@@ -27,29 +26,24 @@ const Checkout = () => {
     navigate('/');
   };
 
+  const handleBack = () => {
+    navigate('/cart'); // Navigate back to the shopping cart page
+  };
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0
   );
 
-  //   return (
-  //     <div>
-  //       <h1>New Page</h1>
-  //       {userShoppingCart &&
-  //         userShoppingCart.map((item) => {
-  //           return (
-  //             <p>
-  //               {item.product.name} : {item.product.price}
-  //             </p>
-  //           );
-  //         })}
-  //     </div>
-  //   );
-  // };
-
   return (
-    <div className='container mx-auto p-4'>
-      <div className='bg-white shadow-md rounded-lg p-4'>
+    <div className='container mx-auto p-20 w-3/5'>
+      <div className='relative bg-white shadow-md rounded-2xl p-4'>
+        <button
+          className='absolute top-2 right-2 w-20 bg-orange-300 p-3 rounded-full'
+          onClick={handleBack}
+        >
+          Back
+        </button>
         <h1 className='text-3xl text-center font-bold mb-4'>Checkout</h1>
         <h2 className='text-xl font-semibold mb-2'>Order Summary</h2>
         {userShoppingCart ? (

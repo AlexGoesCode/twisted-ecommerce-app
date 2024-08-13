@@ -4,17 +4,19 @@ interface SearchBarProps {
   handleSearch: () => void;
   setSearchTerm: (term: string) => void;
   setSearchBy: (option: 'name' | 'country' | 'id') => void;
+  searchBy: string;
 }
 
 function SearchBar({
   handleSearch,
   setSearchTerm,
   setSearchBy,
+  searchBy,
 }: SearchBarProps) {
   const [term, setTerm] = useState('');
-  const [searchOption, setSearchOption] = useState<'name' | 'country' | 'id'>(
-    'name'
-  ); // Uses a specific union type for searchOption
+  // const [searchOption, setSearchOption] = useState<'name' | 'country' | 'id'>(
+  //   'name'
+  // ); // Uses a specific union type for searchOption
 
   useEffect(() => {
     // Trigger the search when the component mounts
@@ -26,13 +28,20 @@ function SearchBar({
     handleSearch();
   }
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    // console.log('e.target.value :>> ', e.target.value);
+    console.log('typing');
     setTerm(event.target.value);
     setSearchTerm(event.target.value);
+    setSearchBy(event.target.value);
   }
 
   function handleOptionChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    console.log('select');
+
+    console.log('e.target.value :>> ', event.target.value);
     const selectedOption = event.target.value as 'name' | 'country' | 'id';
-    setSearchOption(selectedOption);
+    // setSearchOption(selectedOption);
+    console.log('selectedOption :>> ', selectedOption);
     setSearchBy(selectedOption);
   }
 
@@ -42,7 +51,7 @@ function SearchBar({
         <select
           id='dropdown-button'
           className='z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600 relative'
-          value={searchOption}
+          value={searchBy}
           onChange={handleOptionChange}
         >
           <option value='name'>Name</option>

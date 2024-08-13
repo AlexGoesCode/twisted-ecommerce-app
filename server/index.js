@@ -8,6 +8,7 @@ import testRouter from './routes/testRoute.js';
 import itemRouter from './routes/itemsRouter.js';
 import usersRouter from './routes/usersRouter.js';
 import cloudinaryConfig from './config/cloudinary.js';
+import ordersRouter from './routes/orderRouter.js';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ const loadRoutes = (app) => {
   app.use('/api', testRouter);
   app.use('/api/items', itemRouter);
   app.use('/api/users', usersRouter);
+  app.use('/api/orders', ordersRouter);
 };
 
 const DBConnection = async () => {

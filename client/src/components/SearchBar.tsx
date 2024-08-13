@@ -32,7 +32,7 @@ function SearchBar({
     console.log('typing');
     setTerm(event.target.value);
     setSearchTerm(event.target.value);
-    setSearchBy(event.target.value);
+    // setSearchBy(event.target.value);
   }
 
   function handleOptionChange(event: React.ChangeEvent<HTMLSelectElement>) {

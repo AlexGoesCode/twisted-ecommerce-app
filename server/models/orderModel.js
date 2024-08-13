@@ -3,7 +3,12 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index: true,
+    },
     items: [
       {
         product: {
@@ -11,13 +16,17 @@ const orderSchema = new Schema(
           ref: 'Item',
           required: true,
         },
-        quantity: { type: Number, required: true },
+        quantity: { type: Number, required: true, min: 1 },
       },
     ],
-    shippingAddress: { type: String, required: false },
-    paymentMethod: { type: String, required: false },
-    totalPrice: { type: Number, required: false },
-    status: { type: String, default: 'Pending' }, // Order status: Pending, Shipped, Delivered, etc.
+    shippingAddress: { type: String, required: false, default: '' },
+    paymentMethod: { type: String, required: false, default: 'Not specified' },
+    totalPrice: { type: Number, required: false, default: 0.0, min: 0 },
+    status: {
+      type: String,
+      enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'],
+      default: 'Pending',
+    },
   },
   { timestamps: true }
 );

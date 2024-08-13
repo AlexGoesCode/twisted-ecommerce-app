@@ -17,11 +17,15 @@ const Products = () => {
   const fetchData = async () => {
     console.log('%c fetching products', 'color: red');
     try {
+      console.log('searchBy :>> ', searchBy);
+      console.log('searchTerm', searchTerm);
       const response = await fetch(
-        // in the link: for Pagiantion - add '&page=${currentPage}' before searchTerm
-        // `http://localhost:5022/api/productsby${searchBy}?${searchBy}=${searchTerm}&number=10`
-        'http://localhost:5022/api/items/all'
+        `http://localhost:5022/api/items/all/productsby?${searchBy}=${searchTerm}`
       );
+      // in the link: for Pagiantion - add '&page=${currentPage}' before searchTerm
+      // `http://localhost:5022/api/productsby${searchBy}?${searchBy}=${searchTerm}&number=10`
+      // 'http://localhost:5022/api/items/all'
+
       if (!response.ok) {
         console.log('error fetching products');
         return;
@@ -65,6 +69,7 @@ const Products = () => {
         handleSearch={handleSearch}
         setSearchTerm={setSearchTerm}
         setSearchBy={setSearchBy}
+        searchBy={searchBy}
       />
       <GridList items={items} fetchData={fetchData} />
     </div>

@@ -9,7 +9,7 @@ import Register from '../pages/Register';
 import SingleProduct from '../pages/SingleProduct';
 import NotFound from '../pages/NotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
-import Basket from '../pages/Basket';
+import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 
 const Routes = () => {
@@ -35,6 +35,7 @@ const Routes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route path='/aboutus' element={<AboutUs />} />
       <Route
         path='/myaccount'
@@ -45,7 +46,15 @@ const Routes = () => {
         }
       />
 
-      <Route path='/basket' element={<Basket />} />
+      <Route
+        path='/cart'
+        element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path='*' element={<NotFound />} />
 
       <Route path='/checkout' element={<Checkout />} />

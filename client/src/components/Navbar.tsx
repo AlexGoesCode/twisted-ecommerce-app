@@ -138,11 +138,11 @@ const Navbar = () => {
               </div>
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 <NavLink
-                  to='/basket'
+                  to='/cart'
                   className='relative rounded-full bg-gray-200 p-3 text-mirage hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                   onClick={handleCartIconClick}
                 >
-                  <span className='sr-only'>View basket</span>
+                  <span className='sr-only'>View Cart</span>
                   <div className='relative'>
                     <ShoppingCartIcon className='h-6 w-6' aria-hidden='true' />
                     {user?.shoppingCart && user.shoppingCart.length > 0 && (

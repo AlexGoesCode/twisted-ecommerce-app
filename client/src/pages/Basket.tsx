@@ -1,4 +1,4 @@
-import ShoppingCart from '../components/ShoppingCart';
+import ShoppingCart from './ShoppingCart';
 
 function Basket() {
   return (

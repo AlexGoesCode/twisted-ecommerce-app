@@ -25,11 +25,11 @@ function ShoppingCart() {
     }
   }, [fetchCart, token]);
 
-  useEffect(() => {
-    if (cartItems && cartItems.length === 0) {
-      navigate('/items');
-    }
-  }, [cartItems, navigate]);
+  // useEffect(() => {
+  //   if (cartItems && cartItems.length === 0) {
+  //     navigate('/items');
+  //   }
+  // }, [cartItems, navigate]);
 
   const increaseQuantity = (productId: string) => {
     addItemsToCart(productId);

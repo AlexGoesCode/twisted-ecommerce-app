@@ -6,7 +6,7 @@ const shoppingCartItemSchema = new Schema(
     quantity: { type: Number },
     product: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' },
   },
-  { _id: false }
+  { _id: false, collection: 'Item' }
 );
 
 const userSchema = new Schema(
@@ -20,6 +20,9 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
+// export const shoppingCartItemModel = mongoose.model(
+//   'cartItem',
+//   shoppingCartItemSchema
+// );
 const userModel = mongoose.model('user', userSchema);
 export default userModel;

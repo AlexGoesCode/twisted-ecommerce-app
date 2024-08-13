@@ -19,6 +19,39 @@ const allItems = async (req, res) => {
   }
 };
 
+const itemsByName = async (req, res) => {
+  // console.log('req :>> ', req);
+  console.log('req :>> ', typeof req.query.name);
+  console.log('req.query :>> ', req.query);
+
+  const searchQuery = Object.entries(req.query)[0];
+  console.log('searchQuery :>> ', searchQuery);
+  const searchPropertyName = searchQuery[0];
+  const searchPropertyValue = searchQuery[1];
+
+  if (!searchPropertyValue) {
+    const allItems = await itemModel.find({});
+    return res.status(200).json({
+      number: allItems.length,
+      allItems,
+    });
+  }
+
+  if (searchPropertyValue) {
+    const allItems = await itemModel.find({
+      [searchPropertyName]: {
+        $regex: searchPropertyValue.toString(),
+        $options: 'i',
+      },
+    });
+    console.log('itemsBYname :>> ', allItems);
+    return res.status(200).json({
+      number: allItems.length,
+      allItems,
+    });
+  }
+};
+
 const itemsByCountry = async (req, res) => {
   console.log('req :>> '.yellow, req);
 };
@@ -264,6 +297,7 @@ const checkout = async (req, res) => {
 export {
   checkout,
   allItems,
+  itemsByName,
   itemsByCountry,
   getCart,
   getItemById,

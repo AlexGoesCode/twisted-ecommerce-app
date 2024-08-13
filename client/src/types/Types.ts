@@ -2,14 +2,14 @@ export type Item = {
   _id: string;
   name: string;
   price: number;
-  // inStock: number;
   country: string;
   body: 'I love it';
   likes?: string[];
   image: ImageType[];
   imageAlt: string;
-  // link?: string;
   quantity: number;
+  // link?: string;
+  // inStock: number;
 };
 
 export type ShoppingCartItem = {
@@ -26,10 +26,10 @@ export type ImageType = {
 export type UserType = {
   email: string;
   username: string;
-  // likedItems: Item[];
   shoppingCart: [ShoppingCartItem];
   id: string;
   avatar: string;
+  // likedItems: Item[];
 };
 
 export type SingleItemOkResponse = {
@@ -46,4 +46,28 @@ export type LoginAndRegisterResponse = {
 export type GetProfileOkResponse = {
   message: string;
   user: UserType;
+};
+
+//* Orders types
+
+export type OrderData = {
+  productId: string;
+  quantity: number;
+  // Add other fields as necessary
+};
+
+export type OrderResponse = {
+  orderId: string;
+  status: string;
+  // Add other fields as necessary
+};
+
+export type UserOrdersResponse = {
+  orders: Array<{
+    orderId: string;
+    productId: string;
+    quantity: number;
+    status: string;
+    totalPrice: number;
+  }>;
 };

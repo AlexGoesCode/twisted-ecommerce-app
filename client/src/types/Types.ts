@@ -53,13 +53,12 @@ export type GetProfileOkResponse = {
 export type OrderData = {
   productId: string;
   quantity: number;
-  // Add other fields as necessary
+  paymentMethod: string;
 };
 
 export type OrderResponse = {
   orderId: string;
   status: string;
-  // Add other fields as necessary
 };
 
 export type UserOrdersResponse = {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import DesktopImage from './assets/images/bobbleheads.png';
+import DesktopImage from './assets/images/BobbleHeads2.png';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
 import Routes from './routes/Routes';
@@ -14,7 +14,7 @@ function App() {
       <div className='flex flex-col min-h-screen'>
         <Navbar />
         <div
-          className='sti flex-grow bg-cover bg-center'
+          className='sti flex-grow bg-cover bg-center bg-no-repeat'
           style={{ backgroundImage: `url(${DesktopImage})` }}
         >
           <div className='flex-grow'>

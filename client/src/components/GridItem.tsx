@@ -23,6 +23,7 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
     }
     const urlencoded = new URLSearchParams();
     urlencoded.append('productId', item._id);
+
     try {
       const response = await fetch(
         'http://localhost:5022/api/items/addItemsToCart',
@@ -52,12 +53,12 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
 
   return (
     // <Link to={`/items/${item._id}`} className='block'>
-    <div className='relative bg-gray-600 opacity-100 max-w-60 min-h-96 p-4 border rounded-2xl cursor-pointer'>
+    <div className='relative bg-gray-600 opacity-100 max-w-60 min-h-96 p-3 border rounded-2xl cursor-pointer'>
       {item.image && (
         <Link to={`/items/${item._id}`}>
           <img
-            src={item.image[0].url}
-            alt={item.imageAlt}
+            src={item.image[0]?.url}
+            alt={item.image[0]?.alt}
             className='w-full h-48 object-cover rounded-xl'
           />
         </Link>

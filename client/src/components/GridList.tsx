@@ -50,8 +50,8 @@ export default function GridList({ items, fetchData }: GridListProps) {
 
   return (
     <div className='relative bg-gray-100 min-h-2.5 opacity-100'>
-      <div className='mx-auto max-w-6xl py-10'>
-        <h2 className='text-3xl text-center p-8 font-bold tracking-tight text-mirage'>
+      <div className='mx-auto max-w-6xl py-10 pl-24'>
+        <h2 className='text-3xl text-center p-8 font-bold tracking-tight text-mirage pr-24'>
           Our BobbleHeads selection:
         </h2>
         {/* <div className='mt-6 flex flex-wrap justify-center'> */}
@@ -80,6 +80,8 @@ export default function GridList({ items, fetchData }: GridListProps) {
           {'>'}
         </button> */}
         <Carousel responsive={responsive}>
+          {/* customLeftArrow={<CustomLeftArrow />}
+          customRightArrow={<CustomRightArrow />} */}
           {items.map((item) => (
             <div key={item._id}>
               <GridItem

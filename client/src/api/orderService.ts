@@ -1,26 +1,39 @@
 // orderService.ts
-import { OrderData, OrderResponse, UserOrdersResponse } from '../types/Types';
+import { OrderItem, OrderType, UserOrdersResponse } from '../types/Types';
 
 export const placeOrder = async (
-  orderData: OrderData
-): Promise<OrderResponse> => {
+  orderItems: OrderItem[],
+  token: string,
+  paymentMethod: string,
+  totalPrice: number,
+  shippingAddress: string
+): Promise<OrderType> => {
   try {
     const response = await fetch(
-      'http://localhost:5173/api/orders/place-order',
+      'http://localhost:5022/api/orders/place-order',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify({
+          items: orderItems,
+          shippingAddress: shippingAddress,
+          paymentMethod: paymentMethod,
+          totalPrice: totalPrice,
+        }),
       }
     );
 
     if (!response.ok) {
+      const errorText = await response.text(); // Capture the response body
+      console.error('Error response:', errorText);
       throw new Error('Network response was not ok');
     }
 
-    const data: OrderResponse = await response.json();
+    const data: OrderType = await response.json();
+    console.log('data for orderResponse :>> ', data);
     return data;
   } catch (error) {
     console.error('Error placing order:', error);
@@ -29,20 +42,24 @@ export const placeOrder = async (
 };
 
 export const fetchUserOrders = async (
-  userId: string
+  userId: string,
+  token: string
 ): Promise<UserOrdersResponse> => {
   try {
     const response = await fetch(
-      `http://localhost:5173/api/orders/user-orders/${userId}`,
+      `http://localhost:5022/api/orders/user-orders/${userId}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
       }
     );
 
     if (!response.ok) {
+      const errorText = await response.text(); // Capture the response body
+      console.error('Error response:', errorText);
       throw new Error('Network response was not ok');
     }
 

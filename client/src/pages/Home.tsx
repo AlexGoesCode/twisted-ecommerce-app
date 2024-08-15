@@ -7,9 +7,17 @@ const Home = () => {
 
   return (
     <div className='relative inset-0 z-10 flex items-center justify-center'>
-      <div className='bg-white max-w-2xl h-auto p-10 mt-40 rounded-2xl shadow-lg text-center'>
+      <div className='bg-white opacity-95 max-w-2xl h-auto p-10 mt-40 rounded-2xl shadow-lg text-center'>
         <h1 className='text-2xl font-bold mb-4'>Welcome to BobbleHeads!</h1>
-        <p className='mt-4 text-xl'>Our online store has a great selection.</p>
+        <p className='mt-4 text-xl'>
+          Finally you can take a piece of your favorite (or least favorite)
+          politician with you - because who wouldn’t want a tiny, nodding
+          reminder of their superiority? Whether you admire their ehm...
+          selfless dedication to public service or just can’t get enough of
+          their striking personalities, our collection of bobbleheads lets you
+          carry that political magic everywhere you go!<br></br> Grab yours
+          today and feel the touch of greatness and power !
+        </p>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className='relative inset-0 z-10 flex items-center justify-center'>
-      <div className='bg-white opacity-95 max-w-2xl h-auto p-10 mt-40 rounded-2xl shadow-lg text-center'>
+      <div className='bg-white opacity-95 max-w-2xl h-auto p-10 mt-36 rounded-2xl shadow-lg text-center'>
         <h1 className='text-2xl font-bold mb-4'>Welcome to BobbleHeads!</h1>
         <p className='mt-4 text-xl'>
           Finally you can take a piece of your favorite (or least favorite)

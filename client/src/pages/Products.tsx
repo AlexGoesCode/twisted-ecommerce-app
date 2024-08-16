@@ -47,11 +47,7 @@ const Products = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-
-    //  pagination logic here
   };
-
-  // pagination logic here
 
   const handleSearch = () => {
     // setCurrentPage(1);

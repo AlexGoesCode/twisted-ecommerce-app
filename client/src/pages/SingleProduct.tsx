@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Item, SingleItemOkResponse } from '../types/Types';
+// import Carousel from 'react-multi-carousel';
 // import { BasketContext } from '../context/BasketContext';
 
 function SingleProduct() {
@@ -33,32 +34,32 @@ function SingleProduct() {
   }, [itemid]);
   console.log('item', item);
 
-  const handleLikeItem = async () => {
-    const url = `http://localhost:5022/api/items/${itemid}/like`;
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-      });
+  // const handleLikeItem = async () => {
+  //   const url = `http://localhost:5022/api/items/${itemid}/like`;
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'POST',
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Failed to like item');
-      }
+  //     if (!response.ok) {
+  //       throw new Error('Failed to like item');
+  //     }
 
-      const result = await response.json();
-      console.log('Item liked', result);
+  //     const result = await response.json();
+  //     console.log('Item liked', result);
 
-      if (item) {
-        setItem({ ...item, likes: result.likes });
-      }
-    } catch (error) {
-      console.error('Error liking item:', error);
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError('An unknown error occurred');
-      }
-    }
-  };
+  //     if (item) {
+  //       setItem({ ...item, likes: result.likes });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error liking item:', error);
+  //     if (error instanceof Error) {
+  //       setError(error.message);
+  //     } else {
+  //       setError('An unknown error occurred');
+  //     }
+  //   }
+  // };
 
   const handleBack = () => {
     navigate(-1); // Navigate back to the previous page
@@ -72,9 +73,24 @@ function SingleProduct() {
     return <div>Loading...</div>;
   }
 
+  // const responsive = {
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 1,
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 464 },
+  //     items: 1,
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 464, min: 0 },
+  //     items: 1,
+  //   },
+  // };
+
   return (
     <main className='mt-8 flex justify-center items-center bg-eggshell p-10'>
-      <article className='bg-white rounded-3xl max-w-5xl h-auto flex flex-col md:flex-row'>
+      <article className='bg-white rounded-2xl shadow-lg max-w-5xl max-h-full flex flex-col md:flex-row'>
         <div className='md:w-1/2 flex justify-center items-center p-4'>
           <div className='w-full'>
             <img
@@ -84,6 +100,26 @@ function SingleProduct() {
               style={{ aspectRatio: '3 / 4' }}
             />
           </div>
+          {/* <div className='w-full'>
+            {item.image && (
+              <Carousel
+                responsive={responsive}
+                infinite={true}
+                autoPlay={false}
+                autoPlaySpeed={3000}
+              >
+                {item.image.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img.url}
+                    alt={`Photo of ${img.alt}`}
+                    className='w-full h-auto object-cover rounded-2xl'
+                    style={{ aspectRatio: '3 / 4' }}
+                  />
+                ))}
+              </Carousel>
+            )}
+          </div> */}
         </div>
         <div className='relative px-8 py-4 font-outfit text-wenge-brown md:w-1/2'>
           <button
@@ -96,11 +132,11 @@ function SingleProduct() {
             {item.name}
           </h1>
           <div className='flex justify-between mb-16 text-xl '>
-            <p className='mt-6 m-5'>Price: {item.price}</p>
+            <p className='m-6'>Price: {item.price.toFixed(2)} €</p>
             {/* <p className='mt-6'>In stock: {item.inStock}</p> */}
-            <p className='mt-6'>Country: {item.country}</p>
+            <p className='m-6'>Country: {item.country}</p>
           </div>
-          <div className='flex justify-between mb-16'>
+          {/* <div className='flex justify-between mb-4'>
             <div className='w-1/2 pl-2'>
               <h2 className='text-dark-raspberry text-xl ml-2'>Likes</h2>
               <div className='ml-8 flex items-center text-lg'>
@@ -120,11 +156,11 @@ function SingleProduct() {
                 {item.likes?.length}
               </div>
             </div>
-          </div>
-          <div className='flex mt-8'>
+          </div> */}
+          <div className='flex -mt-8'>
             <div className='w-1/2 pl-4'>
-              <h3 className='font-fancy text-2xl text-nutmeg'>Description</h3>
-              <p className='mt-4 ml-6'>{item.body}</p>
+              <h3 className='font-fancy text-2xl'>Description</h3>
+              <p className='text-lg m-12 ml-4 w-96'>{item.body}</p>
             </div>
           </div>
         </div>

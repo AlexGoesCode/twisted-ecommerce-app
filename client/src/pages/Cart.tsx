@@ -42,12 +42,12 @@ function Cart() {
 
   return (
     <div className='container mx-auto p-20 w-3/5'>
-      <div className='bg-white shadow-md rounded-lg p-4'>
-        <h1 className='text-3xl text-center font-bold mb-4'>Shopping Cart</h1>
+      <div className='bg-white shadow-lg rounded-2xl p-10 mt-4'>
+        <h1 className='text-2xl text-center font-bold mb-4'>Shopping Cart</h1>
         {cartItems && cartItems.length === 0 ? (
           <p>Your shopping cart is empty.</p>
         ) : (
-          <div>
+          <div className='max-h-96 overflow-y-auto p-4'>
             {cartItems &&
               cartItems.map((item) => (
                 <div

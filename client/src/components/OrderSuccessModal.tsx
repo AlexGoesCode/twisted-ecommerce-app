@@ -11,17 +11,20 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
   isOpen,
   onClose,
   orderData,
-  totalPrice,
 }) => {
   console.log('orderData modal :>> ', orderData);
   if (!isOpen) return null;
   console.log('orderData :>> ', orderData);
   return (
     <div className='fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center'>
-      <div className='bg-white p-6 rounded shadow-lg'>
-        <h2 className='text-2xl font-bold mb-4'>Order Placed Successfully!</h2>
-        <p>Thank you for your order. Here is a summary of your purchase:</p>
-        <ul className='my-4'>
+      <div className='bg-white p-6 rounded-xl shadow-lg'>
+        <h2 className='text-2xl font-bold mb-4 text-center'>
+          Order Placed Successfully!
+        </h2>
+        <p className='font-bold'>
+          Thank you for your order. Here is a summary of your purchase:
+        </p>
+        <ul className='my-4 max-h-52 overflow-y-auto p-4'>
           {orderData.items.map((item, index) => (
             <li key={index} className='mb-2'>
               {item.quantity} x {item.product.name} - $
@@ -35,7 +38,7 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
         </p>
         <button
           onClick={onClose}
-          className='bg-blue-500 text-white px-4 py-2 rounded mt-4'
+          className='bg-blue-500 text-white px-4 py-2 rounded-xl mt-4 w-full'
         >
           Close
         </button>

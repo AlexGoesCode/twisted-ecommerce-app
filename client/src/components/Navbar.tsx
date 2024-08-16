@@ -47,7 +47,7 @@ const Navbar = () => {
 
         // Mock upload to server. Replace with your own server
         const response = await fetch(
-          'http://localhost:5022/api/user/upload-avatar',
+          'http://localhost:5022/api/users/upload-avatar',
           {
             method: 'POST',
             headers: {

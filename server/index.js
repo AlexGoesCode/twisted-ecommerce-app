@@ -9,6 +9,7 @@ import itemRouter from './routes/itemsRouter.js';
 import usersRouter from './routes/usersRouter.js';
 import cloudinaryConfig from './config/cloudinary.js';
 import ordersRouter from './routes/orderRouter.js';
+import itemModel from './models/itemModel.js';
 
 dotenv.config();
 

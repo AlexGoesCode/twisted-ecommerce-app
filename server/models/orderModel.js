@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
@@ -31,5 +31,5 @@ const orderSchema = new Schema(
   { timestamps: true }
 );
 
-const orderModel = mongoose.model('Order', orderSchema);
+const orderModel = mongoose.model('Orders', orderSchema);
 export default orderModel;

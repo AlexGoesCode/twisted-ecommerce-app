@@ -17,7 +17,7 @@ export default function Footer() {
           <div className='flex justify-between items-center'>
             <div>
               <h3 className='text-sm font-semibold leading-6 text-gray-900'>
-                Company
+                BobbleHeads ltd
               </h3>
               <ul className='mt-1 space-y-1'>
                 <li>
@@ -28,37 +28,14 @@ export default function Footer() {
                     About Us
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href='#'
                     className='text-sm leading-6 text-gray-600 hover:text-gray-900'
                   >
                     Careers
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='text-sm font-semibold leading-6 text-gray-900'>
-                Support
-              </h3>
-              <ul className='mt-1 space-y-1'>
-                <li>
-                  <a
-                    href='#'
-                    className='text-sm leading-6 text-gray-600 hover:text-gray-900'
-                  >
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href='#'
-                    className='text-sm leading-6 text-gray-600 hover:text-gray-900'
-                  >
-                    Contact Us
-                  </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div>
@@ -75,7 +52,7 @@ export default function Footer() {
                 <li className='flex items-center space-x-2'>
                   <MapIcon className='h-5 w-5 text-gray-600' />
                   <span className='text-sm leading-6 text-gray-600'>
-                    support@example.com
+                    support@bobbleheads.com
                   </span>
                 </li>
               </ul>

@@ -2,16 +2,20 @@ import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
 import { useShoppingCart } from '../hooks/useShoppingCart';
 import { useNavigate } from 'react-router-dom';
+import { placeOrder } from '../api/orderService';
+import { OrderItem, OrderType } from '../types/Types'; // Import OrderData type
+import OrderSuccessModal from '../components/OrderSuccessModal';
 
 const Checkout = () => {
   const { user } = useAuth();
   const userShoppingCart = user?.shoppingCart;
   const token = localStorage.getItem('token') || '';
   const [paymentMethod, setPaymentMethod] = useState('Credit Card');
+  const [shippingAddress, setShippingAddress] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [orderData, setOrderData] = useState<OrderType>({} as OrderType);
   const navigate = useNavigate();
   const { cartItems, fetchCart } = useShoppingCart(token);
-
-  console.log('userShoppingCart :>> ', userShoppingCart);
 
   useEffect(() => {
     if (token) {
@@ -19,15 +23,33 @@ const Checkout = () => {
     }
   }, [fetchCart, token]);
 
-  const handlePlaceOrder = () => {
-    // Implement the order placement logic here
-    alert('Order placed successfully');
-    // After placing the order, navigate to a success or order summary page
-    navigate('/');
+  const handlePlaceOrder = async () => {
+    try {
+      const orderItems: OrderItem[] = cartItems.map((item) => ({
+        // product: item.product._id,
+        product: item.product._id,
+        quantity: item.quantity,
+      }));
+
+      const data = await placeOrder(
+        orderItems,
+        token,
+        paymentMethod,
+        totalPrice,
+        shippingAddress
+      );
+      setOrderData(data);
+      setIsModalOpen(true);
+      console.log('Order response:', data);
+      // navigate('/myaccount');
+    } catch (error) {
+      alert('Failed to place order');
+      console.error('Error placing order:', error);
+    }
   };
 
   const handleBack = () => {
-    navigate('/cart'); // Navigate back to the shopping cart page
+    navigate('/cart');
   };
 
   const totalPrice = cartItems.reduce(
@@ -36,8 +58,8 @@ const Checkout = () => {
   );
 
   return (
-    <div className='container mx-auto p-20 w-3/5'>
-      <div className='relative bg-white shadow-md rounded-2xl p-4'>
+    <div className='container mx-auto p-10 w-3/5'>
+      <div className='relative bg-white shadow-md rounded-2xl p-10'>
         <button
           className='absolute top-2 right-2 w-20 bg-orange-300 p-3 rounded-full'
           onClick={handleBack}
@@ -45,27 +67,14 @@ const Checkout = () => {
           Back
         </button>
         <h1 className='text-3xl text-center font-bold mb-4'>Checkout</h1>
-        <h2 className='text-xl font-semibold mb-2'>Order Summary</h2>
-        {userShoppingCart ? (
-          userShoppingCart.map((item) => {
-            return (
-              <>
-                <div>
+        <div className='max-h-52 overflow-y-auto p-4'>
+          <h2 className='text-xl font-semibold mb-2'>Order Summary</h2>
+          {userShoppingCart ? (
+            userShoppingCart.map((item) => {
+              return (
+                <div key={item.product._id}>
                   <div className='mb-4'>
-                    {/* <input
-                type='text'
-                className='w-full p-2 border rounded'
-                placeholder='Enter your shipping address'
-                value={shippingAddress}
-                onChange={(e) => setShippingAddress(e.target.value)}
-              /> */}
-                  </div>
-
-                  <div className='mb-4'>
-                    <div
-                      key={item.product._id}
-                      className='flex justify-between items-center mb-2'
-                    >
+                    <div className='flex justify-between items-center mb-2'>
                       <div>
                         <h3 className='text-lg'>{item.product.name}</h3>
                         <p>
@@ -80,18 +89,25 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-              </>
-            );
-          })
-        ) : (
-          <p>Your shopping cart is empty.</p>
-        )}
+              );
+            })
+          ) : (
+            <p>Your shopping cart is empty.</p>
+          )}
+        </div>
         <div className='text-right font-bold text-xl'>
           Total: ${totalPrice.toFixed(2)}
         </div>
         <h2 className='text-l font-semibold mb-2'>Shipping Address</h2>
+        <input
+          type='text'
+          className='w-full p-2 border rounded mb-4'
+          value={shippingAddress}
+          onChange={(e) => setShippingAddress(e.target.value)}
+          placeholder='Enter your shipping address'
+        />
         <div className='mb-4'>
-          <h2 className='text-xl font-semibold mb-2'>Payment Method</h2>
+          <h2 className='text-l font-semibold mb-2'>Payment Method</h2>
           <select
             className='w-full p-2 border rounded'
             value={paymentMethod}
@@ -104,11 +120,17 @@ const Checkout = () => {
         </div>
         <button
           onClick={handlePlaceOrder}
-          className='bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full'
+          className='bg-blue-500 text-white px-4 py-2 rounded-xl mt-4 w-full'
         >
           Place Order
         </button>
       </div>
+      <OrderSuccessModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        orderData={orderData}
+        totalPrice={totalPrice}
+      />
     </div>
   );
 };

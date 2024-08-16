@@ -15,6 +15,7 @@ export type Item = {
 export type ShoppingCartItem = {
   quantity: number;
   product: Item;
+  _id: string;
 };
 
 export type ImageType = {
@@ -50,23 +51,26 @@ export type GetProfileOkResponse = {
 
 //* Orders types
 
-export type OrderData = {
-  productId: string;
+export type OrderItem = {
+  product: string;
   quantity: number;
+};
+
+// export type OrderResponse = {
+//   orderId: string;
+//   status: string;
+// };
+
+export type OrderType = {
+  _id: string;
+  userId: string;
+  items: [{ product: Item; quantity: number }];
   paymentMethod: string;
-};
-
-export type OrderResponse = {
-  orderId: string;
+  totalPrice: number;
   status: string;
+  shippingAddress: string;
+  createdAt: string;
 };
+export type UserOrdersResponse = OrderType[];
 
-export type UserOrdersResponse = {
-  orders: Array<{
-    orderId: string;
-    productId: string;
-    quantity: number;
-    status: string;
-    totalPrice: number;
-  }>;
-};
+// If I don't use populate on 'items' the product property would be a string (objectId)

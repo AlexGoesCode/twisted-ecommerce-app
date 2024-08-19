@@ -47,8 +47,10 @@
 
 ### **AI Tools:**
 
-- **Chat GPT 4o** For clarity.
-- **Github Copilot** For clarity.
+- **Chat GPT 4o**
+- **Github Copilot**
+- For code clarity (and messing things up).
+
 - **PIXLR** For creating product images.
 
 ---
@@ -67,6 +69,7 @@
 
 ## **Future Enhancements**
 
+- **Feature 1**: _RESPONSIVNESS improvement_
 - **Feature 1**: _LIKES functionality_
 - **Feature 2**: _COMMENTS section_
 - **Feature 3**: _STYLING_

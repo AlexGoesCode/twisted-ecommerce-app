@@ -9,6 +9,6 @@ export const passwordEncryption = async (plainPassword) => {
     return hashedPassword;
   } catch (error) {
     console.error('Error encrypting password :>> ', error);
-    throw new Error('Password encryåtion failed');
+    throw new Error('Password encryption failed');
   }
 };

@@ -14,9 +14,6 @@ function SearchBar({
   searchBy,
 }: SearchBarProps) {
   const [term, setTerm] = useState('');
-  // const [searchOption, setSearchOption] = useState<'name' | 'country' | 'id'>(
-  //   'name'
-  // ); // Uses a specific union type for searchOption
 
   useEffect(() => {
     // Trigger the search when the component mounts

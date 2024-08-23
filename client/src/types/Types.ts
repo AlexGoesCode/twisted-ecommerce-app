@@ -56,11 +56,6 @@ export type OrderItem = {
   quantity: number;
 };
 
-// export type OrderResponse = {
-//   orderId: string;
-//   status: string;
-// };
-
 export type OrderType = {
   _id: string;
   userId: string;

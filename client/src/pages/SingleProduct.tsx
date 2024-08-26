@@ -89,14 +89,14 @@ function SingleProduct() {
   // };
 
   return (
-    <main className='mt-8 flex justify-center items-center bg-eggshell p-10'>
+    <main className='flex justify-center items-center bg-eggshell p-10'>
       <article className='bg-white rounded-2xl shadow-lg max-w-5xl max-h-full flex flex-col md:flex-row'>
         <div className='md:w-1/2 flex justify-center items-center p-4'>
           <div className='w-full'>
             <img
               src={item.image[0].url}
               alt={`Photo of ${item.image[0].alt}`}
-              className='w-full h-2/3 object-cover rounded-2xl'
+              className='w-5/6 object-cover rounded-2xl'
               style={{ aspectRatio: '3 / 4' }}
             />
           </div>
@@ -128,11 +128,11 @@ function SingleProduct() {
           >
             Back
           </button>
-          <h1 className='font-fancy text-4xl text-center mt-20 mb-4 text-dark-charcoal'>
+          <h1 className='font-fancy text-2xl text-center mt-20 mb-4 text-dark-charcoal'>
             {item.name}
           </h1>
           <div className='flex justify-between mb-16 text-xl '>
-            <p className='m-6'>Price: {item.price.toFixed(2)} €</p>
+            <p className='m-6 ml-8'>Price: {item.price.toFixed(2)} €</p>
             {/* <p className='mt-6'>In stock: {item.inStock}</p> */}
             <p className='m-6'>Country: {item.country}</p>
           </div>
@@ -159,8 +159,10 @@ function SingleProduct() {
           </div> */}
           <div className='flex -mt-8'>
             <div className='w-1/2 pl-4'>
-              <h3 className='font-fancy text-2xl'>Description</h3>
-              <p className='text-lg m-12 ml-4 w-96'>{item.body}</p>
+              <h3 className='font-fancy text-2xl ml-4'>Description</h3>
+              <p className='text-lg m-12 ml-4 w-96 overflow-y-auto max-h-48'>
+                {item.body}
+              </p>
             </div>
           </div>
         </div>

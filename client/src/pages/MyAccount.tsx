@@ -40,16 +40,16 @@ const MyAccount = () => {
   };
 
   return (
-    <div className='container mx-auto p-20 w-3/5'>
-      <div className='relative bg-white shadow-lg rounded-2xl p-10 mt-20 h-2/3 overflow-hidden'>
+    <div className='container mx-auto p-20 w-3/5 h-full -mt-5'>
+      <div className='relative bg-white shadow-lg rounded-2xl p-10 mt-20 overflow-hidden'>
         <button
           className='absolute top-2 right-2 w-20 bg-orange-300 p-3 rounded-full'
           onClick={handleBack}
         >
           Back
         </button>
-        <h1 className='text-2xl text-center font-bold mb-4'>Orders History</h1>
-        <h2 className='text-xl font-semibold mb-2'>Order Summary</h2>
+        <h1 className='text-2xl text-center font-bold mb-4'>My Account</h1>
+        <h2 className='text-xl font-semibold mb-2'>Orders History:</h2>
         <div className='max-h-52 overflow-y-auto p-4'>
           {orders && orders.length > 0 ? (
             orders.map((order) => (

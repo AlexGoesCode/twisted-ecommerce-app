@@ -76,12 +76,15 @@ const Login = () => {
           </div>
           {error && <div className='text-red-500 text-sm mt-4'>{error}</div>}
         </div>
-        <button
-          onClick={handleLogin}
-          className='mt-4 bg-tuscany text-white object-center py-2 px-4 rounded-md shadow-sm hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tuscany'
-        >
-          Login
-        </button>
+        <div className='flex justify-between items-center'>
+          <button
+            onClick={handleLogin}
+            className='order-1 mt-4 bg-tuscany text-white object-center py-2 px-4 rounded-md shadow-sm hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tuscany'
+          >
+            Login
+          </button>
+          <p className='text-right order-2'>*Both fields required</p>
+        </div>
       </div>
     </AuthLayout>
   );

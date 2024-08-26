@@ -185,7 +185,7 @@ const Register = () => {
           >
             Register
           </button>
-          <p className='text-right order-2'>*All fields are required</p>
+          <p className='text-right order-2'>*All fields required</p>
         </div>
       </div>
     </AuthLayout>

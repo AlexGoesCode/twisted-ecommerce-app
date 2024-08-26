@@ -47,7 +47,7 @@ function Cart() {
         {cartItems && cartItems.length === 0 ? (
           <p>Your shopping cart is empty.</p>
         ) : (
-          <div className='max-h-96 overflow-y-auto p-4'>
+          <div className='max-h-72 overflow-y-auto p-4'>
             {cartItems &&
               cartItems.map((item) => (
                 <div
@@ -86,14 +86,14 @@ function Cart() {
             <div className='text-right font-bold text-xl'>
               {/* Total: ${totalPrice.toFixed(2)} */}
             </div>
-            <button
-              onClick={handleCheckout}
-              className='bg-blue-500 text-white px-4 py-2 rounded mt-4'
-            >
-              Go to Checkout
-            </button>
           </div>
         )}
+        <button
+          onClick={handleCheckout}
+          className='bg-blue-500 text-white px-4 py-2 rounded mt-4'
+        >
+          Go to Checkout
+        </button>
       </div>
     </div>
   );

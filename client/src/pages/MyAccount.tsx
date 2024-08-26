@@ -94,11 +94,11 @@ const MyAccount = () => {
                             key={index}
                             className='border-t border-gray-200 pt-2 mt-2'
                           >
-                            <p className='text-sm'>
+                            {/* <p className='text-sm'>
                               Product ID: {item.product._id}
-                            </p>
+                            </p> */}
                             <p className='text-sm'>
-                              Product Name: {item.product.name}
+                              Product: {item.product.name}
                             </p>
                             <p className='text-sm'>Quantity: {item.quantity}</p>
                             <p className='text-sm'>
@@ -113,10 +113,14 @@ const MyAccount = () => {
                     ) : (
                       <p className='text-sm'>No items in this order.</p>
                     )}
-                    <p className='text-sm'>Status: {order.status}</p>
-                    <p className='text-sm'>
-                      Shipping Address: {order.shippingAddress}
-                    </p>
+                    <div className='border-t border-gray-200 pt-2 mt-2'>
+                      <p className='text-sm font-semibold'>
+                        Status: {order.status}
+                      </p>
+                      <p className='text-sm font-semibold'>
+                        Shipping Address: {order.shippingAddress}
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>

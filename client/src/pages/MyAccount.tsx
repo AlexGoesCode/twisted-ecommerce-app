@@ -59,7 +59,7 @@ const MyAccount = () => {
               >
                 <div className='flex justify-between items-center mb-2'>
                   <div>
-                    <h3 className='text-lg font-medium'>
+                    <h3 className='text-md font-medium'>
                       Order ID: {order._id}
                     </h3>
                     <p className='text-sm'>
@@ -114,10 +114,10 @@ const MyAccount = () => {
                       <p className='text-sm'>No items in this order.</p>
                     )}
                     <div className='border-t border-gray-200 pt-2 mt-2'>
-                      <p className='text-sm font-semibold'>
+                      <p className='text-sm font-medium'>
                         Status: {order.status}
                       </p>
-                      <p className='text-sm font-semibold'>
+                      <p className='text-sm font-medium'>
                         Shipping Address: {order.shippingAddress}
                       </p>
                     </div>

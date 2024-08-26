@@ -75,7 +75,7 @@ const Navbar = () => {
   };
 
   const handleCartIconClick = () => {
-    if (user?.shoppingCart && user.shoppingCart.length === 0) {
+    if (user?.shoppingCart && user.shoppingCart.length === 1) {
       setShowEmptyCartModal(true);
     } else {
       setShowEmptyCartModal(false);

@@ -153,14 +153,11 @@ const Navbar = () => {
                     )}
                   </div>
                 </NavLink>
-                <button
-                  type='button'
-                  className='relative rounded-full bg-gray-200 p-3 text-mirage hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                >
-                  <span className='absolute -inset-1.5' />
-                  <span>{user?.email}</span>
-                  <span className='sr-only'>View notifications</span>
-                </button>
+                {user?.email && (
+                  <div className='relative rounded-full bg-gray-200 p-3 text-mirage'>
+                    <span>{user.email}</span>
+                  </div>
+                )}
 
                 <Menu as='div' className='relative ml-3'>
                   <div>

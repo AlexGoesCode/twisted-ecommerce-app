@@ -72,9 +72,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
-      navigate('/');
+      // navigate('/'); alert during first load
     } catch (error) {
-      console.log('error :>> ', error);
+      console.log('Login error :>> ', error);
       setIsLoading(false);
       setError('Failed to login');
     } finally {
@@ -133,7 +133,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (token) {
       getUserProfile();
     } else {
-      alert('you need to login first');
+      // alert('you need to login first');
+      navigate('/login');
     }
   }, []);
 

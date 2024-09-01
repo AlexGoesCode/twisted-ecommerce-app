@@ -9,16 +9,10 @@ interface AuthLayoutProps {
   buttonClassName?: string;
 }
 
-const AuthLayout = ({
-  title,
-  buttonText,
-  onButtonClick,
-  children,
-  showSignupLink,
-}: AuthLayoutProps) => {
+const AuthLayout = ({ children, showSignupLink }: AuthLayoutProps) => {
   return (
     <>
-      <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+      <div className='flex max-h-screen items-center justify-center lg:px-8 transform translate-y-1/4'>
         {/* <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-100'>
             {title}

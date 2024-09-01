@@ -34,7 +34,7 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
         </ul>
         <p className='font-bold'>Total: ${orderData.totalPrice.toFixed(2)}</p>
         <p className='font-bold'>
-          Shipping Adress: ${orderData.shippingAddress}
+          Shipping Adress: {orderData.shippingAddress}
         </p>
         <button
           onClick={onClose}

@@ -33,7 +33,7 @@ const Login = () => {
       buttonText='Login'
       onButtonClick={handleLogin}
     >
-      <div className='bg-gray-100 bg-opacity-95 p-6 rounded-2xl shadow-md'>
+      <div className=' bg-gray-100 bg-opacity-95 p-6 rounded-2xl shadow-md'>
         <h2 className='text-mirage text-xl text-center font-semibold mb-4'>
           Login to your account
         </h2>

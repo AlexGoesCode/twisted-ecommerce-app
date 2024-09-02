@@ -27,18 +27,20 @@ function SearchBar({
     handleSearch();
   }
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    // console.log('e.target.value :>> ', e.target.value);
-    console.log('typing');
-    setTerm(event.target.value);
-    setSearchTerm(event.target.value);
-    // setSearchBy(event.target.value);
+    const value = event.target.value;
+    setTerm(value);
+    setSearchTerm(value);
+
+    if (value === '') {
+      handleSearch();
+    }
   }
 
   function handleOptionChange(event: React.ChangeEvent<HTMLSelectElement>) {
     console.log('select');
 
     console.log('e.target.value :>> ', event.target.value);
-    const selectedOption = event.target.value as 'name' | 'country' | 'id';
+    const selectedOption = event.target.value as 'name' | 'country';
     // setSearchOption(selectedOption);
     console.log('selectedOption :>> ', selectedOption);
     setSearchBy(selectedOption);
@@ -58,14 +60,15 @@ function SearchBar({
         >
           <option value='name'>Name</option>
           <option value='country'>Country</option>
-          <option value='id'>ID</option>
+          {/* <option value='id'>ID</option> */}
         </select>
         <input
           type='search'
           id='search-dropdown'
           onChange={handleInputChange}
           className='relative block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 border-gray-300 rounded-r-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500'
-          placeholder='Search...'
+          placeholder='Search...   (to reset search, refresh the page)'
+          value={term}
           required
         />
         <button

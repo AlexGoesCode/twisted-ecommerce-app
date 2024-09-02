@@ -19,9 +19,6 @@ interface AuthContextType {
   setError: (error: string) => void;
   error: string | null;
   user: UserType | null;
-  // avatarUrl: string;
-  // updateUserAvatar: (url: string) => void;
-  // token: string | null;
   getUserProfile: () => void;
   isLoading: boolean;
 }
@@ -35,11 +32,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  // const [avatarUrl, setAvatarUrl] = useState('');
 
   const login = async (email: string, password: string) => {
-    // console.log(`Logging in with username: ${email} and password: ${password}`);
-
     //* Headers make sure the content type is set to form data
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -72,10 +66,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
-      // navigate('/'); alert during first load
+      alert('successfully logged in!');
+      navigate('/');
     } catch (error) {
       console.log('Login error :>> ', error);
-      setIsLoading(false);
+      // setIsLoading(false);
       setError('Failed to login');
     } finally {
       setIsLoading(false);
@@ -88,6 +83,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     console.log('Logging out...');
     setIsAuthenticated(false);
     setUser(null);
+    alert('You are logged out!');
+    navigate('/login');
   };
 
   const getUserProfile = async () => {
@@ -108,19 +105,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       if (!response.ok && response.status === 401) {
         localStorage.removeItem('token');
-        setIsLoading(false);
+        // setIsLoading(false);
         setIsAuthenticated(false);
         navigate('/login');
         return;
       }
       const result = (await response.json()) as GetProfileOkResponse;
       console.log('result profile', result);
-      setIsLoading(false);
+      // setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
     } catch (error) {
       console.log('error getting profile :>> ', error);
-      setIsLoading(false);
+      // setIsLoading(false);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -133,10 +130,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (token) {
       getUserProfile();
     } else {
+      setIsLoading(false);
       // alert('you need to login first');
       navigate('/login');
     }
-  }, []);
+  }, [navigate]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider

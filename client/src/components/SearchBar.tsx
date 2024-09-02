@@ -5,6 +5,7 @@ interface SearchBarProps {
   setSearchTerm: (term: string) => void;
   setSearchBy: (option: 'name' | 'country' | 'id') => void;
   searchBy: string;
+  className?: string;
 }
 
 function SearchBar({
@@ -12,6 +13,7 @@ function SearchBar({
   setSearchTerm,
   setSearchBy,
   searchBy,
+  className,
 }: SearchBarProps) {
   const [term, setTerm] = useState('');
 
@@ -43,7 +45,10 @@ function SearchBar({
   }
 
   return (
-    <form className='max-w-xl mx-auto my-8 relative' onSubmit={handleSubmit}>
+    <form
+      className={`max-w-xl mx-auto my-8 relative ${className}`}
+      onSubmit={handleSubmit}
+    >
       <div className='flex'>
         <select
           id='dropdown-button'

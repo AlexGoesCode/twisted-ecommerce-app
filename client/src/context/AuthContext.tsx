@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       localStorage.setItem('token', result.token);
-      setIsLoading(false);
+      // setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
       alert('successfully logged in!');
@@ -105,19 +105,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
       if (!response.ok && response.status === 401) {
         localStorage.removeItem('token');
-        // setIsLoading(false);
         setIsAuthenticated(false);
         navigate('/login');
         return;
       }
       const result = (await response.json()) as GetProfileOkResponse;
       console.log('result profile', result);
-      // setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
     } catch (error) {
       console.log('error getting profile :>> ', error);
-      // setIsLoading(false);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -131,10 +128,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       getUserProfile();
     } else {
       setIsLoading(false);
-      // alert('you need to login first');
-      navigate('/login');
     }
-  }, [navigate]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;

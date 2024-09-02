@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // setIsLoading(false);
       setUser(result.user);
       setIsAuthenticated(true);
-      alert('successfully logged in!');
+      alert('**You are successfully logged in!**');
       navigate('/');
     } catch (error) {
       console.log('Login error :>> ', error);

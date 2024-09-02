@@ -1,6 +1,6 @@
 //* Attributes
 // product name, images / image gallery, price, description,
-// ... variants, stock availability, add to Cart, buy now,
+// ... variants, add to Cart, buy now,
 // opt: comments, star ratings, chat, swift
 
 import { useEffect, useState } from 'react';
@@ -66,6 +66,7 @@ const Products = () => {
         setSearchTerm={setSearchTerm}
         setSearchBy={setSearchBy}
         searchBy={searchBy}
+        className='mt-12 border-8 border-gray-100 rounded-2xl'
       />
       <GridList items={items} fetchData={fetchData} />
     </div>

@@ -19,6 +19,9 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
     console.log('item._id :>> ', item._id);
     if (!token) {
       console.log('No token found');
+      alert(
+        'Please register or login first! Click on the user icon in the top right corner. '
+      );
       return;
     }
     const urlencoded = new URLSearchParams();

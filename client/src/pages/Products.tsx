@@ -1,6 +1,4 @@
-//* Attributes
-// product name, images / image gallery, price, description,
-// ... variants, add to Cart, buy now,
+//* Attributes to add
 // opt: comments, star ratings, chat, swift
 
 import { useEffect, useState } from 'react';
@@ -19,40 +17,31 @@ const Products = () => {
     try {
       console.log('searchBy :>> ', searchBy);
       console.log('searchTerm', searchTerm);
-      const response = await fetch(
-        `http://localhost:5022/api/items/all/productsby?${searchBy}=${searchTerm}`
-      );
-      // in the link: for Pagiantion - add '&page=${currentPage}' before searchTerm
-      // `http://localhost:5022/api/productsby${searchBy}?${searchBy}=${searchTerm}&number=10`
-      // 'http://localhost:5022/api/items/all'
+
+      let url = 'http://localhost:5022/api/items/all';
+      if (searchTerm) {
+        url += `/productsby?${searchBy}=${searchTerm}`;
+      }
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         console.log('error fetching products');
         return;
       }
-      if (response.ok) {
-        const data = await response.json();
-        console.log('data:', data);
-        setItems(data.allItems);
-      }
 
-      // if (Array.isArray(data)) {
-      //   setItems(data.allItems);
-      // } else if (data && Array.isArray(data.allItems)) {
-      //   setItems(data.allItems);
-      // } else {
-      //   console.warn('Unexpected data format:', data);
-      //   setItems([]);
-      // }
+      const data = await response.json();
+      console.log('data:', data);
+      setItems(data.allItems);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   const handleSearch = () => {
-    // setCurrentPage(1);
     fetchData();
   };
+
   useEffect(() => {
     fetchData();
   }, []);

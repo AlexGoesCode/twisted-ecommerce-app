@@ -72,7 +72,7 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
       <p className='text-gray-100'>{item.country}</p>
       {/* <p className='text-gray-100'>{item.likes?.length} Likes</p> */}
       <p className='text-gray-100'>{item.price.toFixed(2)} €</p>
-      <div className='absolute bottom-3 right-3 w-13 bg-orange-300 p-2 rounded-full '>
+      <div className='absolute bottom-3 right-3 w-13 bg-orange-300 p-2 -mb-1 rounded-full '>
         <button onClick={() => addToBasket(item)}>Add to Cart</button>
       </div>
       {/* Display price with € sign */}

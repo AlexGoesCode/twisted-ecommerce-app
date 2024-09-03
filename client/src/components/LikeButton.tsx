@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 interface LikeButtonProps {

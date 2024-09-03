@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useShoppingCart } from '../hooks/useShoppingCart';
 import { useNavigate } from 'react-router-dom';
 
 function Cart() {
-  const { user, getUserProfile } = useAuth();
+  const { getUserProfile } = useAuth();
   const token = localStorage.getItem('token') || '';
   const {
     cartItems,

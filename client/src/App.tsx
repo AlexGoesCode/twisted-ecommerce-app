@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import DesktopImage from './assets/images/BobbleHeads2.png';
@@ -7,8 +6,6 @@ import { AuthProvider } from './context/AuthContext';
 import Routes from './routes/Routes';
 
 function App() {
-  const [state, setState] = useState(0);
-
   return (
     <AuthProvider>
       <div className='flex flex-col min-h-screen'>

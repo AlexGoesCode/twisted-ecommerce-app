@@ -1,7 +1,7 @@
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext'; // for like logics
 import { Item } from '../types/Types';
 import GridItem from './GridItem';
-import { useState } from 'react';
+// import { useState } from 'react'; // for custom pagination logics
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -11,7 +11,7 @@ interface GridListProps {
 }
 
 export default function GridList({ items, fetchData }: GridListProps) {
-  const { user } = useAuth();
+  // const { user } = useAuth(); // for like logics
 
   //* below - regular pagination setup
   // const [currentPage, setCurrentPage] = useState(0);

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { Item, ShoppingCartItem } from '../types/Types';
-
+import { ShoppingCartItem } from '../types/Types';
+// import { Item } from '../types/Types';
 export const useShoppingCart = (token: string) => {
   const [cartItems, setCartItems] = useState<ShoppingCartItem[]>([]);
 
@@ -74,8 +74,7 @@ export const useShoppingCart = (token: string) => {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        // setCartItems(data.userIncreasingCart.shoppingCart);
+        await response.json();
         fetchCart();
       }
     } catch (error) {

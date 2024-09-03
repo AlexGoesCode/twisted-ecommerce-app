@@ -109,14 +109,6 @@ const Navbar = () => {
                 <div className='flex flex-shrink-0 items-center'></div>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
-                    {/* <input
-                      type='file'
-                      name='avatar-file'
-                      id='avatar-file'
-                      ref={fileInputRef}
-                      className='hidden'
-                      onChange={handleAvatarChange}
-                    /> */}
                     {navigation.map((item) => (
                       <NavLink
                         key={item.name}
@@ -137,7 +129,7 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-              <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+              <div className='flex items-center'>
                 <NavLink
                   to='/cart'
                   className='relative rounded-full bg-gray-200 p-3 text-mirage hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
@@ -153,12 +145,6 @@ const Navbar = () => {
                     )}
                   </div>
                 </NavLink>
-                {user?.email && (
-                  <div className='relative rounded-full bg-gray-200 p-3 text-mirage'>
-                    <span>{user.email}</span>
-                  </div>
-                )}
-
                 <Menu as='div' className='relative ml-3'>
                   <div>
                     <MenuButton className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
@@ -182,7 +168,7 @@ const Navbar = () => {
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'
                   >
-                    <MenuItems className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                    <MenuItems className='absolute right-0 z-10 mt-2 w-64 sm:w-48 origin-top-right rounded-md bg-white py-3 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                       {isAuthenticated ? (
                         <>
                           <MenuItem>
@@ -280,7 +266,7 @@ const Navbar = () => {
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      : 'text-gray-700 hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
@@ -290,6 +276,7 @@ const Navbar = () => {
               ))}
             </div>
           </DisclosurePanel>
+
           {showEmptyCartModal && (
             <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
               <div className='bg-white p-6 rounded-lg shadow-lg'>

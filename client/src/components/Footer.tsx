@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <div>
       <footer
-        className={`fixed bottom-0 left-0 w-full bg-gray-100 bg-opacity-95 transition-transform duration-300 ${
+        className={`fixed bottom-0 left-0 w-full bg-gray-100 bg-opacity-95 transition-transform duration-500 ${
           footerVisible ? 'translate-y-0' : 'translate-y-full'
         }`}
         onMouseEnter={() => setFooterVisible(true)}

@@ -89,80 +89,42 @@ function SingleProduct() {
   // };
 
   return (
-    <main className='flex justify-center items-center bg-eggshell p-10'>
-      <article className='bg-white rounded-2xl shadow-lg max-w-5xl max-h-full flex flex-col md:flex-row'>
-        <div className='md:w-1/2 flex justify-center items-center p-4'>
-          <div className='w-full'>
+    <main className='flex justify-center items-center bg-eggshell p-4 md:p-10'>
+      <article className='bg-white rounded-2xl shadow-lg max-w-full md:max-w-5xl max-h-full flex flex-col md:flex-row'>
+        <div className='w-full md:w-1/2 flex justify-center items-center p-4'>
+          <div className='w-full flex justify-center'>
             <img
               src={item.image[0].url}
               alt={`Photo of ${item.image[0].alt}`}
-              className='w-5/6 object-cover rounded-2xl'
+              className='w-full md:w-5/6 object-cover rounded-2xl'
               style={{ aspectRatio: '3 / 4' }}
             />
           </div>
-          {/* <div className='w-full'>
-            {item.image && (
-              <Carousel
-                responsive={responsive}
-                infinite={true}
-                autoPlay={false}
-                autoPlaySpeed={3000}
-              >
-                {item.image.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img.url}
-                    alt={`Photo of ${img.alt}`}
-                    className='w-full h-auto object-cover rounded-2xl'
-                    style={{ aspectRatio: '3 / 4' }}
-                  />
-                ))}
-              </Carousel>
-            )}
-          </div> */}
         </div>
-        <div className='relative px-8 py-4 font-outfit text-wenge-brown md:w-1/2'>
+        <div className='relative px-4 py-4 md:px-8 md:py-4 font-outfit text-wenge-brown w-full md:w-1/2'>
           <button
-            className='absolute top-4 right-6 w-20 bg-orange-300 p-3 rounded-full'
+            className='absolute top-4 right-4 md:right-6 w-16 md:w-20 bg-orange-300 p-2 md:p-3 rounded-full'
             onClick={handleBack}
           >
             Back
           </button>
-          <h1 className='font-fancy text-2xl text-center mt-20 mb-4 text-dark-charcoal'>
+          <h1 className='font-fancy text-xl md:text-2xl text-center mt-16 md:mt-20 mb-4 text-dark-charcoal'>
             {item.name}
           </h1>
-          <div className='flex justify-between mb-16 text-xl '>
-            <p className='m-6 ml-8'>Price: {item.price.toFixed(2)} €</p>
-            {/* <p className='mt-6'>In stock: {item.inStock}</p> */}
-            <p className='m-6'>Country: {item.country}</p>
+          <div className='flex flex-col md:flex-row justify-between mb-8 md:mb-16 text-lg md:text-xl'>
+            <p className='m-4 md:m-6'>Price: {item.price.toFixed(2)} €</p>
+            <p className='m-4 md:m-6'>Country: {item.country}</p>
           </div>
-          {/* <div className='flex justify-between mb-4'>
-            <div className='w-1/2 pl-2'>
-              <h2 className='text-dark-raspberry text-xl ml-2'>Likes</h2>
-              <div className='ml-8 flex items-center text-lg'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 24 24'
-                  fill='red'
-                  className='w-6 h-6 mr-2'
-                  onClick={handleLikeItem} // Add onClick handler for liking the recipe
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                {item.likes?.length}
+          <div className='flex flex-col md:flex-row -mt-4 md:-mt-8'>
+            <div className='w-full md:w-1/2 pl-0 md:pl-4'>
+              <h3 className='font-fancy text-xl md:text-2xl ml-4'>
+                Description
+              </h3>
+              <div className='-ml-8'>
+                <p className='text-base md:text-lg m-4 md:m-12 ml-4 w-full md:w-96 overflow-y-auto max-h-48 border border-gray-300 p-4 rounded-xl md:border-0 md:p-0 md:rounded-none'>
+                  {item.body}
+                </p>
               </div>
-            </div>
-          </div> */}
-          <div className='flex -mt-8'>
-            <div className='w-1/2 pl-4'>
-              <h3 className='font-fancy text-2xl ml-4'>Description</h3>
-              <p className='text-lg m-12 ml-4 w-96 overflow-y-auto max-h-48'>
-                {item.body}
-              </p>
             </div>
           </div>
         </div>

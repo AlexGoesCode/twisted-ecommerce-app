@@ -40,32 +40,36 @@ const MyAccount = () => {
   };
 
   return (
-    <div className='container mx-auto p-20 w-3/5 h-full -mt-5'>
-      <div className='relative bg-white shadow-lg rounded-2xl p-10 mt-20 overflow-hidden'>
+    <div className='container mx-auto p-4 md:p-20 w-full md:w-4/5 xl:w-3/5 mt-48 sm:mt-32 md:mt-32 lg:mt-32 xl:mt-32'>
+      <div className='relative bg-white shadow-lg rounded-2xl p-4 md:p-10 overflow-hidden min-h-96'>
         <button
-          className='absolute top-2 right-2 w-20 bg-orange-300 p-3 rounded-full'
+          className='absolute top-2 right-2 w-16 md:w-20 bg-orange-300 p-2 md:p-3 rounded-full'
           onClick={handleBack}
         >
           Back
         </button>
-        <h1 className='text-2xl text-center font-bold mb-4'>My Account</h1>
-        <h2 className='text-xl font-semibold mb-2'>Orders History:</h2>
-        <div className='max-h-52 overflow-y-auto p-4'>
+        <h1 className='text-xl md:text-2xl text-center font-bold mb-4'>
+          My Account
+        </h1>
+        <h2 className='text-lg md:text-xl font-semibold mb-2'>
+          Orders History:
+        </h2>
+        <div className='max-h-52 overflow-y-auto p-2 md:p-4'>
           {orders && orders.length > 0 ? (
             orders.map((order) => (
               <div
                 key={order._id}
-                className='border border-gray-300 rounded-lg p-4 mb-4 bg-gray-50'
+                className='border border-gray-300 rounded-lg p-2 md:p-4 mb-4 bg-gray-50'
               >
-                <div className='flex justify-between items-center mb-2'>
+                <div className='flex flex-col md:flex-row justify-between items-start md:items-center mb-2'>
                   <div>
-                    <h3 className='text-md font-medium'>
+                    <h3 className='text-sm md:text-md font-medium'>
                       Order ID: {order._id}
                     </h3>
-                    <p className='text-sm'>
+                    <p className='text-xs md:text-sm'>
                       Date: {new Date(order.createdAt).toLocaleDateString()}
                     </p>
-                    <p className='text-sm'>
+                    <p className='text-xs md:text-sm'>
                       Total Price: $
                       {order.items
                         .reduce(
@@ -77,7 +81,7 @@ const MyAccount = () => {
                     </p>
                   </div>
                   <button
-                    className='text-blue-500 underline'
+                    className='text-blue-500 underline mt-2 md:mt-0'
                     onClick={() => handleToggle(order._id)}
                   >
                     {toggledOrderId === order._id
@@ -94,14 +98,13 @@ const MyAccount = () => {
                             key={index}
                             className='border-t border-gray-200 pt-2 mt-2'
                           >
-                            {/* <p className='text-sm'>
-                              Product ID: {item.product._id}
-                            </p> */}
-                            <p className='text-sm'>
+                            <p className='text-xs md:text-sm'>
                               Product: {item.product.name}
                             </p>
-                            <p className='text-sm'>Quantity: {item.quantity}</p>
-                            <p className='text-sm'>
+                            <p className='text-xs md:text-sm'>
+                              Quantity: {item.quantity}
+                            </p>
+                            <p className='text-xs md:text-sm'>
                               Price: $
                               {item.product.price
                                 ? item.product.price.toFixed(2)
@@ -111,13 +114,15 @@ const MyAccount = () => {
                         ))}
                       </>
                     ) : (
-                      <p className='text-sm'>No items in this order.</p>
+                      <p className='text-xs md:text-sm'>
+                        No items in this order.
+                      </p>
                     )}
                     <div className='border-t border-gray-200 pt-2 mt-2'>
-                      <p className='text-sm font-medium'>
+                      <p className='text-xs md:text-sm font-medium'>
                         Status: {order.status}
                       </p>
-                      <p className='text-sm font-medium'>
+                      <p className='text-xs md:text-sm font-medium'>
                         Shipping Address: {order.shippingAddress}
                       </p>
                     </div>
@@ -126,7 +131,9 @@ const MyAccount = () => {
               </div>
             ))
           ) : (
-            <p className='text-center'>You have no orders.</p>
+            <p className='text-center text-xs md:text-sm'>
+              You have no orders.
+            </p>
           )}
         </div>
       </div>

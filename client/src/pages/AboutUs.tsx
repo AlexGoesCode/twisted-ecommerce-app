@@ -1,6 +1,6 @@
 const AboutUs = () => {
   return (
-    <div className='flex justify-center container mx-auto px-5 sm:px-8 md:px-16 lg:px-36 py-10 md:py-16 lg:py-20'>
+    <div className='flex justify-center container mx-auto px-5 sm:px-0 md:px-16 lg:px-36 py-10 md:py-16 lg:py-20'>
       {/* container mx-auto p-20 w-3/5 mt-10 */}
       {/* container mx-auto px-4 sm:px-8 md:px-12 lg:px-20 py-10 md:py-16 lg:py-20 */}
       <div className='relative min-h-72 max-w-3xl bg-white opacity-95 shadow-lg rounded-2xl p-10 mt-16'>

@@ -27,7 +27,7 @@ export type ImageType = {
 export type UserType = {
   email: string;
   username: string;
-  shoppingCart: [ShoppingCartItem];
+  shoppingCart: ShoppingCartItem[];
   id: string;
   avatar: string;
   // likedItems: Item[];
@@ -59,7 +59,7 @@ export type OrderItem = {
 export type OrderType = {
   _id: string;
   userId: string;
-  items: [{ product: Item; quantity: number }];
+  items: { product: Item; quantity: number }[];
   paymentMethod: string;
   totalPrice: number;
   status: string;

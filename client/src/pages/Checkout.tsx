@@ -58,17 +58,21 @@ const Checkout = () => {
   );
 
   return (
-    <div className='container mx-auto p-10 w-3/5'>
-      <div className='relative bg-white shadow-md rounded-2xl p-10'>
+    <div className='container mx-auto mt-20 p-4 md:p-10 w-full sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-3/5'>
+      <div className='relative bg-white shadow-md rounded-2xl p-4 md:p-10'>
         <button
-          className='absolute top-2 right-2 w-20 bg-orange-300 p-3 rounded-full'
+          className='absolute top-2 right-2 w-20 bg-orange-300 p-2 md:p-3 rounded-full'
           onClick={handleBack}
         >
           Back
         </button>
-        <h1 className='text-3xl text-center font-bold mb-4'>Checkout</h1>
-        <div className='max-h-52 overflow-y-auto p-4'>
-          <h2 className='text-xl font-semibold mb-2'>Order Summary</h2>
+        <h1 className='text-2xl md:text-3xl text-center font-bold mb-4'>
+          Checkout
+        </h1>
+        <div className='max-h-52 overflow-y-auto p-2 md:p-4'>
+          <h2 className='text-lg md:text-xl font-semibold mb-2'>
+            Order Summary
+          </h2>
           {userShoppingCart ? (
             userShoppingCart.map((item) => {
               return (
@@ -76,7 +80,9 @@ const Checkout = () => {
                   <div className='mb-4'>
                     <div className='flex justify-between items-center mb-2'>
                       <div>
-                        <h3 className='text-lg'>{item.product.name}</h3>
+                        <h3 className='text-md md:text-lg'>
+                          {item.product.name}
+                        </h3>
                         <p>
                           {item.quantity} x ${item.product.price.toFixed(2)}
                         </p>
@@ -95,10 +101,12 @@ const Checkout = () => {
             <p>Your shopping cart is empty.</p>
           )}
         </div>
-        <div className='text-right font-bold text-xl'>
+        <div className='text-right font-bold text-lg md:text-xl'>
           Total: ${totalPrice.toFixed(2)}
         </div>
-        <h2 className='text-l font-semibold mb-2'>Shipping Address</h2>
+        <h2 className='text-md md:text-lg font-semibold mb-2'>
+          Shipping Address
+        </h2>
         <input
           type='text'
           className='w-full p-2 border rounded mb-4'
@@ -107,7 +115,9 @@ const Checkout = () => {
           placeholder='Enter your shipping address'
         />
         <div className='mb-4'>
-          <h2 className='text-l font-semibold mb-2'>Payment Method</h2>
+          <h2 className='text-md md:text-lg font-semibold mb-2'>
+            Payment Method
+          </h2>
           <select
             className='w-full p-2 border rounded'
             value={paymentMethod}

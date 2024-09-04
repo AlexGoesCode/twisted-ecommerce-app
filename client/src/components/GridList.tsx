@@ -37,25 +37,25 @@ export default function GridList({ items, fetchData }: GridListProps) {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
       items: 3,
-      slidesToSlide: 3, // optional, default to 1.
+      slidesToSlide: 1, // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1024, min: 640 },
       items: 2,
-      slidesToSlide: 2, // optional, default to 1.
+      slidesToSlide: 1, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 640, min: 0 },
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
   };
 
   return (
-    <div className='flex items-start justify-center'>
-      <div className='relative bg-gray-100 opacity-100 w-full rounded-3xl -mt-4'>
+    <div className='relative flex items-start justify-center -mt-8'>
+      <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl'>
         <div className='mx-auto max-w-6xl pl-32 p-10'>
-          <h2 className='text-2xl text-center p-8 font-bold tracking-tight text-mirage pr-24'>
+          <h2 className='hidden md:block text-2xl text-center p-8 font-bold tracking-tight text-mirage pr-24'>
             Our BobbleHeads selection:
           </h2>
           {/* <div className='mt-6 flex flex-wrap justify-center'> */}

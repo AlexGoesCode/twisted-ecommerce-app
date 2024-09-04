@@ -75,10 +75,11 @@ const Navbar = () => {
   };
 
   const handleCartIconClick = () => {
-    if (user?.shoppingCart && user.shoppingCart.length === 1) {
+    if (user?.shoppingCart && user.shoppingCart.length === 0) {
       setShowEmptyCartModal(true);
     } else {
       setShowEmptyCartModal(false);
+      navigate('/items');
       // Navigate to the shopping cart page or perform other actions
     }
   };

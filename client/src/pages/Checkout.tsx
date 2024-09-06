@@ -7,26 +7,31 @@ import { OrderItem, OrderType } from '../types/Types'; // Import OrderData type
 import OrderSuccessModal from '../components/OrderSuccessModal';
 
 const Checkout = () => {
-  const { user } = useAuth();
+  const { user, token } = useAuth(); // Extract token from AuthContext
   const userShoppingCart = user?.shoppingCart;
-  const token = localStorage.getItem('token') || '';
   const [paymentMethod, setPaymentMethod] = useState('Credit Card');
   const [shippingAddress, setShippingAddress] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orderData, setOrderData] = useState<OrderType>({} as OrderType);
   const navigate = useNavigate();
-  const { cartItems, fetchCart } = useShoppingCart(token);
+  const { cartItems, fetchCart, clearCart } = useShoppingCart(token || ''); // Pass token to useShoppingCart with a default value of an empty string
 
   useEffect(() => {
     if (token) {
       fetchCart();
+    } else {
+      console.error('Token is not available');
     }
   }, [fetchCart, token]);
 
   const handlePlaceOrder = async () => {
+    if (!token) {
+      alert('Token is not available. Please log in again.');
+      return;
+    }
+
     try {
       const orderItems: OrderItem[] = cartItems.map((item) => ({
-        // product: item.product._id,
         product: item.product._id,
         quantity: item.quantity,
       }));
@@ -40,8 +45,8 @@ const Checkout = () => {
       );
       setOrderData(data);
       setIsModalOpen(true);
+      clearCart();
       console.log('Order response:', data);
-      // navigate('/myaccount');
     } catch (error) {
       alert('Failed to place order');
       console.error('Error placing order:', error);
@@ -102,7 +107,7 @@ const Checkout = () => {
           )}
         </div>
         <div className='text-right font-bold text-lg md:text-xl'>
-          Total: ${totalPrice.toFixed(2)}
+          Total: €{totalPrice.toFixed(2)}
         </div>
         <h2 className='text-md md:text-lg font-semibold mb-2'>
           Shipping Address

@@ -34,7 +34,7 @@ const Navbar = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); // new
 
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -46,7 +46,6 @@ const Navbar = () => {
         const formData = new FormData();
         formData.append('avatar', file);
 
-        // Mock upload to server. Replace with your own server
         const response = await fetch(
           'http://localhost:5022/api/users/upload-avatar',
           {
@@ -266,13 +265,14 @@ const Navbar = () => {
                   as={Link}
                   to={item.href}
                   className={classNames(
-                    location.pathname === item.href
+                    location.pathname === item.href // <- before: item.current
                       ? 'bg-gray-900 text-white'
                       : 'text-gray-700 hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={
                     location.pathname === item.href ? 'page' : undefined
+                    // before:  aria-current={item.current ? 'page' : undefined}
                   }
                 >
                   {item.name}

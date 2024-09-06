@@ -14,7 +14,6 @@ import {
   getItemById,
   itemsByCountry,
   itemsByName,
-  clearCart,
 } from '../controller/itemsController.js';
 
 const itemsRouter = express.Router();
@@ -30,7 +29,6 @@ itemsRouter.patch('/addItemsToCart', authMiddleware, addItemsToCart);
 itemsRouter.patch('/removeItemsFromCart', authMiddleware, removeItemsFromCart);
 itemsRouter.delete('/deleteItemsFromCart', authMiddleware, deleteItemsFromCart);
 itemsRouter.post('/checkout', authMiddleware, checkout);
-itemsRouter.post('/clearCart', authMiddleware, clearCart);
 // API list is ordered - /cart and then /:itemId
 
 // itemsRouter.put('/:itemid/rating', authMiddleware, rating);

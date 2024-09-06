@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { ShoppingCartItem } from '../types/Types';
-// import { Item } from '../types/Types';
+
 export const useShoppingCart = (token: string) => {
   const [cartItems, setCartItems] = useState<ShoppingCartItem[]>([]);
 
@@ -18,6 +18,29 @@ export const useShoppingCart = (token: string) => {
       console.log('Error fetching cart:', error);
     }
   }, [token]);
+
+  const clearCart = async () => {
+    try {
+      const response = await fetch(
+        'http://localhost:5022/api/orders/clear-cart',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        setCartItems([]);
+        fetchCart();
+      } else {
+        console.log('Error clearing cart');
+      }
+    } catch (error) {
+      console.log('Error clearing cart:', error);
+    }
+  };
 
   //* Add Item to Cart
   const addItemsToCart = async (productId: string) => {
@@ -115,6 +138,7 @@ export const useShoppingCart = (token: string) => {
   return {
     cartItems,
     fetchCart,
+    clearCart,
     addItemsToCart,
     removeItemsFromCart,
     deleteItemsFromCart,

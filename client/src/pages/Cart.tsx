@@ -34,6 +34,11 @@ function Cart() {
     await deleteItemsFromCart(productId);
     await fetchCart();
     getUserProfile();
+
+    if (cartItems.length === 1) {
+      // Since the item is already deleted, check if the length was 1 before deletion
+      navigate('/items');
+    }
   };
 
   const handleCheckout = () => {
@@ -41,26 +46,28 @@ function Cart() {
   };
 
   return (
-    <div className='container mx-auto p-20 w-3/5'>
-      <div className='bg-white shadow-lg rounded-2xl p-10 mt-4'>
-        <h1 className='text-2xl text-center font-bold mb-4'>Shopping Cart</h1>
+    <div className='container mx-auto p-4 md:p-10 lg:p-20 w-full md:w-4/5 lg:w-4/5 xl:w-3/5'>
+      <div className='bg-white shadow-lg rounded-2xl p-4 md:p-10 mt-14'>
+        <h1 className='text-xl md:text-2xl text-center font-bold mb-4'>
+          Shopping Cart
+        </h1>
         {cartItems && cartItems.length === 0 ? (
-          <p>Your shopping cart is empty.</p>
+          <p className='text-center'>Your shopping cart is empty.</p>
         ) : (
-          <div className='max-h-72 overflow-y-auto p-4'>
+          <div className='max-h-72 overflow-y-auto p-2 md:p-4'>
             {cartItems &&
               cartItems.map((item) => (
                 <div
                   key={item.product._id}
-                  className='flex justify-between items-center mb-4'
+                  className='flex flex-col md:flex-row justify-between items-start md:items-center mb-4'
                 >
-                  <div>
-                    <h2 className='text-xl font-semibold'>
+                  <div className='mb-4 md:mb-0'>
+                    <h2 className='text-lg md:text-xl font-semibold'>
                       {item.product.name}
                     </h2>
                     <p>Price: ${item.product.price.toFixed(2)}</p>
                     <p>Quantity: {item.quantity}</p>
-                    <div className='flex items-center'>
+                    <div className='flex items-center mt-2'>
                       <button
                         onClick={() => increaseQuantity(item.product._id)}
                         className='bg-green-500 text-white px-2 py-1 rounded mr-2'
@@ -83,14 +90,14 @@ function Cart() {
                   </button>
                 </div>
               ))}
-            <div className='text-right font-bold text-xl'>
+            <div className='text-right font-bold text-lg md:text-xl'>
               {/* Total: ${totalPrice.toFixed(2)} */}
             </div>
           </div>
         )}
         <button
           onClick={handleCheckout}
-          className='bg-blue-500 text-white px-4 py-2 rounded mt-4'
+          className='bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full md:w-auto'
         >
           Go to Checkout
         </button>

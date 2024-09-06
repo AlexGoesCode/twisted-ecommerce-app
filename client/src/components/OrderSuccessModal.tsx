@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { OrderType } from '../types/Types'; // Import OrderData type
-// import { useShoppingCart } from '../hooks/useShoppingCart';
-// import { useContext } from 'react';
-// import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom'; //
+import { OrderType } from '../types/Types';
+// import { useShoppingCart } from '../hooks/useShoppingCart'; // new
+// import { useContext } from 'react';                          // new
+// import { AuthContext } from '../context/AuthContext';        // new
 
 interface OrderSuccessModalProps {
   isOpen: boolean;

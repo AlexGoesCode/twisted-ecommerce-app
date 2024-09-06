@@ -1,6 +1,5 @@
 import itemModel from '../models/itemModel.js';
 import userModel from '../models/userModel.js';
-import orderModel from '../models/orderModel.js';
 
 const allItems = async (req, res) => {
   try {

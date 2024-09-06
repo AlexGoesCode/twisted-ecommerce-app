@@ -21,20 +21,20 @@ interface AuthContextType {
   user: UserType | null;
   getUserProfile: () => void;
   isLoading: boolean;
+  token: string | null; // new, is needed?
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-//* AuthProvider component that wraps the entire application and provides the authentication context
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserType | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState<string | null>(null);
 
   const login = async (email: string, password: string) => {
-    //* Headers make sure the content type is set to form data
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       headers: myHeaders,
       body: urlencoded,
     };
+
     try {
       const response = await fetch(
         'http://localhost:5022/api/users/login',
@@ -63,14 +64,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       localStorage.setItem('token', result.token);
-      // setIsLoading(false);
+      setToken(result.token);
       setUser(result.user);
       setIsAuthenticated(true);
       alert('**You are successfully logged in!**');
       navigate('/');
     } catch (error) {
       console.log('Login error :>> ', error);
-      // setIsLoading(false);
       setError('Failed to login');
     } finally {
       setIsLoading(false);
@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     console.log('Logging out...');
     setIsAuthenticated(false);
     setUser(null);
+    setToken(null);
     alert('You are logged out!');
     navigate('/login');
   };
@@ -98,6 +99,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       method: 'GET',
       headers: myHeaders,
     };
+
     try {
       const response = await fetch(
         'http://localhost:5022/api/users/profile',
@@ -109,12 +111,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         navigate('/login');
         return;
       }
+
       const result = (await response.json()) as GetProfileOkResponse;
       console.log('result profile', result);
       setUser(result.user);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log('error getting profile :>> ', error);
+      console.log('Error getting profile :>> ', error);
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -123,8 +126,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (token) {
+      // setToken(token);
       getUserProfile();
     } else {
       setIsLoading(false);
@@ -143,10 +146,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         logout,
         setError,
         error,
-        // avatarUrl,
         user,
         getUserProfile,
         isLoading,
+        token,
       }}
     >
       {children}

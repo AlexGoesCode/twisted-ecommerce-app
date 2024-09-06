@@ -48,7 +48,7 @@ function SearchBar({
 
   return (
     <form
-      className={`max-w-xl mx-auto my-8 relative ${className}`}
+      className={`max-w-xl mx-auto my-8 mt-0 sm:mt-32 ${className}`}
       onSubmit={handleSubmit}
     >
       <div className='flex'>

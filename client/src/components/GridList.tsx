@@ -13,26 +13,6 @@ interface GridListProps {
 export default function GridList({ items, fetchData }: GridListProps) {
   // const { user } = useAuth(); // for like logics
 
-  //* below - regular pagination setup
-  // const [currentPage, setCurrentPage] = useState(0);
-
-  // const itemsPerPage = 3;
-  // const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  // const handleNextPage = () => {
-  //   setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
-  // };
-
-  // const handlePrevPage = () => {
-  //   setCurrentPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
-  // };
-
-  // const currentItems = items.slice(
-  //   currentPage * itemsPerPage,
-  //   currentPage * itemsPerPage + itemsPerPage
-  // );
-  //* above - regular pagination setup
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -52,37 +32,12 @@ export default function GridList({ items, fetchData }: GridListProps) {
   };
 
   return (
-    <div className='relative flex items-start justify-center -mt-8'>
-      <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl'>
+    <div className='relative flex items-start justify-center -mt-8 -mr-36 sm:-mr-0'>
+      <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl mr-52 sm:mr-0'>
         <div className='mx-auto max-w-6xl pl-32 p-10'>
           <h2 className='hidden md:block text-2xl text-center p-8 font-bold tracking-tight text-mirage pr-24'>
             Our BobbleHeads selection:
           </h2>
-          {/* <div className='mt-6 flex flex-wrap justify-center'> */}
-          {/* {currentItems.map((item) => (
-            <div key={item._id} className='flex-shrink-0 w-1/5 p-2'>
-              <GridItem
-                item={item}
-                isLiked={user?.shoppingCart?.includes(item) || false}
-                fetchData={fetchData}
-              />
-            </div>
-          ))} */}
-          {/* </div> */}
-          {/* <button
-          onClick={handlePrevPage}
-          className='absolute left-32 top-1/2 transform -translate-y-1/2 text-mirage text-9xl font-normal focus:outline-none hover:text-gray-500'
-          style={{ transform: 'scaleX(0.5) scaleY(3.0)' }}
-        >
-          {'<'}
-        </button>
-        <button
-          onClick={handleNextPage}
-          className='absolute right-32 top-1/2 transform -translate-y-1/2 text-mirage text-9xl font-normal focus:outline-none hover:text-gray-500'
-          style={{ transform: 'scaleX(0.5) scaleY(3.0)' }}
-        >
-          {'>'}
-        </button> */}
 
           <Carousel responsive={responsive}>
             {items.map((item) => (

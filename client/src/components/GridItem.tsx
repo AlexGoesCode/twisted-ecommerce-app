@@ -9,7 +9,7 @@ interface GridItemProps {
   fetchData: () => Promise<void>;
 }
 
-const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
+const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
   console.log('item', item);
   const { getUserProfile } = useAuth();
 
@@ -56,22 +56,25 @@ const GridItem = ({ item /*isLiked*/ }: GridItemProps) => {
 
   return (
     // <Link to={`/items/${item._id}`} className='block'>
-    <div className='relative bg-gray-600 opacity-100 w-52 h-80 p-3 rounded-2xl cursor-pointer'>
+    <div
+      className='relative bg-gray-600 opacity-100 w-11/12 max-h-full sm:min-h-0 sm:w-52 sm:h-80 p-3 rounded-2xl cursor-pointer'
+      // style={{ transform: 'translateX(-20px)' }}
+    >
       {item.image && (
         <Link to={`/items/${item._id}`}>
           <img
             src={item.image[0]?.url}
             alt={item.image[0]?.alt}
-            className='w-full h-48 object-cover rounded-xl'
+            className='w-full h-96 sm:w-full sm:h-48 object-cover rounded-xl'
           />
         </Link>
       )}
       <h3 className='text-lg text-center font-bold mt-2 text-gray-100'>
         {item.name}
       </h3>
-      <p className='text-gray-100'>{item.country}</p>
+      <p className='text-gray-100 font-semibold'>{item.country}</p>
       {/* <p className='text-gray-100'>{item.likes?.length} Likes</p> */}
-      <p className='text-gray-100'>{item.price.toFixed(2)} €</p>
+      <p className='text-gray-100 font-semibold'>{item.price.toFixed(2)} €</p>
       <div className='absolute bottom-3 right-3 w-13 bg-orange-300 p-2 -mb-1 rounded-full '>
         <button onClick={() => addToBasket(item)}>Add to Cart</button>
       </div>

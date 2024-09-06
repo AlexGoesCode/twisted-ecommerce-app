@@ -9,6 +9,7 @@ import OrderSuccessModal from '../components/OrderSuccessModal';
 const Checkout = () => {
   const { user, token } = useAuth(); // Extract token from AuthContext
   const userShoppingCart = user?.shoppingCart;
+  // const token = localStorage.getItem('token') || ''; // former token snippet
   const [paymentMethod, setPaymentMethod] = useState('Credit Card');
   const [shippingAddress, setShippingAddress] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);

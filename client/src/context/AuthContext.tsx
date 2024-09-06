@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // setToken(token);
+      setToken(token);
       getUserProfile();
     } else {
       setIsLoading(false);

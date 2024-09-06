@@ -1,6 +1,6 @@
 const AboutUs = () => {
   return (
-    <div className='flex justify-center container mx-auto px-5 sm:px-0 md:px-16 lg:px-36 py-10 md:py-16 lg:py-20'>
+    <div className='flex justify-center container mx-auto -mt-20 sm:-mt-0 px-5 sm:px-0 md:px-16 lg:px-36 py-10 md:py-16 lg:py-20'>
       {/* container mx-auto p-20 w-3/5 mt-10 */}
       {/* container mx-auto px-4 sm:px-8 md:px-12 lg:px-20 py-10 md:py-16 lg:py-20 */}
       <div className='relative min-h-72 max-w-3xl bg-white opacity-95 shadow-lg rounded-2xl p-10 mt-16'>
@@ -14,7 +14,7 @@ const AboutUs = () => {
             clear as day.
           </p>
         </section>
-        <section className='mb-8'>
+        <section className='mb-8 sm:mb-8'>
           <h2 className='text-xl text-center font-semibold mb-2'>Our Values</h2>
           <p className='text-xl text-center'>
             Selling you a BobbleHead. Just pick one!

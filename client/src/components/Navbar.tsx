@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Disclosure,
   Menu,
@@ -34,6 +34,7 @@ const Navbar = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showEmptyCartModal, setShowEmptyCartModal] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -257,20 +258,22 @@ const Navbar = () => {
             </div>
           </div>
 
-          <DisclosurePanel className='sm:hidden'>
-            <div className='space-y-1 px-2 pb-3 pt-2'>
+          <DisclosurePanel className='sm:hidden sticky'>
+            <div className='flex space-x-1 px-2 pb-3 pt-2'>
               {navigation.map((item) => (
                 <DisclosureButton
                   key={item.name}
                   as={Link}
                   to={item.href}
                   className={classNames(
-                    item.current
+                    location.pathname === item.href
                       ? 'bg-gray-900 text-white'
                       : 'text-gray-700 hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={
+                    location.pathname === item.href ? 'page' : undefined
+                  }
                 >
                   {item.name}
                 </DisclosureButton>

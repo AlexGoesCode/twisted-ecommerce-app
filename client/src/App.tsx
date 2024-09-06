@@ -11,7 +11,7 @@ function App() {
       <div className='flex flex-col min-h-screen'>
         <Navbar />
         <div
-          className='flex-grow bg-cover bg-center bg-no-repeat'
+          className='flex-auto bg-repeat sm:flex-grow sm:bg-cover sm:bg-center sm:bg-no-repeat'
           style={{ backgroundImage: `url(${DesktopImage})` }}
         >
           <div className='flex-grow'>

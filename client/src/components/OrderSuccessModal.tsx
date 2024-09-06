@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { OrderType } from '../types/Types'; // Import OrderData type
+// import { useShoppingCart } from '../hooks/useShoppingCart';
+// import { useContext } from 'react';
+// import { AuthContext } from '../context/AuthContext';
 
 interface OrderSuccessModalProps {
   isOpen: boolean;
@@ -7,21 +11,30 @@ interface OrderSuccessModalProps {
   totalPrice: number | undefined;
 }
 
-const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
+function OrderSuccessModal({
   isOpen,
   onClose,
   orderData,
-}) => {
-  console.log('orderData modal :>> ', orderData);
+}: OrderSuccessModalProps) {
+  const navigate = useNavigate();
+  // const { token } = useContext(AuthContext);
+  // const { clearCart } = useShoppingCart(token);
+
+  const handleClose = async () => {
+    onClose();
+    // await clearCart();
+    navigate('/myaccount');
+  };
+
   if (!isOpen) return null;
-  console.log('orderData :>> ', orderData);
+
   return (
     <div className='fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center'>
       <div className='bg-white p-6 rounded-xl shadow-lg'>
         <h2 className='text-2xl font-bold mb-4 text-center'>
           Order Placed Successfully!
         </h2>
-        <p className='font-bold'>
+        <p className='font-semibold text-center'>
           Thank you for your order. Here is a summary of your purchase:
         </p>
         <ul className='my-4 max-h-52 overflow-y-auto p-4'>
@@ -32,12 +45,15 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
             </li>
           ))}
         </ul>
-        <p className='font-bold'>Total: ${orderData.totalPrice.toFixed(2)}</p>
-        <p className='font-bold'>
-          Shipping Adress: {orderData.shippingAddress}
+        <p className='font-semibold'>
+          Total: €
+          {orderData.totalPrice ? orderData.totalPrice.toFixed(2) : 'N/A'}
+        </p>
+        <p className='font-semibold'>
+          Shipping Address: {orderData.shippingAddress}
         </p>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className='bg-blue-500 text-white px-4 py-2 rounded-xl mt-4 w-full'
         >
           Close
@@ -45,6 +61,6 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default OrderSuccessModal;

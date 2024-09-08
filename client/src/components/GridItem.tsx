@@ -57,7 +57,7 @@ const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
   return (
     // <Link to={`/items/${item._id}`} className='block'>
     <div
-      className='relative bg-gray-600 opacity-100 w-11/12 max-h-full sm:min-h-0 sm:w-52 sm:h-80 p-3 rounded-2xl cursor-pointer'
+      className='relative bg-gray-600 opacity-100 w-11/12 max-h-full sm:min-h-0 sm:w-52 sm:h-80 p-3 rounded-2xl cursor-pointer flex flex-col justify-between'
       // style={{ transform: 'translateX(-20px)' }}
     >
       {item.image && (

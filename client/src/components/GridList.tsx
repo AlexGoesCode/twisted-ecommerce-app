@@ -34,14 +34,14 @@ export default function GridList({ items, fetchData }: GridListProps) {
   return (
     <div className='relative flex justify-center -mt-8 sm:-mt-0'>
       <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl sm:mt-0'>
-        <div className='mx-auto max-w-6xl sm:pl-36 p-6'>
-          <h2 className='hidden sm:block text-2xl p-4 mr-28 sm-mr-0 font-bold tracking-tight text-mirage text-center'>
+        <div className='mx-auto max-w-6xl p-6'>
+          <h2 className='hidden sm:block text-2xl p-4 font-bold tracking-tight text-mirage text-center'>
             Our BobbleHeads selection:
           </h2>
 
           <Carousel responsive={responsive}>
             {items.map((item) => (
-              <div key={item._id}>
+              <div key={item._id} className='flex justify-center items-center'>
                 <GridItem
                   item={item}
                   // isLiked={user?.shoppingCart?.includes(item) || false}

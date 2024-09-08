@@ -41,7 +41,7 @@ const MyAccount = () => {
 
   return (
     <div className='flex justify-center items-center h-auto w-full'>
-      <div className='relative bg-white p-4 sm:p-10 w-full sm:w-3/5 xl:w-3/5 h-auto sm:h-3/5 mt-16 sm:mt-36 ml-2 sm:ml-0 shadow-lg rounded-2xl'>
+      <div className='relative bg-white p-4 sm:p-10 w-full sm:w-3/5 xl:w-3/6 h-auto sm:h-3/5 mt-24 sm:mt-40 ml-2 sm:ml-0 shadow-lg rounded-2xl'>
         <button
           className='absolute top-2 right-2 w-16 md:w-20 bg-orange-300 p-2 md:p-3 rounded-full'
           onClick={handleBack}

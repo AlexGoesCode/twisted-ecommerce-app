@@ -108,17 +108,17 @@ function SingleProduct() {
           >
             Back
           </button>
-          <h1 className='font-fancy text-xl md:text-2xl text-center mt-16 md:mt-20 mb-4 text-dark-charcoal'>
+          <h1 className='text-xl md:text-2xl text-center mt-16 md:mt-20 mb-4 text-dark-charcoal'>
             {item.name}
           </h1>
           <div className='flex flex-col md:flex-row justify-between mb-8 md:mb-16 text-lg md:text-xl'>
-            <p className='m-4 md:m-6'>Price: {item.price.toFixed(2)} €</p>
-            <p className='m-4 md:m-6'>Country: {item.country}</p>
+            <p className='m-1 md:m-6'>Price: {item.price.toFixed(2)} €</p>
+            <p className='m-1 md:m-6'>Country: {item.country}</p>
           </div>
           <div className='flex flex-col md:flex-row -mt-4 md:-mt-8'>
             <div className='w-full md:w-1/2 pl-0 md:pl-4'>
-              <h3 className='font-fancy text-xl md:text-2xl ml-4'>
-                Description
+              <h3 className='font-fancy text-xl md:text-2xl ml-1'>
+                Description:
               </h3>
               <div className='-ml-8'>
                 <p className='text-base md:text-lg m-4 md:m-12 ml-4 w-full md:w-96 overflow-y-auto max-h-48 border border-gray-300 p-4 rounded-xl md:border-0 md:p-0 md:rounded-none'>

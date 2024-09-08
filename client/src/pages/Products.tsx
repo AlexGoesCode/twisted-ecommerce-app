@@ -49,13 +49,13 @@ const Products = () => {
   console.log('Items before passing to GridList:', items); // Debug log
 
   return (
-    <div>
+    <div className='container mx-auto px-4 py-8'>
       <SearchBar
         handleSearch={handleSearch}
         setSearchTerm={setSearchTerm}
         setSearchBy={setSearchBy}
         searchBy={searchBy}
-        className='relative mt-24 sm:mt-40 md:mt-40 lg:mt-40 xl:mt-40 sm:mb-0 border-8 border-gray-100 rounded-2xl'
+        className='relative mt-[10vh] sm:mt-[14vh] md:mt-[14vh] lg:mt-[14vh] xl:mt-[14vh] mb-8 border-8 border-gray-100 rounded-2xl'
       />
       <GridList items={items} fetchData={fetchData} />
     </div>

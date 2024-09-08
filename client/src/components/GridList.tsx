@@ -32,10 +32,10 @@ export default function GridList({ items, fetchData }: GridListProps) {
   };
 
   return (
-    <div className='relative flex items-start justify-center -mt-8 -mr-36 sm:-mr-0'>
-      <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl mr-52 sm:mr-0'>
-        <div className='mx-auto max-w-6xl pl-32 p-10'>
-          <h2 className='hidden md:block text-2xl text-center p-8 font-bold tracking-tight text-mirage pr-24'>
+    <div className='relative flex justify-center -mt-8 sm:-mt-0'>
+      <div className='relative bg-gray-100 opacity-95 w-full h-4/5 rounded-3xl sm:mt-0'>
+        <div className='mx-auto max-w-6xl sm:pl-36 p-6'>
+          <h2 className='hidden sm:block text-2xl p-4 mr-28 sm-mr-0 font-bold tracking-tight text-mirage text-center'>
             Our BobbleHeads selection:
           </h2>
 

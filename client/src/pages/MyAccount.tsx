@@ -40,10 +40,8 @@ const MyAccount = () => {
   };
 
   return (
-    // <div className='container mx-auto p-4 md:p-20 w-full md:w-4/5 xl:w-3/5 mt-48 sm:mt-32 md:mt-32 lg:mt-32 xl:mt-32'>
-    // <div className='relative bg-white shadow-lg rounded-2xl p-4 md:p-10 overflow-hidden min-h-96'></div>
     <div className='flex justify-center items-center h-auto w-full'>
-      <div className='relative bg-white p-4 sm:p-10 w-full sm:w-3/5 xl:w-3/5 h-auto sm:h-3/5 mt-10 sm:mt-36 ml-2 sm:ml-0 shadow-lg rounded-2xl'>
+      <div className='relative bg-white p-4 sm:p-10 w-full sm:w-3/5 xl:w-3/5 h-auto sm:h-3/5 mt-16 sm:mt-36 ml-2 sm:ml-0 shadow-lg rounded-2xl'>
         <button
           className='absolute top-2 right-2 w-16 md:w-20 bg-orange-300 p-2 md:p-3 rounded-full'
           onClick={handleBack}

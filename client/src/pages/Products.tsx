@@ -55,7 +55,7 @@ const Products = () => {
         setSearchTerm={setSearchTerm}
         setSearchBy={setSearchBy}
         searchBy={searchBy}
-        className='relative mt-28 sm:mt-40 md:mt-40 lg:mt-40 xl:mt-40 sm:mb-0 border-8 border-gray-100 rounded-2xl'
+        className='relative mt-24 sm:mt-40 md:mt-40 lg:mt-40 xl:mt-40 sm:mb-0 border-8 border-gray-100 rounded-2xl'
       />
       <GridList items={items} fetchData={fetchData} />
     </div>

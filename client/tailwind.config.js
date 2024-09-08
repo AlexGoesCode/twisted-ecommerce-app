@@ -3,6 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'mobile-image': "url('./assets/images/bobbleheads-mobile-v3.png')",
+        'desktop-image': "url('./assets/images/bobbleheads-final.png')",
+      },
       colors: {
         rodeoDust: '#CCB69D', // Rodeo Dust (grey-beige)
         mirage: '#1C2434', // Mirage (dark grey)
@@ -13,6 +17,9 @@ export default {
         '[auto,auto,1fr]': 'auto auto 1fr',
       },
     },
+  },
+  variants: {
+    backgroundImage: ['responsive'],
   },
   plugins: [require('@tailwindcss/aspect-ratio')],
 };

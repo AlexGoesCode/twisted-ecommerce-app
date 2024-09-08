@@ -60,14 +60,14 @@ export default function Footer() {
                       About Us
                     </a>
                   </li>
-                  {/* <li>
-                  <a
-                    href='#'
-                    className='text-sm leading-6 text-gray-600 hover:text-gray-900'
-                  >
-                    Careers
-                  </a>
-                </li> */}
+                  <li>
+                    <a
+                      href='#'
+                      className='text-sm leading-6 text-gray-600 hover:text-gray-900'
+                    >
+                      Careers
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div>

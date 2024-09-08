@@ -46,8 +46,8 @@ function Cart() {
   };
 
   return (
-    <div className='container mx-auto p-4 md:p-10 lg:p-20 w-full md:w-4/5 lg:w-4/5 xl:w-3/5'>
-      <div className='bg-white shadow-lg rounded-2xl p-4 md:p-10 mt-14'>
+    <div className='container mx-auto w-full sm:w-3/5 md:w-3/5 lg:w-3/5 xl:w-3/6'>
+      <div className='bg-white shadow-lg rounded-2xl p-4 md:p-6 mt-24 sm:mt-44'>
         <h1 className='text-xl md:text-2xl text-center font-bold mb-4'>
           Shopping Cart
         </h1>

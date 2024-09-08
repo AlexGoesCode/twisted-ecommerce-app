@@ -64,18 +64,18 @@ const Checkout = () => {
   );
 
   return (
-    <div className='container mx-auto mt-20 p-4 md:p-10 w-full sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-3/5'>
-      <div className='relative bg-white shadow-md rounded-2xl p-4 md:p-10'>
+    <div className='container mx-auto mt-28 sm:mt-28 xl:mt-28 w-full sm:w-4/5 md:w-4/5 lg:w-3/5 xl:w-3/6'>
+      <div className='relative bg-white shadow-md rounded-2xl p-4'>
         <button
           className='absolute top-2 right-2 w-20 bg-orange-300 p-2 md:p-3 rounded-full'
           onClick={handleBack}
         >
           Back
         </button>
-        <h1 className='text-2xl md:text-3xl text-center font-bold mb-4'>
+        <h1 className='text-2xl md:text-2xl text-center font-bold mb-4'>
           Checkout
         </h1>
-        <div className='max-h-52 overflow-y-auto p-2 md:p-4'>
+        <div className='max-h-52 overflow-y-auto p-2 sm:p-2'>
           <h2 className='text-lg md:text-xl font-semibold mb-2'>
             Order Summary
           </h2>
@@ -115,7 +115,7 @@ const Checkout = () => {
         </h2>
         <input
           type='text'
-          className='w-full p-2 border rounded mb-4'
+          className='w-full p-2 border rounded mb-2'
           value={shippingAddress}
           onChange={(e) => setShippingAddress(e.target.value)}
           placeholder='Enter your shipping address'

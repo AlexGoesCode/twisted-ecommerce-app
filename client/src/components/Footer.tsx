@@ -44,7 +44,7 @@ export default function Footer() {
           footerVisible ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
-        <footer className='bg-gray-100 bg-opacity-95 w-full'>
+        <footer className='bg-gray-100 bg-opacity-95 w-screen'>
           <div className='mx-auto max-w-7xl px-6 py-2 lg:px-8'>
             <div className='flex justify-between items-center'>
               <div>

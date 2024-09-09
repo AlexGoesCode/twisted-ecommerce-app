@@ -15,6 +15,9 @@ dotenv.config();
 
 const { black } = colors;
 
+// Define the base URL using the environment variable
+const baseUrl = '/api';
+
 //* Add the middleware functions by calling app.use()
 const addMiddlewares = (app) => {
   app.use(cors());
@@ -23,7 +26,7 @@ const addMiddlewares = (app) => {
   cloudinaryConfig();
 };
 
-//* Start the server by calling app.listen()
+// Start the server by calling app.listen()
 const startServer = (app) => {
   const port = process.env.PORT || 5022;
   app.listen(port, () => {
@@ -32,10 +35,10 @@ const startServer = (app) => {
 };
 
 const loadRoutes = (app) => {
-  app.use('/api', testRouter);
-  app.use('/api/items', itemRouter);
-  app.use('/api/users', usersRouter);
-  app.use('/api/orders', ordersRouter);
+  app.use(`${baseUrl}/test`, testRouter);
+  app.use(`${baseUrl}/items`, itemRouter);
+  app.use(`${baseUrl}/users`, usersRouter);
+  app.use(`${baseUrl}/orders`, ordersRouter);
 };
 
 const DBConnection = async () => {

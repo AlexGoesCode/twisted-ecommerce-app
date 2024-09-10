@@ -11,6 +11,7 @@ import {
   UserType,
 } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../config';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -49,10 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     try {
-      const response = await fetch(
-        'http://localhost:5022/api/users/login',
-        requestOptions
-      );
+      const response = await fetch(`${baseUrl}/users/login`, requestOptions);
       if (!response.ok) throw new Error('Failed to login');
 
       const result = (await response.json()) as LoginAndRegisterResponse;
@@ -101,10 +99,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     try {
-      const response = await fetch(
-        'http://localhost:5022/api/users/profile',
-        requestOptions
-      );
+      const response = await fetch(`${baseUrl}/users/profile`, requestOptions);
       if (!response.ok && response.status === 401) {
         localStorage.removeItem('token');
         setIsAuthenticated(false);

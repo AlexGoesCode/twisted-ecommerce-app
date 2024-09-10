@@ -17,6 +17,7 @@ import {
   ShoppingCartIcon,
 } from '@heroicons/react/24/outline';
 import { Link, NavLink } from 'react-router-dom';
+import { baseUrl } from '../config';
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -46,16 +47,13 @@ const Navbar = () => {
         const formData = new FormData();
         formData.append('avatar', file);
 
-        const response = await fetch(
-          'http://localhost:5022/api/users/upload-avatar',
-          {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming you use token-based authentication
-            },
-            body: formData,
-          }
-        );
+        const response = await fetch(`${baseUrl}/users/upload-avatar`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming you use token-based authentication
+          },
+          body: formData,
+        });
 
         if (!response.ok) {
           throw new Error('Failed to upload avatar');

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import GridList from '../components/GridList';
 import { Item } from '../types/Types';
+import { baseUrl } from '../config';
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,7 +19,7 @@ const Products = () => {
       console.log('searchBy :>> ', searchBy);
       console.log('searchTerm', searchTerm);
 
-      let url = 'http://localhost:5022/api/items/all';
+      let url = `${baseUrl}/items/all`;
       if (searchTerm) {
         url += `/productsby?${searchBy}=${searchTerm}`;
       }

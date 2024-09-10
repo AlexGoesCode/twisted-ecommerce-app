@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Item, SingleItemOkResponse } from '../types/Types';
 // import Carousel from 'react-multi-carousel';
 // import { BasketContext } from '../context/BasketContext';
+import { baseUrl } from '../config';
 
 function SingleProduct() {
   const [item, setItem] = useState<Item | null>(null);
@@ -11,7 +12,7 @@ function SingleProduct() {
   const navigate = useNavigate();
 
   const fetchItem = async () => {
-    const url = `http://localhost:5022/api/items/${itemid}`;
+    const url = `${baseUrl}/items/${itemid}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -35,7 +36,7 @@ function SingleProduct() {
   console.log('item', item);
 
   // const handleLikeItem = async () => {
-  //   const url = `http://localhost:5022/api/items/${itemid}/like`;
+  //   const url = `${baseUrl}/items/${itemid}/like`;
   //   try {
   //     const response = await fetch(url, {
   //       method: 'POST',

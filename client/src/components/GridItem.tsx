@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Item } from '../types/Types';
 // import LikeButton from './LikeButton';
 import { useAuth } from '../context/AuthContext';
+import { baseUrl } from '../config';
 
 interface GridItemProps {
   item: Item;
@@ -28,17 +29,14 @@ const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
     urlencoded.append('productId', item._id);
 
     try {
-      const response = await fetch(
-        'http://localhost:5022/api/items/addItemsToCart',
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: `Bearer ${token}`,
-          },
-          body: urlencoded,
-        }
-      );
+      const response = await fetch(`${baseUrl}/items/addItemsToCart`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${token}`,
+        },
+        body: urlencoded,
+      });
 
       if (!response.ok) {
         throw new Error('Failed to add item to basket');

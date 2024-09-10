@@ -3,6 +3,7 @@ import AuthLayout from '../components/AuthLayout';
 import { useAuth } from '../context/AuthContext';
 import { LoginAndRegisterResponse } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../config';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -63,10 +64,7 @@ const Register = () => {
     };
 
     try {
-      const response = await fetch(
-        'http://localhost:5022/api/users/register',
-        requestOptions
-      );
+      const response = await fetch(`${baseUrl}/users/register`, requestOptions);
       if (!response.ok) {
         const errorResult = await response.json();
         setError(errorResult.message || 'An error has occured.');

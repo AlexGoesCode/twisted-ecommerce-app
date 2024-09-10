@@ -1,5 +1,6 @@
 // orderService.ts
 import { OrderItem, OrderType, UserOrdersResponse } from '../types/Types';
+import { baseUrl } from '../config';
 
 export const placeOrder = async (
   orderItems: OrderItem[],
@@ -9,22 +10,19 @@ export const placeOrder = async (
   shippingAddress: string
 ): Promise<OrderType> => {
   try {
-    const response = await fetch(
-      'http://localhost:5022/api/orders/place-order',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          items: orderItems,
-          shippingAddress: shippingAddress,
-          paymentMethod: paymentMethod,
-          totalPrice: totalPrice,
-        }),
-      }
-    );
+    const response = await fetch(`${baseUrl}/orders/place-order`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        items: orderItems,
+        shippingAddress: shippingAddress,
+        paymentMethod: paymentMethod,
+        totalPrice: totalPrice,
+      }),
+    });
 
     if (!response.ok) {
       const errorText = await response.text(); // Capture the response body
@@ -46,16 +44,13 @@ export const fetchUserOrders = async (
   token: string
 ): Promise<UserOrdersResponse> => {
   try {
-    const response = await fetch(
-      `http://localhost:5022/api/orders/user-orders/${userId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${baseUrl}/orders/user-orders/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (!response.ok) {
       const errorText = await response.text(); // Capture the response body

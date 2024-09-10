@@ -1,4 +1,5 @@
 import { useAuth } from '../context/AuthContext';
+import { baseUrl } from '../config';
 
 interface LikeButtonProps {
   itemId: string;
@@ -36,7 +37,7 @@ const LikeButton = ({ itemId, isLiked, fetchData }: LikeButtonProps) => {
         return;
       }
 
-      const url = `http://localhost:5022/api/twisted-ecommerce/${itemId}/${
+      const url = `${baseUrl}/twisted-ecommerce/${itemId}/${
         isLiked ? 'unlike' : 'like'
       }`;
 

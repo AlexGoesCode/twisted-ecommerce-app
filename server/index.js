@@ -4,31 +4,33 @@ import colors from 'colors';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import testRouter from './routes/testRoute.js';
-// import { cloudinaryConfig } from './config/cloudinary.js';
 import itemRouter from './routes/itemsRouter.js';
 import usersRouter from './routes/usersRouter.js';
 import cloudinaryConfig from './config/cloudinary.js';
 import ordersRouter from './routes/orderRouter.js';
 import itemModel from './models/itemModel.js';
+import { baseUrl, port } from './serverConfig.js';
 
 dotenv.config();
 
+console.log('Environment Variables:');
+console.log('BASE_URL:', process.env.BASE_URL);
+console.log('PORT:', process.env.PORT);
+console.log('MONGO_DB:', process.env.MONGO_DB);
+
 const { black } = colors;
 
-// Define the base URL using the environment variable
-const baseUrl = '/api';
-
-//* Add the middleware functions by calling app.use()
+// Add the middleware functions by calling app.use()
 const addMiddlewares = (app) => {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   cloudinaryConfig();
+  console.log('Middlewares added');
 };
 
 // Start the server by calling app.listen()
 const startServer = (app) => {
-  const port = process.env.PORT || 5022;
   app.listen(port, () => {
     console.log(`Server is running on port', ${port}`);
   });
@@ -39,6 +41,7 @@ const loadRoutes = (app) => {
   app.use(`${baseUrl}/items`, itemRouter);
   app.use(`${baseUrl}/users`, usersRouter);
   app.use(`${baseUrl}/orders`, ordersRouter);
+  console.log('Routes loaded');
 };
 
 const DBConnection = async () => {

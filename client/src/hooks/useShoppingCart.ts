@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react';
 import { ShoppingCartItem } from '../types/Types';
+import { baseUrl } from '../config';
 
 export const useShoppingCart = (token: string) => {
   const [cartItems, setCartItems] = useState<ShoppingCartItem[]>([]);
 
   const fetchCart = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5022/api/items/cart', {
+      const response = await fetch(`${baseUrl}/items/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,15 +22,12 @@ export const useShoppingCart = (token: string) => {
 
   const clearCart = async () => {
     try {
-      const response = await fetch(
-        'http://localhost:5022/api/orders/clear-cart',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${baseUrl}/orders/clear-cart`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         setCartItems([]);
@@ -60,7 +58,7 @@ export const useShoppingCart = (token: string) => {
       };
 
       const response = await fetch(
-        'http://localhost:5022/api/items/addItemsToCart',
+        `${baseUrl}/items/addItemsToCart`,
         requestOptions
       );
 
@@ -92,7 +90,7 @@ export const useShoppingCart = (token: string) => {
       };
 
       const response = await fetch(
-        'http://localhost:5022/api/items/removeItemsFromCart',
+        `${baseUrl}/items/removeItemsFromCart`,
         requestOptions
       );
 
@@ -121,7 +119,7 @@ export const useShoppingCart = (token: string) => {
       };
 
       const response = await fetch(
-        'http://localhost:5022/api/items/deleteItemsFromCart',
+        `${baseUrl}/items/deleteItemsFromCart`,
         requestOptions
       );
 

@@ -9,14 +9,14 @@ import usersRouter from './routes/usersRouter.js';
 import cloudinaryConfig from './config/cloudinary.js';
 import ordersRouter from './routes/orderRouter.js';
 import itemModel from './models/itemModel.js';
-import { baseUrl, port } from './serverConfig.js';
+import { allowedOrigins, baseUrl, port, mongoDbUrl } from './serverConfig.js';
 
 dotenv.config();
 
 console.log('Environment Variables:');
-console.log('BASE_URL:', process.env.BASE_URL);
-console.log('PORT:', process.env.PORT);
-console.log('MONGO_DB:', process.env.MONGO_DB);
+console.log('BASE_URL:', baseUrl);
+console.log('PORT:', port);
+console.log('MONGO_DB:', mongoDbUrl);
 
 const { black } = colors;
 
@@ -24,7 +24,7 @@ const { black } = colors;
 const addMiddlewares = (app) => {
   app.use(
     cors({
-      origin: ['http://localhost:5173', 'https://bobbleheads.vercel.app'],
+      origin: allowedOrigins,
       credentials: true,
     })
   );

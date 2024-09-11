@@ -31,6 +31,6 @@
     "JWT_SECRET": "supersecretstring",
     "BASE_URL": "/api",
     "PORT": "5022",
-    "REACT_APP_API_BASE_URL": "https://your-vercel-domain/api"
+    "REACT_APP_API_BASE_URL": "https://bobbleheads.vercel.app"
   }
 }

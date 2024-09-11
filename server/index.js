@@ -22,7 +22,12 @@ const { black } = colors;
 
 // Add the middleware functions by calling app.use()
 const addMiddlewares = (app) => {
-  app.use(cors());
+  app.use(
+    cors({
+      origin: ['http://localhost:5022', 'https://bobbleheads.vercel.app'],
+      credentials: true,
+    })
+  );
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   cloudinaryConfig();

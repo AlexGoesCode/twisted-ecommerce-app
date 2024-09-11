@@ -4,12 +4,23 @@
     {
       "src": "server/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/build"
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/build/$1"
     }
   ],
   "env": {
@@ -19,6 +30,7 @@
     "CLOUD_SECRET": "your_cloud_secret",
     "JWT_SECRET": "your_jwt_secret",
     "BASE_URL": "/api",
-    "PORT": "5022"
+    "PORT": "5022",
+    "REACT_APP_API_BASE_URL": "https://your-vercel-domain/api"
   }
 }

@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/index.js"
+    }
+  ],
+  "env": {
+    "MONGO_DB": "your-mongo-db-connection-string",
+    "CLOUD_NAME": "your-cloud-name",
+    "CLOUD_API_KEY": "your-cloud-api-key",
+    "CLOUD_SECRET": "your-cloud-secret",
+    "JWT_SECRET": "your-jwt-secret",
+    "BASE_URL": "/api",
+    "PORT": "5022"
+  }
+}

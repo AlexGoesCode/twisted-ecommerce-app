@@ -24,11 +24,11 @@
     }
   ],
   "env": {
-    "MONGO_DB": "your_mongodb_connection_string",
-    "CLOUD_NAME": "your_cloud_name",
-    "CLOUD_API_KEY": "your_cloud_api_key",
-    "CLOUD_SECRET": "your_cloud_secret",
-    "JWT_SECRET": "your_jwt_secret",
+    "MONGO_DB": "mongodb+srv://vkyslik:4WO6wC1fao2i5DpU@cluster0.5rltoox.mongodb.net/twisted-ecommerce?retryWrites=true&w=majority&appName=cluster0",
+    "CLOUD_NAME": "dkripctbz",
+    "CLOUD_API_KEY": "627467712237956",
+    "CLOUD_SECRET": "DxRPWxf3NfGHFsUs8SLprFCiuq4",
+    "JWT_SECRET": "supersecretstring",
     "BASE_URL": "/api",
     "PORT": "5022",
     "REACT_APP_API_BASE_URL": "https://your-vercel-domain/api"

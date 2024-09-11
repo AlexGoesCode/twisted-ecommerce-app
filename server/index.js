@@ -24,7 +24,7 @@ const { black } = colors;
 const addMiddlewares = (app) => {
   app.use(
     cors({
-      origin: ['http://localhost:5022/api', 'https://bobbleheads.vercel.app'],
+      origin: ['http://localhost:5022', 'https://bobbleheads.vercel.app'],
       credentials: true,
     })
   );

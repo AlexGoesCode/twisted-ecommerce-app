@@ -51,7 +51,10 @@ const loadRoutes = (app) => {
 
 const DBConnection = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_DB);
+    await mongoose.connect(process.env.MONGO_DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('connection with MongoDB established'.bgGreen);
   } catch (error) {
     console.log('problem with connecting to MongoDB'.bgRed, error);
@@ -66,8 +69,15 @@ const DBConnection = async () => {
   addMiddlewares(app);
   await DBConnection();
   loadRoutes(app);
+
+  // Catch-all route for undefined routes
+  app.use((req, res, next) => {
+    res.status(404).send('Not Found');
+  });
+
   startServer(app);
 })();
+
 // a self-contained function that initializes an Express application, establishes a DB connection,
 // adds necessary middleware, sets up routes, and starts the server.
 // The use of an IIFE ensures that all these steps are executed immediately

@@ -16,6 +16,6 @@
     }
   ],
   "env": {
-    "REACT_APP_API_BASE_URL": "https://bobbleheads.vercel.app"
+    "VITE_PROD_BASE_URL": "https://bobbleheads-server.vercel.app"
   }
 }

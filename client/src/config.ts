@@ -1,5 +1,3 @@
-const isDevelopment = import.meta.env.MODE === 'development';
+// export const baseUrl = "http://localhost:5022/api";
 
-export const baseUrl = isDevelopment
-  ? import.meta.env.VITE_LOCAL_BASE_URL
-  : import.meta.env.VITE_PROD_BASE_URL;
+export const baseUrl = 'https://bobbleheads-server.vercel.app/api';

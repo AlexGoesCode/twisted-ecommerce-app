@@ -24,7 +24,13 @@ const { black } = colors;
 const addMiddlewares = (app) => {
   app.use(
     cors({
-      origin: allowedOrigins,
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
     })
   );
@@ -37,7 +43,7 @@ const addMiddlewares = (app) => {
 // Start the server by calling app.listen()
 const startServer = (app) => {
   app.listen(port, () => {
-    console.log(`Server is running on port', ${port}`);
+    console.log(`Server is running on port ${port}`);
   });
 };
 
@@ -51,19 +57,19 @@ const loadRoutes = (app) => {
 
 const DBConnection = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_DB, {
+    await mongoose.connect(mongoDbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('connection with MongoDB established'.bgGreen);
+    console.log('Connection with MongoDB established'.bgGreen);
   } catch (error) {
-    console.log('problem with connecting to MongoDB'.bgRed, error);
+    console.log('Problem with connecting to MongoDB'.bgRed, error);
   }
 };
 
 // bellow is a main function that runs the server aka IIFE:
 //* Immediatelly Invoked Function Expression
-// functions need to be in order after each other
+// functions need to be in order
 (async function controller() {
   const app = express();
   addMiddlewares(app);

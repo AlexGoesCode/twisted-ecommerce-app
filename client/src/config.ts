@@ -3,5 +3,5 @@
 
 export const baseUrl =
   import.meta.env.MODE === 'development'
-    ? 'http://localhost:5022'
-    : 'https://bobbleheads-server.vercel.app';
+    ? 'http://localhost:5022/api'
+    : 'https://bobbleheads-server.vercel.app/api';

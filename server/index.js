@@ -8,7 +8,7 @@ import itemRouter from './routes/itemsRouter.js';
 import usersRouter from './routes/usersRouter.js';
 import cloudinaryConfig from './config/cloudinary.js';
 import ordersRouter from './routes/orderRouter.js';
-import itemModel from './models/itemModel.js';
+// import itemModel from './models/itemModel.js';
 import { allowedOrigins, baseUrl, port, mongoDbUrl } from './serverConfig.js';
 
 dotenv.config();
@@ -20,17 +20,11 @@ console.log('MONGO_DB:', mongoDbUrl);
 
 const { black } = colors;
 
-// Add the middleware functions by calling app.use()
+//* Simplified CORS config for testing purpose
 const addMiddlewares = (app) => {
   app.use(
     cors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
+      origin: '*', // Allow all origins for testing purposes
       credentials: true,
     })
   );
@@ -39,6 +33,26 @@ const addMiddlewares = (app) => {
   cloudinaryConfig();
   console.log('Middlewares added');
 };
+
+// Add the middleware functions by calling app.use()
+// const addMiddlewares = (app) => {
+//   app.use(
+//     cors({
+//       origin: (origin, callback) => {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//           callback(null, true);
+//         } else {
+//           callback(new Error('Not allowed by CORS'));
+//         }
+//       },
+//       credentials: true,
+//     })
+//   );
+//   app.use(express.json());
+//   app.use(express.urlencoded({ extended: true }));
+//   cloudinaryConfig();
+//   console.log('Middlewares added');
+// };
 
 // Start the server by calling app.listen()
 const startServer = (app) => {

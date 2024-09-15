@@ -64,13 +64,20 @@ const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
       // style={{ transform: 'translateX(-20px)' }}
     >
       {item.image && (
-        <Link to={`/items/${item._id}`}>
-          <img
-            src={item.image[0]?.url}
-            alt={item.image[0]?.alt}
-            className='w-full h-96 sm:w-full sm:h-48 object-cover rounded-xl'
-          />
-        </Link>
+        <div className='relative'>
+          <Link to={`/items/${item._id}`}>
+            <img
+              src={item.image[0]?.url}
+              alt={item.image[0]?.alt}
+              className='w-full h-96 sm:w-full sm:h-48 object-cover rounded-xl'
+            />
+          </Link>
+          <div className='absolute inset-0 flex items-center justify-center pointer-events-none'>
+            <div className='bg-gray-700 bg-opacity-60 text-gray-100 px-2 py-2 rounded-full'>
+              tap!
+            </div>
+          </div>
+        </div>
       )}
       <h3 className='text-lg text-center font-bold mt-2 text-gray-100'>
         {item.name}

@@ -16,6 +16,15 @@ export default {
       gridTemplateRows: {
         '[auto,auto,1fr]': 'auto auto 1fr',
       },
+      keyframes: {
+        driftUp: {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(-20px)' },
+        },
+      },
+      animation: {
+        driftUp: 'driftUp 3s ease-in-out forwards',
+      },
     },
   },
   variants: {

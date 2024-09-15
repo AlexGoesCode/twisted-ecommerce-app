@@ -3,6 +3,7 @@ import { Item } from '../types/Types';
 // import LikeButton from './LikeButton';
 import { useAuth } from '../context/AuthContext';
 import { baseUrl } from '../config';
+import { useState } from 'react';
 
 interface GridItemProps {
   item: Item;
@@ -13,6 +14,7 @@ interface GridItemProps {
 const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
   console.log('item', item);
   const { getUserProfile } = useAuth();
+  const [showBubble, setShowBubble] = useState(false);
 
   const addToBasket = async (item: Item) => {
     const token = localStorage.getItem('token');
@@ -47,6 +49,9 @@ const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
 
       // fetchData();
       getUserProfile();
+      // alert('Item added to the Cart');
+      setShowBubble(true);
+      setTimeout(() => setShowBubble(false), 1500);
     } catch (error) {
       console.error('Error adding item to basket:', error);
     }
@@ -75,6 +80,11 @@ const GridItem = ({ item /*fetchData*/ /*isLiked*/ }: GridItemProps) => {
       <p className='text-gray-100 font-semibold'>{item.price.toFixed(2)} €</p>
       <div className='absolute bottom-3 right-3 w-13 bg-orange-300 p-2 -mb-1 rounded-full '>
         <button onClick={() => addToBasket(item)}>Add to Cart</button>
+        {showBubble && (
+          <div className='absolute top-0 right-0 bg-red-500 text-white px-2 py-1 rounded-full animate-driftUp'>
+            +1
+          </div>
+        )}
       </div>
       {/* Display price with € sign */}
       {/* <div className='absolute bottom-2 right-2 '> */}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapIcon, PhoneIcon } from '@heroicons/react/20/solid';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const [footerVisible, setFooterVisible] = useState(false);
@@ -54,12 +55,12 @@ export default function Footer() {
                 </h3>
                 <ul className='mt-1 space-y-1'>
                   <li>
-                    <a
-                      href='mailto:our-email@example.com'
+                    <Link
+                      to='/aboutus'
                       className='text-sm leading-6 text-gray-600 hover:text-gray-900'
                     >
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   <li className='flex items-center space-x-2'>
                     <PhoneIcon className='h-5 w-5 text-gray-600' />

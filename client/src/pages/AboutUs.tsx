@@ -9,11 +9,11 @@ const AboutUs = () => {
         </h1>
         <section className='mb-5 sm:mb-8'>
           <p className='text-l sm:text-xl text-center'>
-            Our journey began 200 years ago when a visionary named Mr. Bobble
-            carved a funny figure from a piece of wood. This simple act sparked
-            a revolution, and our company was born. Over the centuries, we have
-            sold many BobbleHeads and we'll sell them to you as well, that's
-            clear as day.
+            Our journey began exactly 200 years ago when a visionary named Mr.
+            Bobble carved a funny figure from a piece of wood. This simple act
+            sparked a revolution, and our company was born. Over the centuries,
+            we have sold many BobbleHeads and we'll sell them to you as well...
+            that's clear as day.
           </p>
         </section>
         <section className='mb-2 sm:mb-8'>

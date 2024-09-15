@@ -167,7 +167,7 @@ const Navbar = () => {
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'
                   >
-                    <MenuItems className='absolute right-0 z-10 mt-2 w-64 sm:w-48 origin-top-right rounded-md bg-white py-3 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                    <MenuItems className='absolute right-0 z-10 mt-2 w-42 sm:w-48 origin-top-right rounded-md bg-white py-3 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                       {isAuthenticated ? (
                         <>
                           <MenuItem>
@@ -176,10 +176,10 @@ const Navbar = () => {
                                 onClick={logout}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
-                                  'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                  'block w-full text-left px-4 py-4 text-sm text-gray-700'
                                 )}
                               >
-                                Sign-out
+                                Sign-Out
                               </button>
                             )}
                           </MenuItem>
@@ -190,7 +190,7 @@ const Navbar = () => {
                                   onClick={() => fileInputRef.current?.click()}
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
-                                    'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                    'block w-full text-left px-4 py-4 text-sm text-gray-700'
                                   )}
                                 >
                                   Change Avatar
@@ -213,7 +213,7 @@ const Navbar = () => {
                                 to='/login'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
-                                  'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                  'block w-full text-left px-4 py-4 text-sm text-gray-700'
                                 )}
                               >
                                 Log-in
@@ -226,7 +226,7 @@ const Navbar = () => {
                                 to='/register'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
-                                  'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                  'block w-full text-left px-4 py-4 text-sm text-gray-700'
                                 )}
                               >
                                 Register
@@ -239,7 +239,7 @@ const Navbar = () => {
                                 to='/myaccount'
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
-                                  'block w-full text-left px-4 py-2 text-sm text-gray-700'
+                                  'block w-full text-left px-4 py-4 text-sm text-gray-700'
                                 )}
                               >
                                 My account

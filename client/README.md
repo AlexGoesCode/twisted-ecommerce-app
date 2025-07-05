@@ -101,7 +101,6 @@
 - **Feature 1**: LIKES functionality
 - **Feature 2**: COMMENTS section
 - **Feature 3**: STYLING
-- **Feature 4**: DEPLOYMENT
 
 ---
 

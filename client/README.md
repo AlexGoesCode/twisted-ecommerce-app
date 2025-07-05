@@ -183,6 +183,7 @@ For any questions or feedback, feel free to reach out on GitHub or:
   CLOUD_API_KEY=<your-api-key> // cloudinary API key, usually like '4235466856534365'
   CLOUD_SECRET=<your-cloud-secret> // cloudinary secret, usually like 'DD5gxHYUdf45fdFdg'
   JWT_SECRET=<your-jwt-secret> // follow the manual below
+  update this section!
 
   ```
 

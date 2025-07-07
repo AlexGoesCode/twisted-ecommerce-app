@@ -98,7 +98,7 @@
 ## **Possible Future Enhancements**
 
 - **Feature 1**: RESPONSIVNESS improvement (for mobile)
-- **Feature 1**: LIKES functionality
+- **Feature 1**: LIKES functionality (did in previous project)
 - **Feature 2**: COMMENTS section
 - **Feature 3**: STYLING improvements
 
@@ -234,5 +234,3 @@ For any questions or feedback, feel free to reach out on GitHub or:
 - Thank you for going through my app, hopefully it was worth it! ^^
 
 ---
-
-## **API Documentation**

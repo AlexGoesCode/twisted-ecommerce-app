@@ -163,15 +163,7 @@ For any questions or feedback, feel free to reach out on GitHub or:
    ```
 
 5. Replace the placeholder values (
-   `<username>`,
-   `<password>`,
-   `<cluster-url>`,
-   `<database>`,
-   `<app-name>`,
-   `<your-cloudinary-cloud-name>`,
-   `<your-cloudinary-api-key>`,
-   `<your-cloudinary-api-secret>`,
-   `<your-jwt-secret>`)
+   inside `<>`
    with your actual credentials.
 
 ### Example:

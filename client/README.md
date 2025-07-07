@@ -46,7 +46,7 @@
 ### **Frontend**
 
 - **React**: A JavaScript library for building user interfaces.
-- **JavaScript**: A programming language that adds interactivity to your website.
+- **JavaScript**: A programming language that adds interactivity to website.
 - **TypeScript**: Strongly typed programming language that builds on JavaScript.
 - **Vite**: Fast development tool for building modern web applications.
 - **Tailwind CSS**: A utility-first CSS framework for styling.
@@ -61,7 +61,7 @@
 - **JWT (jsonwebtoken)**: Used for securing routes and managing authentication.
 - **Bcrypt**: Library to hash passwords for security.
 - **Multer**: Middleware for handling file uploads.
-- **Cloudinary**: Cloud service for managing and serving media assets.
+- **Cloudinary**: Cloud service for managing and serving media assets (images etc).
 
 ### **Tools and Libraries**
 
@@ -100,7 +100,7 @@
 - **Feature 1**: RESPONSIVNESS improvement (for mobile)
 - **Feature 1**: LIKES functionality
 - **Feature 2**: COMMENTS section
-- **Feature 3**: STYLING
+- **Feature 3**: STYLING improvements
 
 ---
 

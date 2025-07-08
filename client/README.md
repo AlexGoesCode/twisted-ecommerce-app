@@ -33,8 +33,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [Testing](#testing)
 - [Deployment](#deployment)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -162,7 +160,7 @@ For any questions or feedback, feel free to reach out on GitHub or:
    JWT_SECRET=<your-jwt-secret>
    ```
 
-5. Replace the placeholder values (
+5. Replace the placeholder values
    inside `<>`
    with your actual credentials.
 

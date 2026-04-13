@@ -69,36 +69,43 @@ const loadRoutes = (app) => {
   console.log('Routes loaded');
 };
 
+// Module-level flag: persists across warm Vercel invocations so we only
+// open one connection per Lambda container instead of reconnecting every request.
+let isConnected = false;
+
 const DBConnection = async () => {
+  if (isConnected) return; // reuse existing connection on warm invocations
   try {
     await mongoose.connect(mongoDbUrl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      maxPoolSize: 1, // one connection per serverless instance avoids Atlas connection storms
     });
+    isConnected = true;
     console.log('Connection with MongoDB established'.bgGreen);
   } catch (error) {
     console.log('Problem with connecting to MongoDB'.bgRed, error);
+    throw error; // propagate so the request fails fast rather than hanging
   }
 };
 
-// bellow is a main function that runs the server aka IIFE:
-//* Immediatelly Invoked Function Expression
-// functions need to be in order
-(async function controller() {
-  const app = express();
-  addMiddlewares(app);
+// App and routes are set up once at module load time — synchronously, no DB call.
+// This runs on every cold start but is fast (no network I/O).
+const app = express();
+addMiddlewares(app);
+loadRoutes(app);
+
+app.use((_req, res, _next) => {
+  res.status(404).send('Not Found');
+});
+
+// Vercel serverless export: called per request.
+// DBConnection() is a no-op on warm invocations thanks to the isConnected guard.
+export default async function handler(req, res) {
   await DBConnection();
-  loadRoutes(app);
+  return app(req, res);
+}
 
-  // Catch-all route for undefined routes
-  app.use((req, res, next) => {
-    res.status(404).send('Not Found');
-  });
-
-  startServer(app);
-})();
-
-// a self-contained function that initializes an Express application, establishes a DB connection,
-// adds necessary middleware, sets up routes, and starts the server.
-// The use of an IIFE ensures that all these steps are executed immediately
-// when the script is run, and the use of async/await ensures that asynchronous operations are handled correctly.
+// Local development only: connect then start the HTTP server.
+// process.env.VERCEL is injected automatically by Vercel's runtime.
+if (!process.env.VERCEL) {
+  DBConnection().then(() => startServer(app));
+}

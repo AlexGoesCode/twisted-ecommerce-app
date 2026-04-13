@@ -32,7 +32,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // Initialise synchronously from localStorage — no network call needed.
+  // If a token exists we know we'll need to verify it, so start in loading state.
+  // If there's no token the user is definitely logged out — no wait needed.
+  const [isLoading, setIsLoading] = useState(() => !!localStorage.getItem('token'));
   const [token, setToken] = useState<string | null>(null);
 
   const login = async (email: string, password: string) => {
@@ -123,15 +126,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const token = localStorage.getItem('token');
     if (token) {
       setToken(token);
-      getUserProfile();
-    } else {
-      setIsLoading(false);
+      getUserProfile(); // sets isLoading=false in its finally block
     }
+    // No else branch: isLoading is already false when there's no token
   }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <AuthContext.Provider

@@ -18,8 +18,6 @@ console.log('BASE_URL:', baseUrl);
 console.log('PORT:', port);
 console.log('MONGO_DB:', mongoDbUrl);
 
-const { black } = colors;
-
 //* Simplified CORS config for testing purpose
 const addMiddlewares = (app) => {
   app.use(
@@ -69,43 +67,36 @@ const loadRoutes = (app) => {
   console.log('Routes loaded');
 };
 
-// Module-level flag: persists across warm Vercel invocations so we only
-// open one connection per Lambda container instead of reconnecting every request.
+// This variable lives outside the function so it stays in memory between requests.
+// On Vercel, the server can reuse the same connection instead of reconnecting every time.
 let isConnected = false;
 
 const DBConnection = async () => {
-  if (isConnected) return; // reuse existing connection on warm invocations
+  // If we are already connected, skip reconnecting
+  if (isConnected) {
+    return;
+  }
   try {
     await mongoose.connect(mongoDbUrl, {
-      maxPoolSize: 1, // one connection per serverless instance avoids Atlas connection storms
+      maxPoolSize: 1, // keep only 1 connection open (important for serverless hosting)
     });
     isConnected = true;
     console.log('Connection with MongoDB established'.bgGreen);
   } catch (error) {
     console.log('Problem with connecting to MongoDB'.bgRed, error);
-    throw error; // propagate so the request fails fast rather than hanging
   }
 };
 
-// App and routes are set up once at module load time — synchronously, no DB call.
-// This runs on every cold start but is fast (no network I/O).
-const app = express();
-addMiddlewares(app);
-loadRoutes(app);
-
-app.use((_req, res, _next) => {
-  res.status(404).send('Not Found');
-});
-
-// Vercel serverless export: called per request.
-// DBConnection() is a no-op on warm invocations thanks to the isConnected guard.
-export default async function handler(req, res) {
+(async function controller() {
+  const app = express();
+  addMiddlewares(app);
   await DBConnection();
-  return app(req, res);
-}
+  loadRoutes(app);
 
-// Local development only: connect then start the HTTP server.
-// process.env.VERCEL is injected automatically by Vercel's runtime.
-if (!process.env.VERCEL) {
-  DBConnection().then(() => startServer(app));
-}
+  // Catch-all route for undefined routes
+  app.use((req, res, next) => {
+    res.status(404).send('Not Found');
+  });
+
+  startServer(app);
+})();

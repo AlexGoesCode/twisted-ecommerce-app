@@ -26,7 +26,3 @@ dist-ssr
 # Environment variables
 .env
 client/.env
-
-# Claude Code
-CLAUDE.md
-.claude/
